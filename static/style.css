@@ -1,0 +1,90 @@
+body {
+	background-color: #E9E9E9;
+	font-family: 'Oxygen', sans-serif;
+}
+
+p {
+	font-size: 20px;
+}
+
+p.head {
+	font-size: 27.5px;
+}
+
+p.error {
+	color: #646464;
+}
+
+.title {
+  width: 700px;
+}
+
+.content{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.ncontent {
+  display: flex;
+  justify-content: center;
+
+}
+
+img.tile {
+	height: 60px;
+	width: 60px;
+}
+
+img.score_gauge {
+	width: 400px;
+	height: auto;
+	vertical-align: top;
+}
+
+input {
+	font-family: 'Oxygen', sans-serif;
+}
+
+input.tile:focus {
+	outline-color: #272727;
+}
+
+input.tile {
+	height: 80px;
+	width: 80px;
+	font-size: 60px;
+	text-align: center;
+	text-transform: uppercase;
+	border-radius: 10px;
+	border:  none;
+	caret-color: transparent;
+}
+
+input.submit {
+    background-color: #AEC6F5;
+    border-radius: 10px;
+    padding: 5px 20px 5px;
+    font-size: 20px;
+    border:  none;
+    text-decoration: none;
+    color: initial;
+    cursor: pointer;
+}
+
+a.button {
+    background-color: #CBCBCB;
+    border-radius: 10px;
+    padding: 5px 20px 5px;
+    font-size: 20px;
+    text-decoration: none;
+    color: initial;
+}
+
+span.tally {
+	background-color: #FFFFFF;
+	border-radius: 6px;
+	padding: 9.5px;
+	display: inline-block;
+}
+

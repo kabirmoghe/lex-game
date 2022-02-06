@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Done</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">		
+</head>
+<body>
+	<div class="content">
+		<div class="title">
+			<h1>Results</h1>
+			<p>	{{scoreGauge}}</p>
+			<p>
+				{% for guess in guesses %}
+					{{guess}}<br>
+				{% endfor %}
+			</p>
+
+			<p>{{maxPossible}}</p>
+			<p>	
+				{% for item in maxList %}
+					{{item}}<br>
+				{% endfor %}
+			</p>
+
+			<form method="post">
+				<p>
+					<input class="submit" type="submit" id = "next" name="nextButton" value = "Back">
+				</p>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
