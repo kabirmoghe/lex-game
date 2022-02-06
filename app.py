@@ -29,6 +29,8 @@ scorePos = 0
 
 @app.route("/", methods = ["GET", "POST"])
 def home():
+
+	global word_info
 	
 	global guesses
 	global numGuesses
@@ -44,6 +46,10 @@ def home():
 	global maxPoints
 	global bestWords
 	global possWords
+
+	word_info = readbucketdata.readbucketdata()
+
+	letters, letterPts, maxPoints, bestWords, possWords = eval(word_info["letters"][0]), eval(word_info["letterPts"][0]), word_info["maxPoints"][0], eval(word_info["bestWords"][0]), eval(word_info["possWords"][0])
 
 	#for i in range(len(newGame.letters)-1):
 		#letters_are += newGame.letters[i].upper() + "({}), ".format(newGame.letterPts[i])
