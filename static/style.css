@@ -51,8 +51,8 @@ input.tile:focus {
 }
 
 input.tile {
-	height: 80px;
-	width: 80px;
+	height: 7.5%;
+	width: 10%;
 	font-size: 60px;
 	text-align: center;
 	text-transform: uppercase;
