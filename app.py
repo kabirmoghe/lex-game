@@ -1,69 +1,63 @@
-from flask import Flask, redirect, url_for, render_template, request
+from flask import Flask, redirect, url_for, render_template, request, session
 import game
 import readbucketdata
 
 app = Flask(__name__)
 app.secret_key = 'hello'
 
-# Global variables 
-
-word_info = readbucketdata.readbucketdata()
-
-letters, letterPts, maxPoints, bestWords, possWords = eval(word_info["letters"][0]), eval(word_info["letterPts"][0]), word_info["maxPoints"][0], eval(word_info["bestWords"][0]), eval(word_info["possWords"][0])
-
-guesses = {}
-
-score = 0
-
-numGuesses =  0
-
-scoreGauge = ""
-
-maxPossible = ""
-
-maxList = []
-
-totalWords = "Find the top 5 words out of {} possible words\n".format(len(possWords))
-
-scorePos = 0
 
 @app.route("/", methods = ["GET", "POST"])
 def home():
 
-	global word_info
-	
-	global guesses
-	global numGuesses
-	global score
-	global maxPossible
-	global maxList
-	global scoreGauge
-	global totalWords
-	global scorePos
-
-	global letters
-	global letterPts
-	global maxPoints
-	global bestWords
-	global possWords
-
 	word_info = readbucketdata.readbucketdata()
 
-	letters, letterPts, maxPoints, bestWords= eval(word_info["letters"][0]), eval(word_info["letterPts"][0]), word_info["maxPoints"][0], eval(word_info["bestWords"][0])
+	letters, letterPts, maxPoints, bestWords = eval(word_info["letters"][0]), eval(word_info["letterPts"][0]), word_info["maxPoints"][0], eval(word_info["bestWords"][0])
 
-	#for i in range(len(newGame.letters)-1):
-		#letters_are += newGame.letters[i].upper() + "({}), ".format(newGame.letterPts[i])
+	if "possWords" not in session:
+		session["possWords"] = eval(word_info["possWords"][0])
 
-	#letters_are += newGame.letters[-1].upper() + "({}) ".format(newGame.letterPts[-1])
+	possWords = session["possWords"]
+
+	if "score" in session:
+		score = session["score"]
+	else:
+		session["score"] = 0
+		score = session["score"]
+
+	if "maxPossible" not in session:
+		session["maxPossible"] = ""
+
+	if "maxList" not in session:
+		session["maxList"] = []
+
+	if "guesses" not in session:
+		session["guesses"] = {}
+
+	if "score" not in session:
+		session["score"] = 0
+ 
+	if "numGuesses" not in session:
+		session["numGuesses"] =  0
+
+	if "scoreGauge" not in session:
+		session["scoreGauge"] = ""
+
+	if "scorePos" not in session:
+		session["scorePos"] = 0
+
+	if "totalWords" not in session:
+		session["totalWords"] = "Find the top 5 words out of {} possible words\n".format(len(possWords))
 
 	scoreGauge = "{} You scored {} points.".format(game.score_gauge(score, maxPoints)[0], score)
 
-	scorePos = game.score_gauge(score, maxPoints)[1]
+	session["scoreGauge"] = scoreGauge
 
-	maxPossible = "The maximum possible score was {}, and the best possible words were:".format(maxPoints)
-	maxList = [("{} ({} points)".format(bestWords[i][0].upper(), bestWords[i][1])) for i in range(len(bestWords))]
+	session["scorePos"] = game.score_gauge(score, maxPoints)[1]
 
-	totalWords = "Find the top 5 words out of {} possible words\n".format(len(possWords))
+	session["maxPossible"] = "The maximum possible score was {}, and the best possible words were:".format(maxPoints)
+	session["maxList"] = [("{} ({} points)".format(bestWords[i][0].upper(), bestWords[i][1])) for i in range(len(bestWords))]
+
+	session["totalWords"] = "Find the top 5 words out of {} possible words\n".format(len(possWords))
 
 	if request.method == "POST":
 		tile1 = request.form["1"]
@@ -80,68 +74,61 @@ def home():
 
 			error = "Invalid word"
 
-			if (guess.title() in guesses):
+			if (guess.title() in session["guesses"]):
 				error = "Already guessed"
 			
-			return render_template("game.html", totalWords = totalWords, letters = letters, guesses = guesses, error = error, score = score, scorePos = scorePos)
+			return render_template("game.html", totalWords = session["totalWords"], letters = letters, guesses = session["guesses"], error = error, score = session["score"], scorePos = session["scorePos"])
 
 		else:
 
 			pts = possWords[guess]
+			guesses = session["guesses"]
 			guesses[guess.title()] = pts
+
+			session["guesses"] = guesses
+
 			score += pts
+			session["score"] = score
 
 			scorePos = game.score_gauge(score, maxPoints)[1]
 
+			session["scorePos"] = scorePos
+
 			possWords.pop(guess)
+			session["possWords"] = possWords
 
-			totalWords = "Find the top 5 words out of {} possible words\n".format(len(possWords))
+			session["totalWords"] = "Find the top 5 words out of {} possible words\n".format(len(possWords))
 
-			scoreGauge = "{} You scored {} points.".format(game.score_gauge(score, maxPoints)[0], score)
+			session["scoreGauge"] = "{} You scored {} points.".format(game.score_gauge(score, maxPoints)[0], score)
 
-			maxPossible = "The maximum possible score was {}, and the best possible words were:".format(maxPoints)
-			maxList = [("{}, {}".format(bestWords[i][0].title(), bestWords[i][1])) for i in range(len(bestWords))]
+			session["maxPossible"] = "The maximum possible score was {}, and the best possible words were:".format(maxPoints)
+			session["maxList"] = [("{}, {}".format(bestWords[i][0].title(), bestWords[i][1])) for i in range(len(bestWords))]
 
-			numGuesses += 1
+			session["numGuesses"] = session["numGuesses"] + 1
 			
-			if numGuesses == 5:
+			if session["numGuesses"] == 5:
 
 				return redirect(url_for('done'))
 
-	return render_template("game.html", totalWords = totalWords, scoreGauge = scoreGauge, letters = letters, guesses = guesses, score = score, scorePos = scorePos)
+	return render_template("game.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], score = session["score"], scorePos = session["scorePos"])
 
 @app.route("/done", methods = ["GET", "POST"])
 def done():
 
-	global guesses
-	global newGame
-	global numGuesses
-	global score
-	global scoreGauge
-	global maxPossible
-	global maxList
-
-	global letters
-	global letterPts
-	global maxPoints
-	global bestWords
-	global possWords
-	
 	if request.method == "POST":
 
-		letters, letterPts, maxPoints, bestWords, possWords = eval(word_info["letters"][0]), eval(word_info["letterPts"][0]), word_info["maxPoints"][0], eval(word_info["bestWords"][0]), eval(word_info["possWords"][0])
-
-		guesses = {}
-		numGuesses = 0
-		score = 0
-		totalWords = "Find the top 5 words out of {} possible words\n".format(len(possWords))
-		maxList = []
-		maxPossible = ""
-		scoreGauge = ""
+		session.pop("possWords")
+		session["maxPossible"] = ""
+		session["maxList"] = []
+		session["guesses"] = {}
+		session["score"] = 0
+		session["numGuesses"] =  0
+		session["scoreGauge"] = ""
+		session["scorePos"] = 0
 
 		return redirect(url_for('home'))
 	else:
-		return render_template("done.html", guesses = guesses, score = score, scoreGauge = scoreGauge, maxPossible = maxPossible, maxList = maxList)
+		return render_template("done.html", guesses = session["guesses"], score = session["score"], scoreGauge = session["scoreGauge"], maxPossible = session["maxPossible"], maxList = session["maxList"])
 
 if __name__ == '__main__':
     app.run(debug = True)
