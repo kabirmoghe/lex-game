@@ -70,6 +70,7 @@ input.submit {
     text-decoration: none;
     color: initial;
     cursor: pointer;
+    -webkit-appearance: none;
 }
 
 a.button {
@@ -86,5 +87,45 @@ span.tally {
 	border-radius: 6px;
 	padding: 9.5px;
 	display: inline-block;
+}
+
+span.correct {
+	background-color: #9BD1A5;
+	border-radius: 5px;
+	padding: 5px;
+	color:  #FFFFFF;
+}
+
+span.best {
+	background-color: #e6b932;
+	border-radius: 5px;
+	padding: 5px;
+	color:  #FFFFFF;
+}
+
+span#doneNext {
+		background-image: repeating-linear-gradient(135deg, #AEC6F5, 0px, #AEC6F5, 5px, transparent 5px, transparent 7px, #AEC6F5 7px);
+	  /*background-color: #AEC6F5;*/
+    border-radius: 10px;
+    padding: 5px 20px 5px;
+    font-size: 20px;
+    border:  none;
+    color: initial;
+    cursor: not-allowed;
+
+}
+
+span#doneDone {
+		background-image: repeating-linear-gradient(135deg, #CBCBCB, 0px, #CBCBCB, 5px, transparent 5px, transparent 7px, #CBCBCB 7px);
+	  /*background-color: #CBCBCB;*/
+    border-radius: 10px;
+    padding: 5px 20px 5px;
+    font-size: 20px;
+    color: initial;
+    cursor: not-allowed;
+}
+
+span#maxPoints {
+	color: #c9a128;
 }
 

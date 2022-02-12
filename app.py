@@ -13,6 +13,9 @@ def home():
 
 	letters, letterPts, maxPoints, bestWords = eval(word_info["letters"][0]), eval(word_info["letterPts"][0]), word_info["maxPoints"][0], eval(word_info["bestWords"][0])
 
+	session["letters"] = letters
+	session["maxPoints"] = int(maxPoints)
+
 	if "possWords" not in session:
 		session["possWords"] = eval(word_info["possWords"][0])
 
@@ -23,9 +26,6 @@ def home():
 	else:
 		session["score"] = 0
 		score = session["score"]
-
-	if "maxPossible" not in session:
-		session["maxPossible"] = ""
 
 	if "maxList" not in session:
 		session["maxList"] = []
@@ -54,8 +54,7 @@ def home():
 
 	session["scorePos"] = game.score_gauge(score, maxPoints)[1]
 
-	session["maxPossible"] = "The maximum possible score was {}, and the best possible words were:".format(maxPoints)
-	session["maxList"] = [("{} ({} points)".format(bestWords[i][0].upper(), bestWords[i][1])) for i in range(len(bestWords))]
+	session["maxList"] = [("{}, {}".format(bestWords[i][0].title(), bestWords[i][1])) for i in range(len(bestWords))]
 
 	session["totalWords"] = "Find the top 5 words out of {} possible words\n".format(len(possWords))
 
@@ -74,8 +73,12 @@ def home():
 
 			error = "Invalid word"
 
-			if (guess.title() in session["guesses"]):
+			guesses = session["guesses"]
+
+			if (guess.title() in guesses):
 				error = "Already guessed"
+
+			session["guesses"] = {word: pts for word, pts in sorted(guesses.items(), key=lambda item: item[1], reverse = True)}
 			
 			return render_template("game.html", totalWords = session["totalWords"], letters = letters, guesses = session["guesses"], error = error, score = session["score"], scorePos = session["scorePos"])
 
@@ -84,6 +87,7 @@ def home():
 			pts = possWords[guess]
 			guesses = session["guesses"]
 			guesses[guess.title()] = pts
+			guesses = {word: pts for word, pts in sorted(guesses.items(), key=lambda item: item[1], reverse = True)}
 
 			session["guesses"] = guesses
 
@@ -101,7 +105,6 @@ def home():
 
 			session["scoreGauge"] = "{} You scored {} points.".format(game.score_gauge(score, maxPoints)[0], score)
 
-			session["maxPossible"] = "The maximum possible score was {}, and the best possible words were:".format(maxPoints)
 			session["maxList"] = [("{}, {}".format(bestWords[i][0].title(), bestWords[i][1])) for i in range(len(bestWords))]
 
 			session["numGuesses"] = session["numGuesses"] + 1
@@ -118,7 +121,6 @@ def done():
 	if request.method == "POST":
 
 		session.pop("possWords")
-		session["maxPossible"] = ""
 		session["maxList"] = []
 		session["guesses"] = {}
 		session["score"] = 0
@@ -128,7 +130,7 @@ def done():
 
 		return redirect(url_for('home'))
 	else:
-		return render_template("done.html", guesses = session["guesses"], score = session["score"], scoreGauge = session["scoreGauge"], maxPossible = session["maxPossible"], maxList = session["maxList"])
+		return render_template("finished.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = session["letters"], guesses = session["guesses"], score = session["score"], scorePos = session["scorePos"], maxPoints = session["maxPoints"], maxList = session["maxList"])
 
 if __name__ == '__main__':
     app.run(debug = True)

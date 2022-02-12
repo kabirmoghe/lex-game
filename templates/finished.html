@@ -19,6 +19,15 @@
 		  }
 		}
 	</script>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+		    // Handler for .ready() called.
+		    $('html, body').animate({
+		        scrollTop: $('#finished').offset().top
+		    }, 'slow');
+		});
+	</script>
 </head>
 <body>
 	<div class="content">
@@ -32,20 +41,17 @@
 
 			<p>{{totalWords}}</p>
 
-			<form method = "post">
-				<p>
-					<input class="tile" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus" onkeyup="moveOnMax(this,'2')">
-					<input class="tile" type="text" name="2" id="2" required maxlength="1" onkeyup="moveOnMax(this,'3')">
-					<input class="tile" type="text" name="3" id="3" required maxlength="1" onkeyup="moveOnMax(this,'4')">
-					<input class="tile" type="text" name="4" id="4" maxlength="1" onkeyup="moveOnMax(this,'5')">
-					<input class="tile" type="text" name="5" id="5" maxlength="1" onkeyup="moveOnMax(this,'next')">
-					<br>
-					<br>
-					<input class="submit" type="submit" id = "next" name="nextButton" value = "Guess">
-				    <a href="{{ url_for('done') }}" class="button">Done</a>
-				</p>
-			</form>
-			
+			<p>
+				<input class="tile" type="text" name="1" id="1" required maxlength="0" autofocus="autofocus" onkeyup="moveOnMax(this,'2')">
+				<input class="tile" type="text" name="2" id="2" required maxlength="0" onkeyup="moveOnMax(this,'3')">
+				<input class="tile" type="text" name="3" id="3" required maxlength="0" onkeyup="moveOnMax(this,'4')">
+				<input class="tile" type="text" name="4" id="4" maxlength="0" onkeyup="moveOnMax(this,'5')">
+				<input class="tile" type="text" name="5" id="5" maxlength="0" onkeyup="moveOnMax(this,'next')">
+				<br>
+				<br>
+				<span id="doneNext">Guess</span>
+				<span id="doneDone">Done</span>
+			</p>
 			<p class="error"><em>{{error}}&nbsp;</em></p>
 		</div>
 	</div>
@@ -65,6 +71,23 @@
 					<span class="correct">{{guess}}, {{guesses[guess]}} ✓</span>
 				{% endfor %}
 			</p>
+		</div>
+	</div>
+	<div class="content" id="finished">
+		<div class="title">
+			<p>	{{scoreGauge}}</p>
+			<p>With a score of <span id="maxPoints"><strong>{{maxPoints}}</strong></span>, the best possible words were:</p>
+			<p>	
+				{% for item in maxList %}
+					<span class="best">{{item}}</span>
+				{% endfor %}
+			</p>
+
+			<form method="post">
+				<p>
+					<input class="submit" type="submit" id = "next" name="nextButton" value = "Try Again">
+				</p>
+			</form>
 		</div>
 	</div>
 </body>
