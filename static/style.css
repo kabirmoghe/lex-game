@@ -46,10 +46,6 @@ input {
 	font-family: 'Oxygen', sans-serif;
 }
 
-input.tile:focus {
-	outline-color: #272727;
-}
-
 input.tile {
 	height: 70px;
 	width: 70px;
@@ -59,6 +55,14 @@ input.tile {
 	border-radius: 10px;
 	border:  none;
 	caret-color: transparent;
+}
+
+input.tile:focus {
+	outline-color: #272727;
+}
+
+input.tile::selection {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 input.submit {

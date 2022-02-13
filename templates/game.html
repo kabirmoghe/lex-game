@@ -19,6 +19,19 @@
 		  }
 		}
 	</script>
+
+	<script type="text/javascript">
+		$(document).keydown(
+		    function(e)
+		    {    
+
+		        if (e.keyCode == 8) {      
+		            $(".tile:focus").prev().focus();
+
+		        }
+		    }
+		);
+	</script>
 </head>
 <body>
 	<div class="content">
@@ -34,11 +47,11 @@
 
 			<form method = "post">
 				<p>
-					<input class="tile" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus" onkeyup="moveOnMax(this,'2')">
-					<input class="tile" type="text" name="2" id="2" required maxlength="1" onkeyup="moveOnMax(this,'3')">
-					<input class="tile" type="text" name="3" id="3" required maxlength="1" onkeyup="moveOnMax(this,'4')">
-					<input class="tile" type="text" name="4" id="4" maxlength="1" onkeyup="moveOnMax(this,'5')">
-					<input class="tile" type="text" name="5" id="5" maxlength="1" onkeyup="moveOnMax(this,'next')">
+					<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus" onkeyup="moveOnMax(this,'2')">
+					<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" onkeyup="moveOnMax(this,'3')">
+					<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" onkeyup="moveOnMax(this,'4')">
+					<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" onkeyup="moveOnMax(this,'5')">
+					<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" onkeyup="moveOnMax(this,'next')">
 					<br>
 					<br>
 					<input class="submit" type="submit" id = "next" name="nextButton" value = "Guess">
