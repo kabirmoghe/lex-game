@@ -26,56 +26,137 @@
 		    {    
 
 		        if (e.keyCode == 8) {      
-		            $(".tile:focus").prev().focus();
+		            del();
 
 		        }
 		    }
 		);
 	</script>
+
+	<script type="text/javascript">
+
+		function activeTile() {
+			var active = 1;
+			var focus = 1;
+
+			for (let i = 1; i < 6 ; i++) {
+				if (document.getElementById(i).value.length == 0){
+					active = i;
+					if (i == 5){
+						focus = 5;
+					}
+					else {
+						focus = i+1;
+					}
+					break;
+				}
+			}
+
+			document.getElementById(focus).focus()
+
+			document.getElementById(active).style.outlineColor = "black";
+
+			return active;
+		}
+	</script>
+
+	<script type="text/javascript">
+		
+		function del() {
+			var moveTo = 5;
+
+			for (let i = 1; i < 6 ; i++) {
+				if (document.getElementById(i).value.length == 0){
+					if (i == 1){
+						moveTo = 1;
+					}
+					else {
+						moveTo = i-1;
+					}
+					break;
+				}
+			}
+
+			document.getElementById(moveTo).focus()
+
+			return moveTo;
+		}
+
+	</script>
 </head>
 <body>
+	<div class="top">
+		<p class="head">Word Game</p>
+	</div>
 	<div class="content">
-		<div class="title">
-			<h1>Word Game</h1>
-			<p>Given 10 letters, look for the 5 highest-scoring words using those letters (which can be used more than once). You have up to 5 guesses!</p>
-			<p class="head">Letters</p>
-			{% for letter in letters %}
-				<img class="tile" src="{{url_for('static', filename = letter+'.svg')}}">
-			{% endfor %}
+		{% for letter in letters %}
+			<img class="tile" src="{{url_for('static', filename = letter+'.svg')}}">
+		{% endfor %}
 
-			<p>{{totalWords}}</p>
+		<p>{{totalWords}}</p>
 
-			<form method = "post">
-				<p>
-					<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus" onkeyup="moveOnMax(this,'2')">
-					<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" onkeyup="moveOnMax(this,'3')">
-					<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" onkeyup="moveOnMax(this,'4')">
-					<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" onkeyup="moveOnMax(this,'5')">
-					<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" onkeyup="moveOnMax(this,'next')">
-					<br>
-					<br>
-					<input class="submit" type="submit" id = "next" name="nextButton" value = "Guess">
-				    <a href="{{ url_for('done') }}" class="button">Done</a>
-				</p>
-			</form>
-			
-			<p class="error"><em>{{error}}&nbsp;</em></p>
-		</div>
+		<form method = "post">
+			<p>
+				<div class="formContents">
+					<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus" onkeyup="moveOnMax(this,'2')" autocomplete="off">
+					<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" onkeyup="moveOnMax(this,'3')" autocomplete="off">
+					<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" onkeyup="moveOnMax(this,'4')" autocomplete="off">
+					<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" onkeyup="moveOnMax(this,'5')" autocomplete="off">
+					<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" autocomplete="off">
+				</div>
+				<br>
+				<br>
+				<input class="submit" type="submit" id = "next" name="nextButton" value = "Guess">
+				<a href="{{ url_for('done') }}" class="button">Done</a>
+			</p>
+			</form>			
+		<p class="error"><em>{{error}}&nbsp;</em></p>
 	</div>
 	<div class="ncontent">
-		<div class="title">
-			<p style="margin-left: 90px;">
-				<img style="max-width: 3%; height: auto; margin-left: {{scorePos}}%;" src="{{url_for('static', filename='score_arrow.svg')}}">
-				<br>
-				<img class="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}} points</span>
-			</p>
-		</div>
+		<p style="margin-left: 90px;">
+			<img style="max-width: 3%; height: auto; margin-left: {{scorePos}}%;" src="{{url_for('static', filename='score_arrow.svg')}}">
+			<br>
+			<img class="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}} points</span>
+		</p>
 	</div>
 	<div class="content">
-		<div class="title">
+		<div class="keyRow">
+	    	<input type="button" value="Q" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="W" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="E" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="R" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="T" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="Y" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="U" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="I" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="O" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="P" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	  	</div>
+	  	<div class="keyRow">
+	      	<input type="button" value="A" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="S" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="D" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="F" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="G" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="H" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="J" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="K" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="L" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	  	</div>
+	  	<div class="keyRow">
+	      	<input type="button" value="Z" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="X" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="C" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="V" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="B" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="N" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="M" onclick="document.getElementById(activeTile()).value = $(this).val()">
+	      	<input type="button" value="⌫" id="del" onclick="document.getElementById(del()).value = ''">
+	  	</div>
+	  	<div class="content">
 			<p>	
 				{% for guess in guesses %}
-					<span class="correct">{{guess}}, {{guesses[guess]}} ✓</span>
+						<span class="correct">{{guess}}, {{guesses[guess]}} ✓</span>
 				{% endfor %}
 			</p>
 		</div>

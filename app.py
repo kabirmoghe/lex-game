@@ -6,7 +6,8 @@ app = Flask(__name__)
 app.secret_key = 'hello'
 
 def reset():
-	session.pop("possWords")
+	if "possWords" in session:
+		session.pop("possWords")
 	session["maxList"] = []
 	session["guesses"] = {}
 	session["score"] = 0
@@ -139,13 +140,7 @@ def done():
 
 	if request.method == "POST":
 
-		session.pop("possWords")
-		session["maxList"] = []
-		session["guesses"] = {}
-		session["score"] = 0
-		session["numGuesses"] =  0
-		session["scoreGauge"] = ""
-		session["scorePos"] = 0
+		reset()
 
 		return redirect(url_for('home'))
 	else:
