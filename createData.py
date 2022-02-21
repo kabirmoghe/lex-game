@@ -4,6 +4,7 @@ from io import StringIO
 import os
 import boto3
 import game
+from datetime import datetime
 
 def main():
 
@@ -12,6 +13,10 @@ def main():
 	word_info = pd.DataFrame([[newGame.letters, newGame.letterPts, newGame.maxPoints, newGame.bestWords, newGame.possWords]])
 
 	word_info.columns = ["letters", "letterPts", "maxPoints", "bestWords", "possWords"]
+
+	ts = datetime.now()
+
+	word_info["time"] = ["{}:{}".format(ts.hour, ts.minute)]
 
 	filename = 'letters.csv'
 	bucketname = 'wordskm'

@@ -5,16 +5,31 @@ import readbucketdata
 app = Flask(__name__)
 app.secret_key = 'hello'
 
+def reset():
+	session.pop("possWords")
+	session["maxList"] = []
+	session["guesses"] = {}
+	session["score"] = 0
+	session["numGuesses"] =  0
+	session["scoreGauge"] = ""
+	session["scorePos"] = 0
 
 @app.route("/", methods = ["GET", "POST"])
 def home():
 
 	word_info = readbucketdata.readbucketdata()
 
-	letters, letterPts, maxPoints, bestWords = eval(word_info["letters"][0]), eval(word_info["letterPts"][0]), word_info["maxPoints"][0], eval(word_info["bestWords"][0])
+	letters, letterPts, maxPoints, bestWords, time = eval(word_info["letters"][0]), eval(word_info["letterPts"][0]), word_info["maxPoints"][0], eval(word_info["bestWords"][0]), word_info["time"][0]
 
 	session["letters"] = letters
 	session["maxPoints"] = int(maxPoints)
+
+	if "time" not in session:
+		session["time"] = time
+
+	elif session["time"] != time:
+		session["time"] = time
+		reset()
 
 	if "possWords" not in session:
 		session["possWords"] = eval(word_info["possWords"][0])
@@ -45,8 +60,11 @@ def home():
 	if "scorePos" not in session:
 		session["scorePos"] = 0
 
-	if "totalWords" not in session:
-		session["totalWords"] = "Find the top 5 words out of {} possible words\n".format(len(possWords))
+	if session["numGuesses"] == 5:
+
+		return redirect(url_for('done'))
+
+	session["totalWords"] = "Find the top 5 words out of {} possible words\n".format(len(possWords))
 
 	scoreGauge = "{} You scored {} points.".format(game.score_gauge(score, maxPoints)[0], score)
 
@@ -59,6 +77,7 @@ def home():
 	session["totalWords"] = "Find the top 5 words out of {} possible words\n".format(len(possWords))
 
 	if request.method == "POST":
+
 		tile1 = request.form["1"]
 		tile2 = request.form["2"]
 		tile3 = request.form["3"]
@@ -108,12 +127,12 @@ def home():
 			session["maxList"] = [("{}, {}".format(bestWords[i][0].title(), bestWords[i][1])) for i in range(len(bestWords))]
 
 			session["numGuesses"] = session["numGuesses"] + 1
-			
+
 			if session["numGuesses"] == 5:
 
 				return redirect(url_for('done'))
 
-	return render_template("game.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], score = session["score"], scorePos = session["scorePos"])
+	return render_template("game.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], score = session["score"], scorePos = session["scorePos"], possWords = session["possWords"], time = session["time"])
 
 @app.route("/done", methods = ["GET", "POST"])
 def done():
