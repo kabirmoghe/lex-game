@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Word Game</title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
 
@@ -165,11 +166,13 @@
 <body>
 	<div id="all">
 		<div id="mainContent">
-			<header>
-				<div id="info"><button class="revealMore" id="showInfo" type="button">How to Play</button></div>
-				<div id="title">Word Game</div>
-				<div id="yesterday"><button class="revealMore" id="showYesterday" type="button">Yesterday</button></div>
-			</header>
+			<div class="top">
+				<header>
+					<div id="info"><button class="revealMore" id="showInfo" type="button">How to Play</button></div>
+					<div id="title">Word Game</div>
+					<div id="yesterday"><button class="revealMore" id="showYesterday" type="button">Yesterday</button></div>
+				</header>
+			</div>
 			<div class="overlay" id="yesterdayOverlay">
 				<div class="popUpBox" id="yesterdayInfo">	
 					<div class="close">
@@ -256,11 +259,11 @@
 				<form id="letterField" method="post">
 					<p>
 						<div class="formContents">
-							<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus" onkeyup="activeTileType()" autocomplete="off">
-							<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" onkeyup="activeTileType()" autocomplete="off">
-							<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" onkeyup="activeTileType()" autocomplete="off">
-							<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" onkeyup="activeTileType()" autocomplete="off">
-							<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" onkeyup="activeTileType()"autocomplete="off">
+							<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus" onkeyup="activeTileType()" autocomplete="off" onfocus="blur();">
+							<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" onkeyup="activeTileType()" autocomplete="off" onfocus="blur();">
+							<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" onkeyup="activeTileType()" autocomplete="off" onfocus="blur();">
+							<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" onkeyup="activeTileType()" autocomplete="off" onfocus="blur();">
+							<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" onkeyup="activeTileType()"autocomplete="off" onfocus="blur();">
 						</div>
 						<!--<a href="{{ url_for('done') }}" class="button">Done</a>-->
 					</p>
