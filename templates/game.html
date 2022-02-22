@@ -8,6 +8,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
 
 	<link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.ico') }}">
 
@@ -36,8 +37,8 @@
 	<script type="text/javascript">
 
 		function activeTile() {
-			var active = 1;
-			var focus = 1;
+			var active = 5;
+			var focus = 5;
 
 			for (let i = 1; i < 6 ; i++) {
 				if (document.getElementById(i).value.length == 0){
@@ -53,8 +54,6 @@
 			}
 
 			document.getElementById(focus).focus()
-
-			document.getElementById(active).style.outlineColor = "black";
 
 			return active;
 		}
@@ -89,10 +88,15 @@
 		<p class="head">Word Game</p>
 	</div>
 	<div class="content">
-		{% for letter in letters %}
+		<!--{% for letter in letters %}
 			<img class="tile" src="{{url_for('static', filename = letter+'.svg')}}">
-		{% endfor %}
-
+		{% endfor %}-->
+	 	<div class="keyRow">
+			{% for letter in letters %}
+				<input type="image" value="{{letter}}" src="{{url_for('static', filename = letter+'.svg')}}" onclick="document.getElementById(activeTile()).value = $(this).val()">
+			{% endfor %}
+			<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="document.getElementById(del()).value = ''">
+		</div>
 		<p>{{totalWords}}</p>
 
 		<form method = "post">
@@ -112,16 +116,15 @@
 			</form>			
 		<p class="error"><em>{{error}}&nbsp;</em></p>
 	</div>
-	<div class="ncontent">
-		<p style="margin-left: 90px;">
-			<img style="max-width: 3%; height: auto; margin-left: {{scorePos}}%;" src="{{url_for('static', filename='score_arrow.svg')}}">
-			<br>
-			<img class="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}} points</span>
-		</p>
-	</div>
 	<div class="content">
+		<!--
 		<div class="keyRow">
-	    	<input type="button" value="Q" onclick="document.getElementById(activeTile()).value = $(this).val()">
+			{% for letter in letters %}
+				<input type="image" value="{{letter}}" src="{{url_for('static', filename = letter+'.svg')}}" onclick="document.getElementById(activeTile()).value = $(this).val()">
+			{% endfor %}
+		</div>
+			
+			<input type="image" value="Q" src="{{url_for('static', filename = 'a.svg')}}" onclick="document.getElementById(activeTile()).value = $(this).val()">
 	      	<input type="button" value="W" onclick="document.getElementById(activeTile()).value = $(this).val()">
 	      	<input type="button" value="E" onclick="document.getElementById(activeTile()).value = $(this).val()">
 	      	<input type="button" value="R" onclick="document.getElementById(activeTile()).value = $(this).val()">
@@ -153,13 +156,21 @@
 	      	<input type="button" value="M" onclick="document.getElementById(activeTile()).value = $(this).val()">
 	      	<input type="button" value="⌫" id="del" onclick="document.getElementById(del()).value = ''">
 	  	</div>
-	  	<div class="content">
-			<p>	
-				{% for guess in guesses %}
-						<span class="correct">{{guess}}, {{guesses[guess]}} ✓</span>
-				{% endfor %}
-			</p>
-		</div>
+	  -->
+	</div>
+	<div class="ncontent">
+		<p style="margin-left: 90px;">
+			<img style="max-width: 3%; height: auto; margin-left: {{scorePos}}%;" src="{{url_for('static', filename='score_arrow.svg')}}">
+			<br>
+			<img class="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}} points</span>
+		</p>
+	</div>
+  	<div class="content">
+		<p>	
+			{% for guess in guesses %}
+					<span class="correct">{{guess}}, {{guesses[guess]}} ✓</span>
+			{% endfor %}
+		</p>
 	</div>
 </body>
 </html>

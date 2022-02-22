@@ -34,18 +34,26 @@
 		<p class="head">Word Game</p>
 	</div>
 	<div class="content">
-		{% for letter in letters %}
+		<!--{% for letter in letters %}
 			<img class="tile" src="{{url_for('static', filename = letter+'.svg')}}">
-		{% endfor %}
+		{% endfor %}-->
+	 	<div class="keyRow">
+			{% for letter in letters %}
+				<input type="image" value="{{letter}}" src="{{url_for('static', filename = letter+'.svg')}}" onclick="document.getElementById(activeTile()).value = $(this).val()">
+			{% endfor %}
+			<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="document.getElementById(del()).value = ''">
+		</div>
 
 		<p>{{totalWords}}</p>
 
 		<p>
-			<input class="tile" type="text" name="1" id="1" required maxlength="0" autofocus="autofocus" onkeyup="moveOnMax(this,'2')" autocomplete="off">
-			<input class="tile" type="text" name="2" id="2" required maxlength="0" onkeyup="moveOnMax(this,'3')" autocomplete="off">
-			<input class="tile" type="text" name="3" id="3" required maxlength="0" onkeyup="moveOnMax(this,'4')" autocomplete="off">
-			<input class="tile" type="text" name="4" id="4" maxlength="0" onkeyup="moveOnMax(this,'5')" autocomplete="off">
-			<input class="tile" type="text" name="5" id="5" maxlength="0" onkeyup="moveOnMax(this,'next')" autocomplete="off">
+			<div class="formContents">
+				<input class="tile" type="text" name="1" id="1" required maxlength="0" autofocus="autofocus" onkeyup="moveOnMax(this,'2')" autocomplete="off">
+				<input class="tile" type="text" name="2" id="2" required maxlength="0" onkeyup="moveOnMax(this,'3')" autocomplete="off">
+				<input class="tile" type="text" name="3" id="3" required maxlength="0" onkeyup="moveOnMax(this,'4')" autocomplete="off">
+				<input class="tile" type="text" name="4" id="4" maxlength="0" onkeyup="moveOnMax(this,'5')" autocomplete="off">
+				<input class="tile" type="text" name="5" id="5" maxlength="0" onkeyup="moveOnMax(this,'next')" autocomplete="off">
+			</div>
 			<br>
 			<br>
 			<span id="doneNext">Guess</span>
@@ -53,15 +61,13 @@
 		</p>
 		<p class="error"><em>{{error}}&nbsp;</em></p>
 	</div>
-	<div class="ncontent">
-		<p style="margin-left: 90px;">
-			<img style="max-width: 3%; height: auto; margin-left: {{scorePos}}%;" src="{{url_for('static', filename='score_arrow.svg')}}">
-			<br>
-			<img class="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}} points</span>
-		</p>
-	</div>
+	<!--
 	<div class="content">
-	  <div class="keyRow">
+	 	<div class="keyRow">
+			{% for letter in letters %}
+				<input type="image" value="{{letter}}" src="{{url_for('static', filename = letter+'.svg')}}" onclick="document.getElementById(activeTile()).value = $(this).val()">
+		{% endfor %}
+		</div>
 	      <input type="button" value="Q" onclick="document.getElementById(activeTile()).value = $(this).val()">
 	      <input type="button" value="W" onclick="document.getElementById(activeTile()).value = $(this).val()">
 	      <input type="button" value="E" onclick="document.getElementById(activeTile()).value = $(this).val()">
@@ -93,6 +99,15 @@
 	      <input type="button" value="N" onclick="document.getElementById(activeTile()).value = $(this).val()">
 	      <input type="button" value="M" onclick="document.getElementById(activeTile()).value = $(this).val()">
 	  </div>
+	</div>
+    -->
+	<div class="ncontent">
+		<p style="margin-left: 90px;">
+			<img style="max-width: 3%; height: auto; margin-left: {{scorePos}}%;" src="{{url_for('static', filename='score_arrow.svg')}}">
+			<br>
+			<img class="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}} points</span>
+		</p>
+	</div>
 	<div class="content">
 		<p>	
 			{% for guess in guesses %}
