@@ -134,6 +134,7 @@ def score_gauge(pts, top):
     elif (pts >= 0.2*top):
         response = "Great!"
     elif (pts > 0):
-        response = "Nice!" 
+        response = "Nice!"
+
             
     return response, score_pos

@@ -4,9 +4,9 @@ import os
 import boto3
 import pandas as pd
 
-def readbucketdata():
+def readbucketdata(file):
 
-    filename = "letters.csv"
+    filename = file
     
     bucketname = 'wordskm'
 
