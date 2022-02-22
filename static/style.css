@@ -68,6 +68,7 @@ header {
 button.revealMore {
 	font-family: 'Oxygen', sans-serif;
 	background-color: #FFFFFF;
+	color: black;
 	border-radius: 15px;
 	font-size: 15px;
 	border: none;
