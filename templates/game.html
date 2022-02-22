@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content= "width=device-width, user-scalable=no">
 	<title>Word Game</title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
 
@@ -258,17 +259,18 @@
 				<form id="letterField" method="post">
 					<p>
 						<div class="formContents">
-							<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus" onkeyup="activeTileType()" autocomplete="off" onfocus="blur();">
-							<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" onkeyup="activeTileType()" autocomplete="off" onfocus="blur();">
-							<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" onkeyup="activeTileType()" autocomplete="off" onfocus="blur();">
-							<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" onkeyup="activeTileType()" autocomplete="off" onfocus="blur();">
-							<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" onkeyup="activeTileType()"autocomplete="off" onfocus="blur();">
+							<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus" onkeyup="activeTileType()" autocomplete="off">
+							<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" onkeyup="activeTileType()" autocomplete="off">
+							<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" onkeyup="activeTileType()" autocomplete="off">
+							<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" onkeyup="activeTileType()" autocomplete="off">
+							<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" onkeyup="activeTileType()"autocomplete="off">
 						</div>
 						<!--<a href="{{ url_for('done') }}" class="button">Done</a>-->
 					</p>
 					</form>			
 				<p class="error"><em>{{error}}&nbsp;</em></p>
 			</div>
+			<!--
 			<div class="ncontent">
 				<p style="margin-left: 90px;">
 					<img style="max-width: 3%; height: auto; margin-left: {{scorePos}}%;" src="{{url_for('static', filename='score_arrow.svg')}}">
@@ -276,6 +278,7 @@
 					<img class="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}} points</span>
 				</p>
 			</div>
+		-->
 		  	<div class="content">
 				<p>	
 					{% for guess in guesses %}
