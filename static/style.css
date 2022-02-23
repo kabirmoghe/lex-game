@@ -426,6 +426,7 @@ span.correct {
 	padding: 5px;
 	color: #FFFFFF;
 	margin-bottom: 5px;
+	white-space: pre;
 }
 
 span.correctBest {
@@ -434,6 +435,7 @@ span.correctBest {
 	padding: 5px;
 	color: #FDDE80;
 	margin-bottom: 5px;
+	white-space: pre;
 }
 
 span.best {
@@ -442,6 +444,7 @@ span.best {
 	padding: 5px;
 	color: #FFFFFF;
 	margin-bottom: 40px;
+	white-space: pre;
 }
 
 input#doneNext {
