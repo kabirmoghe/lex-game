@@ -107,11 +107,33 @@ button.revealMore {
 	background-color: rgba(233, 233, 233, 0.6);
 }
 
+#yesterdayOverlay {
+	display: flex;
+	display: none;
+	position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  justify-content: right;
+	background-color: rgba(233, 233, 233, 0.6);	
+}
+
 .popUpBox {
 	display: flex;
 	margin-top: 40px;
   width: 700px;
   min-height: 650px;
+  flex-direction: column;
+  background-color: #FFFFFF;
+	box-shadow: 0px 0px 20px 10px #CBCBCB;
+	z-index: 99;
+}
+
+.sideBox {
+	display: flex;
+	margin-top: 0px;
+  width: 400px;
+  min-height: 400px;
   flex-direction: column;
   background-color: #FFFFFF;
 	box-shadow: 0px 0px 20px 10px #CBCBCB;
@@ -142,7 +164,7 @@ button.revealMore {
 }
 
 #mainContent {
-	padding-bottom: 200px
+	padding-bottom: 220px
 }
 
 .keyBoard {
@@ -380,11 +402,17 @@ span.tally {
 	}
 }
 
+.wordsDisplayed {
+	line-height: 42px;
+	font-size: 20px;
+}
+
 span.correct {
 	background-color: #9BD1A5;
 	border-radius: 5px;
 	padding: 5px;
 	color: #FFFFFF;
+	margin-bottom: 5px;
 }
 
 span.correctBest {
@@ -392,15 +420,15 @@ span.correctBest {
 	border-radius: 5px;
 	padding: 5px;
 	color: #FDDE80;
+	margin-bottom: 5px;
 }
-
 
 span.best {
 	background-color: #e6b932;
 	border-radius: 5px;
 	padding: 5px;
 	color: #FFFFFF;
-	margin-top: 5px;
+	margin-bottom: 40px;
 }
 
 input#doneNext {

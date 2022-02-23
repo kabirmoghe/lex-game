@@ -187,21 +187,21 @@
 				</header>
 			</div>
 			<div class="overlay" id="yesterdayOverlay">
-				<div class="popUpBox" id="yesterdayInfo">	
+				<div class="sideBox" id="yesterdayInfo">	
 					<div class="close">
 						<button id="closeYesterday" type="button">✕</button>
 					</div>		
 					<div class="popUp" id="yesterdayDetails">
 						<p class="head">Yesterday</p>
-						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br><br>
+						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br></p>
+						<div class="wordsDisplayed">
 							{% for item in oldBestList %}
 							<span class="best">{{item}}</span>
 							{% endfor %}
-							<br><br><br><br>
-							How many did you find?
-						</p>
+						</div>
+						<p><br>How many did you find?</p>
 					</div>
-				</div>	
+				</div>				  	
 			</div>
 			<div class="overlay" id="infoOverlay">
 				<div class="popUpBox" id="playInfo">	
@@ -287,7 +287,8 @@
 				</div>
 			</div>
 		  	<div class="content">
-				<p>	
+		  		<br>
+				<div class="wordsDisplayed">
 					{% for guess in guesses %}
 						{% if guess in bestWordsOnly %}
 							<span class="correctBest">{{guess}}, {{guesses[guess]}} ✓</span>
@@ -295,7 +296,7 @@
 							<span class="correct">{{guess}}, {{guesses[guess]}} ✓</span>
 						{% endif %} 
 					{% endfor %}
-				</p>
+				</div>
 			</div>
 		</div>
 		<div class="keyBoard">

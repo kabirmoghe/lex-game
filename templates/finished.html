@@ -101,21 +101,21 @@
 				<div id="yesterday"><button class="revealMore" id="showYesterday" type="button">Yesterday</button></div>
 			</header>
 			<div class="overlay" id="yesterdayOverlay">
-				<div class="popUpBox" id="yesterdayInfo">	
+				<div class="sideBox" id="yesterdayInfo">	
 					<div class="close">
 						<button id="closeYesterday" type="button">✕</button>
 					</div>		
 					<div class="popUp" id="yesterdayDetails">
 						<p class="head">Yesterday</p>
-						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br><br>
+						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:</p><br>
+						<div class="wordsDisplayed">
 							{% for item in oldBestList %}
 							<span class="best">{{item}}</span>
 							{% endfor %}
-							<br><br><br><br>
-							How many did you find?
-						</p>
+						</div>
+						<p><br>How many did you find?</p>
 					</div>
-				</div>	
+				</div>				  	
 			</div>
 			<div class="overlay" id="infoOverlay">
 				<div class="popUpBox" id="playInfo">	
@@ -197,14 +197,15 @@
 				<p class="error"><em>{{error}}&nbsp;</em></p>
 			</div>
 			<div class="content">
-				<p>
-					<img style="max-width: 15px; height: auto; margin-left: {{scorePos}}%;" src="{{url_for('static', filename='score_arrow.svg')}}">
+				<div class='gauge'>
+					<img style="max-width: 17px; height: auto; margin-left: {{scorePos}}%;" src="{{url_for('static', filename='score_arrow.svg')}}">
 					<br>
 					<img style="max-width: 70%; height: auto;" id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}} points</span>
-				</p>
+				</div>
 			</div>
-			<div class="content">
-				<p>	
+		  	<div class="content">
+		  		<br>
+				<div class="wordsDisplayed">
 					{% for guess in guesses %}
 						{% if guess in bestWordsOnly %}
 							<span class="correctBest">{{guess}}, {{guesses[guess]}} ✓</span>
@@ -212,7 +213,7 @@
 							<span class="correct">{{guess}}, {{guesses[guess]}} ✓</span>
 						{% endif %} 
 					{% endfor %}
-				</p>
+				</div>
 			</div>
 			<div class="content" id="finished">
 				<p>	{{scoreGauge}}</p>
