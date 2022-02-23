@@ -407,6 +407,7 @@ span.tally {
 	border-radius: 6px;
 	padding: 10px;
 	display: inline-block;
+	width: 85px;
 }
 
 @media only screen and (max-width: 500px) {
