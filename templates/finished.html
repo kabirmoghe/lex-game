@@ -107,7 +107,7 @@
 					</div>		
 					<div class="popUp" id="yesterdayDetails">
 						<p class="head">Yesterday</p>
-						<p>Here are yesterday's best words, with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br><br>
+						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br><br>
 							{% for item in oldBestList %}
 							<span class="best">{{item}}</span>
 							{% endfor %}
@@ -196,11 +196,11 @@
 				</p>
 				<p class="error"><em>{{error}}&nbsp;</em></p>
 			</div>
-			<div class="ncontent">
-				<p style="margin-left: 90px;">
-					<img style="max-width: 3%; height: auto; margin-left: {{scorePos}}%;" src="{{url_for('static', filename='score_arrow.svg')}}">
+			<div class="content">
+				<p>
+					<img style="max-width: 15px; height: auto; margin-left: {{scorePos}}%;" src="{{url_for('static', filename='score_arrow.svg')}}">
 					<br>
-					<img class="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}} points</span>
+					<img style="max-width: 70%; height: auto;" id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}} points</span>
 				</p>
 			</div>
 			<div class="content">
@@ -228,7 +228,7 @@
 			<div class="keyWidth">
 			 	<div class="keyRow">
 					{% for letter in letters %}
-						<input type="image" value="{{letter}}" src="{{url_for('static', filename = letter+'.svg')}}" onclick="document.getElementById(activeTile()).value = $(this).val()">
+						<input type="image" value="{{letter}}" src="{{url_for('static', filename = letter+'.svg')}}">
 					{% endfor %}
 				</div>
 				<div class="otherActions">

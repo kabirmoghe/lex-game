@@ -32,30 +32,25 @@ p.error {
 }
 
 .content {
-  width: 700px;
+  align-items: center;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
   margin: 0 auto;
   text-align: center;
 }
 
 .ncontent {
-  width: 700px;
+  align-items: center;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
   margin: 0 auto;
 }
 
-
-/*.info {
-	position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  justify-content: center;
-	animation-name: slidein;
-	animation-duration: 2s;
-	animation-timing-function: linear;
-	z-index: 2000;
-}*/
-
+.gauge {
+	justify-content: flex-start;
+}
 
 /* top bar */
 
@@ -65,6 +60,7 @@ header {
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: space-between;
+	margin-top: 25px;
 	margin-left: 10px;
 	margin-right: 10px;
 	background-color: #E9E9E9;
@@ -146,7 +142,7 @@ button.revealMore {
 }
 
 #mainContent {
-	padding-bottom: 190px
+	padding-bottom: 200px
 }
 
 .keyBoard {
@@ -175,12 +171,19 @@ img.tile {
 	width: 60px;
 }
 
-img.score_gauge {
-	/*width: 400px;*/
-	width: 65%;
+img#score_gauge {
+	max-width: 400px;
 	height: auto;
 	vertical-align: top;
 }
+
+@media only screen and (min-width: 500px) {
+	img#score_gauge {
+		width:400px;
+		height: auto;
+	}
+}
+
 
 img.letterExplained {
 	height: 45px;
@@ -201,17 +204,51 @@ input {
 
 input.tile {
 	font-family: 'Courier Prime', monospace;
-	height: 65px;
-	width: 70px;
+	max-height: 65px;
+	max-width: 70px;
 	padding-top: 10px;
 	font-size: 55px;
   text-align: center;
   vertical-align: middle;
 	text-transform: uppercase;
-	border-radius: 10px;
-	border:  none;
+	border-radius: 8px;
+	border: none;
 	caret-color: transparent;
 	margin: 2px;
+}
+
+@media only screen and (max-width: 500px) {
+	input.tile {
+		font-family: 'Courier Prime', monospace;
+		max-height: 43px;
+		max-width: 52px;
+		padding-top: 10px;
+		font-size: 55px;
+	  text-align: center;
+	  vertical-align: middle;
+		text-transform: uppercase;
+		border-radius: 8px;
+		border: none;
+		caret-color: transparent;
+		margin: 2px;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	input.tile {
+		font-family: 'Courier Prime', monospace;
+		max-height: 38px;
+		max-width: 45px;
+		padding-top: 10px;
+		font-size: 55px;
+	  text-align: center;
+	  vertical-align: middle;
+		text-transform: uppercase;
+		border-radius: 8px;
+		border: none;
+		caret-color: transparent;
+		margin: 2px;
+	}
 }
 
 input.tile:focus {
@@ -316,8 +353,6 @@ input#tryAgain {
 	filter: none;
 }
 
-
-
 a.button {
   background-color: #CBCBCB;
   border-radius: 10px;
@@ -329,9 +364,20 @@ a.button {
 
 span.tally {
 	background-color: #FFFFFF;
+	font-size: 19px;
 	border-radius: 6px;
-	padding: 9.5px;
+	padding: 10px;
 	display: inline-block;
+}
+
+@media only screen and (max-width: 500px) {
+	span.tally {
+		font-size: 14px;
+		background-color: #FFFFFF;
+		border-radius: 6px;
+		padding: 5px;
+		display: inline-block;
+	}
 }
 
 span.correct {
