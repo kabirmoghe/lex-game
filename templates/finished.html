@@ -16,13 +16,18 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script type="text/javascript">
-		function moveOnMax(field,nextFieldID){
-		  if(field.value.length >= field.maxLength){
-		    document.getElementById(nextFieldID).focus();
-		  }
-		}
-	</script>
+		$(document).keydown(
+		    function(e)
+		    {    
 
+		        if (e.keyCode == 27) {      
+		        	$("#completeOverlay").fadeOut("fast");
+		            $(".overlay").fadeOut("fast");
+					document.getElementById(active()).focus();		       
+		        }
+		    }
+		);
+	</script>
 	<script type="text/javascript">
 		$(document).ready(function () {
 		    // Handler for .ready() called.
@@ -34,29 +39,20 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#showYesterday").click(function(){
+		        $("#completeOverlay").fadeIn("fast");		    	
 		        $("#yesterdayOverlay")
 		        	.css('display', 'flex')
 		        	.hide()
 		        	.fadeIn("fast");
-		        $(".keyBoard").fadeOut("fast");
-		        /*
-		        $("#showYesterday").toggle();
-		        $("#info").toggle();
-		        $("#title").toggle();*/
 		    }); 
 		});
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#closeYesterday").click(function(){
+		        $("#completeOverlay").fadeOut("fast");
 		        $("#yesterdayOverlay").fadeOut("fast");
-		        $(".keyBoard").fadeIn("fast");
-				document.getElementById("1").focus();
-		        /*
-		        $("#showYesterday").toggle();
-		        $("#info").toggle();
-		        $("#title").toggle();
-		        */
+				document.getElementById(active()).focus();
 		    }); 
 		});
 	</script>
@@ -64,35 +60,26 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#showInfo").click(function(){
+		        $("#completeOverlay").fadeIn("fast");
 		        $("#infoOverlay")
 		        	.css('display', 'flex')
 		        	.hide()
 		        	.fadeIn("fast");
-		        $(".keyBoard").fadeOut("fast");
-		        /*
-		        $("#showYesterday").toggle();
-		        $("#info").toggle();
-		        $("#title").toggle();*/
 		    }); 
 		});
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#closePlayInfo").click(function(){
+		        $("#completeOverlay").fadeOut("fast");
 		        $("#infoOverlay").fadeOut("fast");
-		        $(".keyBoard").fadeIn("fast");
-				document.getElementById("1").focus();
-		        /*
-		        $("#showYesterday").toggle();
-		        $("#info").toggle();
-		        $("#title").toggle();
-		        */
+				document.getElementById(active()).focus();
 		    }); 
 		});
 	</script>
-
 </head>
 <body>
+	<div id="completeOverlay"></div>
 	<div id="all">
 		<div id="mainContent">
 			<header>

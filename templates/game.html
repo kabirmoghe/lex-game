@@ -27,6 +27,27 @@
 		    }
 		);
 	</script>
+	<script type="text/javascript">
+		$(document).keydown(
+		    function(e)
+		    {    
+
+		        if (e.keyCode == 27) {      
+		        	$("#completeOverlay").fadeOut("fast");
+		            $(".overlay").fadeOut("fast");
+					document.getElementById(active()).focus();		       
+		        }
+		    }
+		);
+	</script>
+	<script type="text/javascript">
+		$(document).click(function(e) { 
+		    // Check for left button
+		    if (e.button == 0) {
+				document.getElementById(active()).focus();		       
+		    }
+		});
+	</script>
 
 	<script type="text/javascript">
 		function activeTile() {
@@ -78,6 +99,21 @@
 	</script>
 
 	<script type="text/javascript">
+		function active() {
+			var active = 5;
+
+			for (let i = 1; i < 6 ; i++) {
+				if (document.getElementById(i).value.length == 0){
+					active = i;
+					break;
+				}
+			}
+
+			return active;
+		}
+	</script>
+
+	<script type="text/javascript">
 		function del() {
 			var moveTo = 5;
 
@@ -105,29 +141,20 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#showYesterday").click(function(){
+		        $("#completeOverlay").fadeIn("fast");		    	
 		        $("#yesterdayOverlay")
 		        	.css('display', 'flex')
 		        	.hide()
 		        	.fadeIn("fast");
-		        $(".keyBoard").fadeOut("fast");
-		        /*
-		        $("#showYesterday").toggle();
-		        $("#info").toggle();
-		        $("#title").toggle();*/
 		    }); 
 		});
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#closeYesterday").click(function(){
+		        $("#completeOverlay").fadeOut("fast");
 		        $("#yesterdayOverlay").fadeOut("fast");
-		        $(".keyBoard").fadeIn("fast");
-				document.getElementById("1").focus();
-		        /*
-		        $("#showYesterday").toggle();
-		        $("#info").toggle();
-		        $("#title").toggle();
-		        */
+				document.getElementById(active()).focus();
 		    }); 
 		});
 	</script>
@@ -135,48 +162,26 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#showInfo").click(function(){
+		        $("#completeOverlay").fadeIn("fast");
 		        $("#infoOverlay")
 		        	.css('display', 'flex')
 		        	.hide()
 		        	.fadeIn("fast");
-		        $(".keyBoard").fadeOut("fast");
-		        /*
-		        $("#showYesterday").toggle();
-		        $("#info").toggle();
-		        $("#title").toggle();*/
 		    }); 
 		});
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#closePlayInfo").click(function(){
+		        $("#completeOverlay").fadeOut("fast");
 		        $("#infoOverlay").fadeOut("fast");
-		        $(".keyBoard").fadeIn("fast");
-				document.getElementById("1").focus();
-		        /*
-		        $("#showYesterday").toggle();
-		        $("#info").toggle();
-		        $("#title").toggle();
-		        */
-		    }); 
-		});
-	</script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-		    $("#closePlayInfo").click(function(){
-		        $("#infoOverlay").fadeOut("fast");
-		        $(".keyBoard").fadeIn("fast");
-				document.getElementById("1").focus();
-		        /*
-		        $("#showYesterday").toggle();
-		        $("#info").toggle();
-		        $("#title").toggle();
-		        */
+				document.getElementById(active()).focus();
 		    }); 
 		});
 	</script>
 </head>
 <body>
+	<div id="completeOverlay"></div>
 	<div id="all">
 		<div id="mainContent">
 			<div class="top">
