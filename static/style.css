@@ -243,8 +243,8 @@ input {
 
 input.tile {
 	font-family: 'Courier Prime', monospace;
-	height: 65px;
-	width: 65px;
+	height: 75px;
+	width: 75px;
 	padding: 0px;
 	font-size: 55px;
   text-align: center;
@@ -255,6 +255,23 @@ input.tile {
 	caret-color: transparent;
 	margin: 2px;
 	-webkit-appearance: none
+}
+
+@media only screen and (max-width: 500px) {
+	input.tile {
+		font-family: 'Courier Prime', monospace;
+		height: 60px;
+		width: 60px;
+		padding: 0px;
+		font-size: 55px;
+	  text-align: center;
+	  align-items: center;
+		text-transform: uppercase;
+		border-radius: 8px;
+		border: none;
+		caret-color: transparent;
+		margin: 2px;
+	}
 }
 
 input.tile:focus {
