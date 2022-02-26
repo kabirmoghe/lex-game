@@ -20,44 +20,84 @@
 		    function(e)
 		    {    
 
-		    	if ($("#completeOverlay").is(":hidden")) {
+		        if (e.keyCode == 8) {      
+		            del();
 
-			        if (e.keyCode == 8)      
-			            del();
-			        else if (e.keyCode == 13)
-			        	$('form#letterField').submit();
-
-			        else if ((!(e.metaKey)) && (e.key >= "a" && e.key <= "z")) {
-
-			        	if (!(document.getElementById("5").value.length == 1)) {
-
-			        		if ((active() == 5)){
-								document.getElementById("5").value = e.key;
-				        		document.getElementById("5").style.border = "2px solid black";
-								document.getElementById("5").style.margin = "0px";		      				
-			        		}
-
-			        		else {
-				        		document.getElementById(active()).value = e.key;
-				        		document.getElementById(active()-1).style.border = "2px solid black";
-								document.getElementById(active()-1).style.margin = "0px";	
-			        		}	        		
-			        	}
-					}
-		   		}
-		   	}
-		);
-	</script>
-	<script type="text/javascript">
-		$(document).keydown(
-		    function(e) {    
-		        if (e.keyCode == 27) {      
-		        	$("#completeOverlay").fadeOut("fast");
-		            $(".overlay").fadeOut("fast");
 		        }
 		    }
 		);
 	</script>
+	<script type="text/javascript">
+		$(document).keydown(
+		    function(e)
+		    {    
+
+		        if (e.keyCode == 27) {      
+		        	$("#completeOverlay").fadeOut("fast");
+		            $(".overlay").fadeOut("fast");
+					document.getElementById(active()).focus();		       
+		        }
+		    }
+		);
+	</script>
+	<script type="text/javascript">
+		$(document).click(function(e) { 
+		    // Check for left button
+		    if (e.button == 0) {
+				document.getElementById(active()).focus();		       
+		    }
+		});
+	</script>
+
+	<script type="text/javascript">
+		function activeTile() {
+			var active = 5;
+			var focus = 5;
+
+			for (let i = 1; i < 6 ; i++) {
+				if (document.getElementById(i).value.length == 0){
+					active = i;
+					if (i == 5){
+						focus = 5;
+					}
+					else {
+						focus = i+1;
+					}
+					break;
+				}
+			}
+
+			document.getElementById(active).style.border = "2px solid black";
+			document.getElementById(active).style.margin = "0px"
+
+			document.getElementById(focus).focus()
+
+			return active;
+		}
+	</script>
+
+	<script type="text/javascript">
+		function activeTileType() {
+			var active = 5;
+			var focus = 5;
+
+			for (let i = 1; i < 6 ; i++) {
+				if (document.getElementById(i).value.length == 0){
+					active = i-1;
+					focus = i;
+					break;
+				}
+			}
+
+			document.getElementById(active).style.border = "2px solid black";
+			document.getElementById(active).style.margin = "0px";
+
+			document.getElementById(focus).focus();
+
+			return active;
+		}
+	</script>
+
 	<script type="text/javascript">
 		function active() {
 			var active = 5;
@@ -72,19 +112,7 @@
 			return active;
 		}
 	</script>
-	<script type="text/javascript">
-		function activeTile() {
-			var currentActive = active();
 
-		    if (!(document.getElementById("5").value.length == 1)) {
-
-				document.getElementById(currentActive).style.border = "2px solid black";
-				document.getElementById(currentActive).style.margin = "0px"
-
-				return currentActive;
-			}
-		}
-	</script>
 	<script type="text/javascript">
 		function del() {
 			var moveTo = 5;
@@ -104,11 +132,12 @@
 		    document.getElementById(moveTo).style.border = "none";
 			document.getElementById(moveTo).style.margin = "2px";
 
-			document.getElementById(moveTo).value = '';
+			document.getElementById(moveTo).focus()
 
 			return moveTo;
 		}
 	</script>
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#showYesterday").click(function(){
@@ -125,6 +154,7 @@
 		    $("#closeYesterday").click(function(){
 		        $("#completeOverlay").fadeOut("fast");
 		        $("#yesterdayOverlay").fadeOut("fast");
+				document.getElementById(active()).focus();
 		    }); 
 		});
 	</script>
@@ -145,6 +175,7 @@
 		    $("#closePlayInfo").click(function(){
 		        $("#completeOverlay").fadeOut("fast");
 		        $("#infoOverlay").fadeOut("fast");
+				document.getElementById(active()).focus();
 		    }); 
 		});
 	</script>
@@ -243,11 +274,11 @@
 				<form id="letterField" method="post">
 					<p>
 						<div class="formContents">
-							<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus"autocomplete="off" onfocus="blur();">
-							<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" autocomplete="off" onfocus="blur();">
-							<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" autocomplete="off" onfocus="blur();">
-							<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" autocomplete="off" onfocus="blur();">
-							<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" autocomplete="off" onfocus="blur();">
+							<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus" onkeyup="activeTileType()" autocomplete="off">
+							<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" onkeyup="activeTileType()" autocomplete="off">
+							<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" onkeyup="activeTileType()" autocomplete="off">
+							<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" onkeyup="activeTileType()" autocomplete="off">
+							<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" onkeyup="activeTileType()"autocomplete="off">
 						</div>
 					</p>
 					</form>			
@@ -282,7 +313,7 @@
 				</div>
 				<div class="otherActions">
 					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="nextButton" form="letterField">
-					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();">
+					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="document.getElementById(del()).value = ''">
 				</div>
 			</div>
 		</div>
