@@ -245,6 +245,7 @@ input.tile {
 	font-family: 'Courier Prime', monospace;
 	height: 75px;
 	width: 75px;
+	line-height: 75px;
 	padding: 0px;
 	font-size: 55px;
   text-align: center;
@@ -262,6 +263,7 @@ input.tile {
 		font-family: 'Courier Prime', monospace;
 		height: 60px;
 		width: 60px;
+		line-height: 60px;
 		padding: 0px;
 		font-size: 55px;
 	  text-align: center;
