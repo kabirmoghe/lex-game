@@ -123,9 +123,11 @@ def score_gauge(pts, top):
         
     response = ""
         
-    score_pos = -36.5+round((55.5*pts/top),2)
+    score_pos = round((80*pts/top),2)
 
-    if (pts >= 0.8*top):
+    if (pts == top):
+        response = "You're the master of masters!"
+    elif (pts >= 0.8*top):
         response = "You're a master!"
     elif (pts >= 0.6*top):
         response = "Genius!"

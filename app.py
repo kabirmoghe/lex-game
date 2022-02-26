@@ -81,7 +81,7 @@ def home():
 
 		return redirect(url_for('done'))
 
-	session["totalWords"] = "Find the top 5 words out of {} possible words\n".format(len(possWords))
+	session["totalWords"] = "Find the 5 highest-value words out of {} possible words\n".format(len(possWords))
 
 	if score == maxPoints:
 		scoreGauge = "{} You reached the highest possible score with ".format(game.score_gauge(score, maxPoints)[0])
@@ -100,7 +100,7 @@ def home():
 
 	session["oldBestList"] = [("{}, {}".format(oldBestWords[i][0].title(), oldBestWords[i][1])) for i in range(len(oldBestWords))]
 
-	session["totalWords"] = "Find the top 5 words out of {} possible words\n".format(len(possWords))
+	session["totalWords"] = "Find the 5 highest-value words out of {} possible words\n".format(len(possWords))
 
 	if request.method == "POST":
 
@@ -125,7 +125,7 @@ def home():
 
 			session["guesses"] = {word: pts for word, pts in sorted(guesses.items(), key=lambda item: item[1], reverse = True)}
 			
-			return render_template("game.html", totalWords = session["totalWords"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], error = error, score = session["score"], scorePos = session["scorePos"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"])
+			return render_template("game.html", totalWords = session["totalWords"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], error = error, score = session["score"], scorePos = session["scorePos"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"])
 
 		else:
 
@@ -146,7 +146,7 @@ def home():
 			possWords.pop(guess)
 			session["possWords"] = possWords
 
-			session["totalWords"] = "Find the top 5 words out of {} possible words\n".format(len(possWords))
+			session["totalWords"] = "Find the 5 highest-value words out of {} possible words\n".format(len(possWords))
 
 			if score == maxPoints:
 				session["scoreGauge"] = "{} You reached the highest possible score with ".format(game.score_gauge(score, maxPoints)[0])
@@ -165,7 +165,7 @@ def home():
 
 				return redirect(url_for('done'))
 
-	return render_template("game.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"] , score = session["score"], scorePos = session["scorePos"], possWords = session["possWords"], time = session["time"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"])
+	return render_template("game.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"] , score = session["score"], scorePos = session["scorePos"], possWords = session["possWords"], time = session["time"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"])
 
 @app.route("/done", methods = ["GET", "POST"])
 def done():

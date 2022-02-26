@@ -49,6 +49,14 @@
 		);
 	</script>
 	<script type="text/javascript">
+		$(document).ready(function() {
+
+			var position = (76.5*{{score}}/{{maxPoints}}).toFixed(2);
+
+			$("#scoreArrow").css('marginLeft', position+'%');
+		})
+	</script>
+	<script type="text/javascript">
 		$(document).keydown(
 		    function(e) {    
 		        if (e.keyCode == 27) {      
@@ -221,7 +229,7 @@
 						<br><br>
 						Each time you guess a valid word, it will show up above the keyboard. If you happen to guess 1 of the 5 best words, the word will show up as gold. <br><br>
 
-						<span class="correctBest">Jump, 15 ✓</span>
+						<span class="best">Jump, 15 ✓</span>
 						<span class="correct">Plume, 9 ✓</span>
 						<span class="correct">Hum, 8 ✓</span>
 
@@ -253,19 +261,17 @@
 					</form>			
 				<p class="error"><em>{{error}}&nbsp;</em></p>
 			</div>
-			<div class="content">
-				<div class='gauge'>
-					<img style="max-width: 17px; height: auto; margin-left: {{scorePos}}%;" src="{{url_for('static', filename='score_arrow.svg')}}">
+			<div class='gauge'>
+					<img id="scoreArrow" style="max-width: 3.5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}">
 					<br>
-					<img style="max-width: 70%; height: auto;" id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}}</span>
-				</div>
+					<img id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}}</span>
 			</div>
 		  	<div class="content">
 		  		<br>
 				<div class="wordsDisplayed">
 					{% for guess in guesses %}
 						{% if guess in bestWordsOnly %}
-							<span class="correctBest">{{guess}}, {{guesses[guess]}} ✓</span>
+							<span class="best">{{guess}}, {{guesses[guess]}} ✓</span>
 						{% else %}
 							<span class="correct">{{guess}}, {{guesses[guess]}} ✓</span>
 						{% endif %} 
