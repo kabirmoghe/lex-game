@@ -256,7 +256,7 @@ input.tile {
 	margin: 2px;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
 	input.tile {
 		font-family: 'Courier Prime', monospace;
 		max-height: 38px;
@@ -403,6 +403,7 @@ span.tally {
 		border-radius: 6px;
 		padding: 5px;
 		display: inline-block;
+		width: 40px;
 	}
 }
 
