@@ -270,6 +270,7 @@ input.tile {
 		border: none;
 		caret-color: transparent;
 		margin: 2px;
+		-webkit-appearance: none;
 	}
 }
 
