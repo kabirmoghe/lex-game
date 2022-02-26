@@ -24,7 +24,7 @@
 
 			        if (e.keyCode == 8)      
 			            del();
-			        else if (e.keyCode == 13)
+			        else if ( ((document.getElementById("1").value.length == 1) && (document.getElementById("2").value.length == 1) && (document.getElementById("3").value.length == 1)) && (e.keyCode == 13))
 			        	$('form#letterField').submit();
 
 			        else if ((!(e.metaKey)) && (e.key >= "a" && e.key <= "z")) {
@@ -155,9 +155,9 @@
 		<div id="mainContent">
 			<div class="top">
 				<header>
-					<div id="info"><button class="revealMore" id="showInfo" type="button">How to Play</button></div>
+					<div id="info"><button class="revealMore" id="showInfo" type="button" onfocus="this.blur();">How to Play</button></div>
 					<div id="title">Word Game</div>
-					<div id="yesterday"><button class="revealMore" id="showYesterday" type="button">Yesterday</button></div>
+					<div id="yesterday"><button class="revealMore" id="showYesterday" type="button" onfocus="this.blur();">Yesterday</button></div>
 				</header>
 			</div>
 			<div class="overlay" id="yesterdayOverlay">
@@ -277,12 +277,12 @@
 			<div class="keyWidth">
 			 	<div class="keyRow">
 					{% for letter in letters %}
-						<input type="image" value="{{letter}}" src="{{url_for('static', filename = letter+'.svg')}}" onclick="document.getElementById(activeTile()).value = $(this).val()">
+						<input type="image" value="{{letter}}" src="{{url_for('static', filename = letter+'.svg')}}" onclick="document.getElementById(activeTile()).value = $(this).val()" onfocus="this.blur();">
 					{% endfor %}
 				</div>
 				<div class="otherActions">
-					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="nextButton" form="letterField">
-					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();">
+					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="nextButton" form="letterField" onfocus="this.blur();">
+					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
 				</div>
 			</div>
 		</div>
