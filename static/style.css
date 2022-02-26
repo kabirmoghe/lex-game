@@ -346,6 +346,7 @@ input#tryAgain {
 	width: auto;
 	margin: 3px 1px;
 	border: none;
+	touch-action: manipulation;
 }
 
 .keyRow input:hover {
