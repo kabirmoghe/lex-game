@@ -52,6 +52,7 @@ p#invalid {
   max-width: 500px;
   text-align: center;
   line-height: 35px;
+  padding-top: 25px;
 }
 
 #additionalInfo {
