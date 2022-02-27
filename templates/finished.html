@@ -85,6 +85,20 @@
 		    }); 
 		});
 	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#share').click(function(){
+			    navigator.clipboard
+			      .writeText('{{level}}')
+			      .then(() => {
+			        alert("Results copied to clipboard!");
+			      })
+			      .catch(() => {
+			        alert("Could not copy results to clipboard.");
+			      });
+			});
+		});
+	</script>
 </head>
 <body>
 	<div id="completeOverlay"></div>
@@ -221,6 +235,7 @@
 					</p>
 				</form>
 			    -->
+			    <img id="share" src="{{url_for('static', filename = 'share.svg')}}">
 			</div>
 		</div>
 		<div class="keyBoard" id="disabledKeyboard">
@@ -233,7 +248,7 @@
 					<div class="otherActions">
 					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="submit" form="letterField" onfocus="this.blur();">
 					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
-					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'done.svg')}}" onclick="window.location.href='{{ url_for( 'done') }}';" onfocus="this.blur();">
+					<input type="image" id="done" value="done" src="{{url_for('static', filename = 'done.svg')}}" onfocus="this.blur();">
 				</div>
 			</div>
 		</div>

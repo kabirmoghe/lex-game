@@ -200,7 +200,7 @@ s}
 }
 
 #mainContent {
-	padding-bottom: 220px
+	padding-bottom: 240px
 }
 
 .keyBoard {
@@ -239,8 +239,12 @@ img.letterExplained {
 	width: auto;
 }
 
-img.done {
-	
+img#share {
+  max-height: 50px;
+  width: auto;
+ 	box-shadow: 0px 0px 4px 2px #CBCBCB;
+ 	border-radius: 10px;
+  cursor: pointer;
 }
 
 input {

@@ -300,7 +300,7 @@
 				<div class="otherActions">
 					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="submit" form="letterField" onfocus="this.blur();">
 					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
-					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'done.svg')}}" onclick="window.location.href='{{ url_for( 'done') }}';" onfocus="this.blur();">
+					<input type="image" id="done" value="done" src="{{url_for('static', filename = 'done.svg')}}" onclick="window.location.href='{{ url_for( 'done') }}';" onfocus="this.blur();">
 				</div>
 			</div>
 		</div>
