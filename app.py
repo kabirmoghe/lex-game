@@ -18,6 +18,7 @@ def reset():
 	session["scorePos"] = 0
 	session["oldMaxPoints"] = 0
 	session["oldBestList"] = ""
+	session["status"] = "not done"
 
 @app.route("/", methods = ["GET", "POST"])
 def home():
@@ -78,8 +79,15 @@ def home():
 	if "scorePos" not in session:
 		session["scorePos"] = 0
 
+	if "status" not in session:
+		session["status"] = "not done"
+
 	if session["numGuesses"] == 10:
 
+		session["status"] = "done"
+		return redirect(url_for('done'))
+
+	if session["status"] == "done":
 		return redirect(url_for('done'))
 
 	session["totalWords"] = "Find the 5 highest-value words out of {} possible words\n".format(len(possWords))
@@ -222,7 +230,7 @@ def done():
 
 		return redirect(url_for('home'))
 	else:
-
+		session["status"] = "done"
 		session["guesses"] = {word: pts for word, pts in sorted(session["guesses"].items(), key=lambda item: item[1], reverse = True)}
 
 		if ("usr" in session) and (session["usr"] == "kabirmoghe"):

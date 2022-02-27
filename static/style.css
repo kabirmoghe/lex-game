@@ -234,10 +234,13 @@ img#score_gauge {
 	vertical-align: top;
 }
 
-
 img.letterExplained {
 	height: 45px;
 	width: auto;
+}
+
+img.done {
+	
 }
 
 input {
