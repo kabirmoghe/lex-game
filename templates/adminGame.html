@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-	<title>Word Game</title>
+	<title>Lex</title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,6 +62,7 @@
 		        if (e.keyCode == 27) {      
 		        	$("#completeOverlay").fadeOut("fast");
 		            $(".overlay").fadeOut("fast");
+		            $("#additionalInfo").fadeOut("fast");
 		        }
 		    }
 		);
@@ -180,7 +181,7 @@
 			<div class="more" id="additionalInfo">
 				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
 				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
-				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
+				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Last Hour</button></div>
 				<div id="login"><a class="revealEvenMore" href="{{ url_for('login') }}">Log In</a></div>
 			</div>
 		</div>
@@ -191,8 +192,8 @@
 						<button id="closeYesterday" type="button">✕</button>
 					</div>		
 					<div class="popUp" id="yesterdayDetails">
-						<p class="head">Yesterday</p>
-						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br></p>
+						<p class="head">Last Hour</p>
+						<p>Here are the last hour's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br></p>
 						<div class="wordsDisplayed">
 							{% for item in oldBestList %}
 							<span class="best">{{item}}</span>

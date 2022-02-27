@@ -55,11 +55,6 @@ p#invalid {
   padding-top: 25px;
 }
 
-#additionalInfo {
-	display: none;
-	text-align: right;
-}
-
 /* top bar */
 
 .top {
@@ -130,10 +125,12 @@ a.revealEvenMore:hover {
 #additionalInfo {
 	background-color: white;
 	border-radius: 5px;
-	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.30));
+	filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.30));
 	padding: 3px;
 	padding-bottom: 9px;
 	margin-top: 30px;
+	display: none;
+	text-align: right;
 }
 
 #completeOverlay {
@@ -181,6 +178,7 @@ a.revealEvenMore:hover {
   background-color: #FFFFFF;
 	box-shadow: 0px 0px 20px 10px #CBCBCB;
 	margin-bottom: 10px;
+	border-radius: 5px;
 }
 
 .sideBox {
@@ -192,6 +190,7 @@ a.revealEvenMore:hover {
   background-color: #FFFFFF;
 	box-shadow: 0px 0px 20px 10px #CBCBCB;
 	margin-bottom: 10px;
+	border-radius: 5px;
 	/*z-index: 99;*/
 }
 
@@ -204,6 +203,7 @@ a.revealEvenMore:hover {
   background-color: #FFFFFF;
 	box-shadow: 0px 0px 20px 10px #CBCBCB;
 	margin-bottom: 10px;
+	border-radius: 5px;
 	/*z-index: 99;*/
 }
 
@@ -213,7 +213,7 @@ a.revealEvenMore:hover {
 }
 
 .close button {
-	background-color: #FFFFFF;
+	background-color: transparent;
 	font-size: 20px;
 	border: none;
 	cursor: pointer;
