@@ -182,6 +182,10 @@ def done():
 
 	if request.method == "POST":
 
+		if ("submit" in request.form):
+			session.pop("usr")
+			return redirect(url_for("done"))
+
 		reset()
 
 		return redirect(url_for('home'))
