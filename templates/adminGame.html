@@ -240,9 +240,9 @@
 						<br><br>
 						Each time you guess a valid word, it will show up above the keyboard. If you happen to guess 1 of the 5 best words, the word will show up as gold. <br><br>
 
-						<span class="best">Jump, 15 ✓</span>
-						<span class="correct">Plume, 9 ✓</span>
-						<span class="correct">Hum, 8 ✓</span>
+						<span class="best">Jump, 15</span>
+						<span class="correct">Plume, 9</span>
+						<span class="correct">Hum, 8</span>
 
 						<br><br>
 
@@ -282,9 +282,9 @@
 				<div class="wordsDisplayed">
 					{% for guess in guesses %}
 						{% if guess in bestWordsOnly %}
-							<span class="best">{{guess}}, {{guesses[guess]}} ✓</span>
+							<span class="best">{{guess}}, {{guesses[guess]}}</span>
 						{% else %}
-							<span class="correct">{{guess}}, {{guesses[guess]}} ✓</span>
+							<span class="correct">{{guess}}, {{guesses[guess]}}</span>
 						{% endif %} 
 					{% endfor %}
 				</div>

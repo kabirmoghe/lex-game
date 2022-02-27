@@ -173,9 +173,9 @@
 						<br><br>
 						Each time you guess a valid word, it will show up above the keyboard. If you happen to guess 1 of the 5 best words, the word will show up as gold. <br><br>
 
-						<span class="best">Jump, 15 ✓</span>
-						<span class="correct">Plume, 9 ✓</span>
-						<span class="correct">Hum, 8 ✓</span>
+						<span class="best">Jump, 15</span>
+						<span class="correct">Plume, 9</span>
+						<span class="correct">Hum, 8</span>
 
 						<br><br>
 
@@ -235,7 +235,7 @@
 					</p>
 				</form>
 			    -->
-			    <img id="share" src="{{url_for('static', filename = 'share.svg')}}">
+			    <input type="image" id="share" value="done" src="{{url_for('static', filename = 'share.svg')}}" onfocus="this.blur();">
 			</div>
 		</div>
 		<div class="keyBoard" id="disabledKeyboard">
