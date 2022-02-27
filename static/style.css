@@ -21,10 +21,13 @@ p.error {
 	color: #646464;
 }
 
+p#invalid {
+	font-size: 15px;
+}
+
 .title {
   width: 700px;
 }
-
 
 .top {
 	margin: 0 auto;
@@ -51,6 +54,13 @@ p.error {
 .gauge {
   margin: 0 auto;
   max-width: 500px;
+}
+
+.login {
+  margin: 0 auto;
+  max-width: 500px;
+  text-align: center;
+  line-height: 35px;
 }
 
 /* top bar */
@@ -148,9 +158,20 @@ s}
 .sideBox {
 	display: flex;
 	margin-top: 0px;
+	height: 400px;
   width: 400px;
-  height: 400px;
-  min-height: 400px;
+  flex-direction: column;
+  background-color: #FFFFFF;
+	box-shadow: 0px 0px 20px 10px #CBCBCB;
+	margin-bottom: 10px;
+	/*z-index: 99;*/
+}
+
+.adminSideBox {
+	display: flex;
+	margin-top: 0px;
+	min-height: 400px;
+  width: 400px;
   flex-direction: column;
   background-color: #FFFFFF;
 	box-shadow: 0px 0px 20px 10px #CBCBCB;
@@ -344,6 +365,52 @@ input#tryAgain {
 #disabledKeyboard input:active { 
 	cursor: not-allowed;
 	filter: none;
+}
+
+input#logOut {
+	font-family: 'Oxygen', sans-serif;
+	background-color: #FFFFFF;
+	color: black;
+	border-radius: 15px;
+	font-size: 15px;
+	border: none;
+	padding: 5px;
+	cursor: pointer;
+	box-shadow: 0px 0px 3px 1px #CBCBCB;
+}
+
+input.logInput {
+	font-family: 'Oxygen', sans-serif;
+	background-color: #FFFFFF;
+	color: black;
+	border-radius: 5px;
+	font-size: 15px;
+	border: none;
+	padding: 5px;
+}
+
+input#logInSubmit {
+	font-family: 'Oxygen', sans-serif;
+	color: black;
+	border-radius: 5px;
+	font-size: 15px;
+	border: none;
+	padding: 5px;
+	background-color: #B3D1EA;
+}
+
+a.logButtons {
+	font-family: 'Oxygen', sans-serif;
+	background-color: #FFFFFF;
+	color: black;
+	border-radius: 15px;
+	font-size: 15px;
+	border: none;
+	padding: 5px;
+	cursor: pointer;
+	box-shadow: 0px 0px 3px 1px #CBCBCB;
+  text-decoration: none;
+  color: initial;
 }
 
 a.button {

@@ -93,7 +93,10 @@
 			<header>
 				<div id="info"><button class="revealMore" id="showInfo" type="button"  onfocus="this.blur();">How to Play</button></div>
 				<div id="title">Word Game</div>
-				<div id="yesterday"><button class="revealMore" id="showYesterday" type="button" onfocus="this.blur();">Yesterday</button></div>
+				<div id="yesterday">
+					<button class="revealMore" id="showYesterday" type="button" onfocus="this.blur();">Yesterday</button>&nbsp;
+					<a class="logButtons" href="{{ url_for('login') }}">Log In</a>
+				</div>			
 			</header>
 			<div class="overlay" id="yesterdayOverlay">
 				<div class="sideBox" id="yesterdayInfo">	
@@ -180,11 +183,11 @@
 
 				<p>
 					<div class="formContents">
-						<input class="tile" type="text" name="1" id="1" required maxlength="0" autofocus="autofocus" onkeyup="moveOnMax(this,'2')" autocomplete="off">
-						<input class="tile" type="text" name="2" id="2" required maxlength="0" onkeyup="moveOnMax(this,'3')" autocomplete="off">
-						<input class="tile" type="text" name="3" id="3" required maxlength="0" onkeyup="moveOnMax(this,'4')" autocomplete="off">
-						<input class="tile" type="text" name="4" id="4" maxlength="0" onkeyup="moveOnMax(this,'5')" autocomplete="off">
-						<input class="tile" type="text" name="5" id="5" maxlength="0" onkeyup="moveOnMax(this,'next')" autocomplete="off">
+						<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus"autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" autocomplete="off" onfocus="blur();">
 					</div>
 					<!--<input class="submit" type="submit" id="doneNext" name="nextButton" value="Guess" disabled>
 					<span id="doneDone">Done</span>-->
@@ -213,7 +216,7 @@
 				<p>{{addInfo}} <span class="maxPoints">{{maxPoints}}</span> points.</p>
 				<form method="post">
 					<p>
-						<input class="submit" type="submit" id="tryAgain" name="nextButton" value="Try Again">
+						<input class="submit" type="submit" id="tryAgain" name="submit" value="Try Again">
 					</p>
 				</form>
 			</div>
@@ -226,7 +229,7 @@
 					{% endfor %}
 				</div>
 				<div class="otherActions">
-					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="nextButton" form="letterField">
+					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="submit" form="letterField">
 					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="document.getElementById(del()).value = ''">
 				</div>
 			</div>

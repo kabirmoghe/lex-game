@@ -164,27 +164,35 @@
 			<div class="top">
 				<header>
 					<div id="info"><button class="revealMore" id="showInfo" type="button" onfocus="this.blur();">How to Play</button></div>
-					<div id="title">Word Game</div>
+					<div id="title">(Admin) Word Game</div>
 					<div id="yesterday">
-						<button class="revealMore" id="showYesterday" type="button" onfocus="this.blur();">Yesterday</button>&nbsp;
-						<a class="logButtons" href="{{ url_for('login') }}">Log In</a>
+						<button class="revealMore" id="showYesterday" type="button" onfocus="this.blur();">More</button> &nbsp;
+						<form method="post">
+							<input name="submit" id="logOut" type="submit" onfocus="this.blur();" value="Log Out">
+						</form>
 					</div>
 				</header>
 			</div>
 			<div class="overlay" id="yesterdayOverlay">
-				<div class="sideBox" id="yesterdayInfo">	
+				<div class="adminSideBox" id="yesterdayInfo">	
 					<div class="close">
 						<button id="closeYesterday" type="button">✕</button>
 					</div>		
 					<div class="popUp" id="yesterdayDetails">
 						<p class="head">Yesterday</p>
-						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br></p>
+						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:</p><br>
 						<div class="wordsDisplayed">
 							{% for item in oldBestList %}
 							<span class="best">{{item}}</span>
 							{% endfor %}
 						</div>
 						<p><br>How many did you find?</p>
+						<p>Today (<span class=maxPoints>{{maxPoints}}</span>):</p><br>	
+						<div class="wordsDisplayed">
+							{% for item in maxList %}
+							<span class="best">{{item}}</span>
+							{% endfor %}
+						</div>
 					</div>
 				</div>				  	
 			</div>
@@ -251,7 +259,7 @@
 
 				<p>{{totalWords}}</p>
 
-				<form id="letterField" method="post">
+				<form id="letterField" method="post" name="myForms" value="guessWords">
 					<p>
 						<div class="formContents">
 							<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus"autocomplete="off" onfocus="blur();">
@@ -290,7 +298,7 @@
 					{% endfor %}
 				</div>
 				<div class="otherActions">
-					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="submit" form="letterField" onfocus="this.blur();">
+					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="submit" form="letterField" onfocus="this.blur();" value="guess">
 					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
 				</div>
 			</div>
