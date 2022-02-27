@@ -145,7 +145,7 @@ def score_gauge(pts, top):
 
     elif (pts >= 0.2*top):
         response = "Great!"
-        level = "Wow! 🟡 {}/{}".format(pts, top)
+        level = "Great! 🟡 {}/{}".format(pts, top)
 
     elif (pts > 0):
         response = "Nice!"

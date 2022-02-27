@@ -5,8 +5,8 @@ body {
 }
 
 #all {
-	padding-left: 25px;
-	padding-right: 25px;
+  min-height: 100%;
+  position:relative;
 }
 
 p {
@@ -23,11 +23,6 @@ p.error {
 
 p#invalid {
 	font-size: 15px;
-}
-
-.top {
-	margin: 0 auto;
-  text-align: center;
 }
 
 .content {
@@ -59,18 +54,20 @@ p#invalid {
   line-height: 35px;
 }
 
+#additionalInfo {
+	display: none;
+	text-align: right;
+}
+
 /* top bar */
 
-header {
+.top {
+	margin-top: 25px;
+	margin-left: 25px;
+	margin-right: 25px;
+	background-color: #E9E9E9;
 	display: flex;
 	align-items: center;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: space-between;
-	margin-top: 25px;
-	margin-left: 10px;
-	margin-right: 10px;
-	background-color: #E9E9E9;
 }
 
 button.revealMore {
@@ -85,26 +82,58 @@ button.revealMore {
 	box-shadow: 0px 0px 3px 1px #CBCBCB;
 }
 
+button.revealEvenMore {
+	font-family: 'Oxygen', sans-serif;
+	background-color: #FFFFFF;
+	color: black;
+	font-size: 15px;
+	border: none;
+	padding: 5px;
+	cursor: pointer;
+}
+
+button.revealEvenMore:hover {
+	background-color: #D9D9D9;
+	border-radius: 5px;
+}
+
+a.revealEvenMore {
+	font-family: 'Oxygen', sans-serif;
+	color: black;
+	font-size: 15px;
+	border: none;
+	padding: 5px;
+	cursor: pointer;
+  text-decoration: none;
+}
+
+a.revealEvenMore:hover {
+	background-color: #D9D9D9;
+	border-radius: 5px;
+}
+
 #title {
 	font-size: 40px;
-	text-align: center;
-	justify-content: center;
-	right: 0;
-	left: 0;
   font-family: 'Courier Prime', monospace;
   font-weight: 700;
+  display: inline-block;
+  margin: 0 auto;
 }
 
-#yesterday {
-	display: flex;
-	justify-content: flex-end;
+.more {
+	display: inline-block;
+	position:absolute; 
+	right: 25px;
 }
 
-#info {
-	display: flex;
-	justify-content: flex-start;
+#additionalInfo {
+	background-color: white;
+	border-radius: 5px;
+	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.30));
+	padding: 3px;
+	padding-bottom: 9px;
+	margin-top: 30px;
 }
-
 
 #completeOverlay {
 	display: none;
@@ -128,7 +157,7 @@ button.revealMore {
   left: 0;
   justify-content: center;
 	z-index: 1000;
-s}
+}
 
 #yesterdayOverlay {
 	display: flex;
@@ -179,6 +208,7 @@ s}
 
 .close {
 	text-align: right;
+	color: black;
 }
 
 .close button {
@@ -195,13 +225,10 @@ s}
 	padding-right: 20px;
 }
 
-#all {
-  min-height: 100%;
-  position:relative;
-}
-
 #mainContent {
-	padding-bottom: 240px
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-bottom: 240px;
 }
 
 .keyBoard {
