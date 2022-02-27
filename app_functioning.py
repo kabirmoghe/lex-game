@@ -10,7 +10,6 @@ def reset():
 		session.pop("possWords")
 	session["maxList"] = []
 	session["guesses"] = {}
-	session["bestGuesses"] = {}
 	session["score"] = 0
 	session["numGuesses"] =  0
 	session["scoreGauge"] = ""
@@ -78,7 +77,7 @@ def home():
 	if "scorePos" not in session:
 		session["scorePos"] = 0
 
-	if session["numGuesses"] == 10:
+	if session["numGuesses"] == 5:
 
 		return redirect(url_for('done'))
 
@@ -129,16 +128,6 @@ def home():
 				error = "Already guessed"
 
 			session["guesses"] = {word: pts for word, pts in sorted(guesses.items(), key=lambda item: item[1], reverse = True)}
-
-			bestGuesses = {}
-
-			if len(session["guesses"]) < 5:
-			    bestGuesses = session["guesses"]
-			else:
-			    for word in list(session["guesses"].keys())[:5]:
-			        bestGuesses[word] = session["guesses"][word]
-
-			session["bestGuesses"] = bestGuesses
 			
 			if ("usr" in session) and (session["usr"] == "kabirmoghe"):
 				return render_template("adminGame.html", totalWords = session["totalWords"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], error = error, score = session["score"], scorePos = session["scorePos"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], maxList = session["maxList"])
@@ -152,20 +141,9 @@ def home():
 			guesses[guess.title()] = pts
 			guesses = {word: pts for word, pts in sorted(guesses.items(), key=lambda item: item[1], reverse = True)}
 
-			bestGuesses = {}
-
-			if len(guesses) < 5:
-			    bestGuesses = guesses
-			else:
-			    for word in list(guesses.keys())[:5]:
-			        bestGuesses[word] = guesses[word]
-
-			session["bestGuesses"] = bestGuesses
-
 			session["guesses"] = guesses
 
-			score = sum(bestGuesses.values())
-
+			score += pts
 			session["score"] = score
 
 			scorePos = game.score_gauge(score, maxPoints)[1]
@@ -183,14 +161,14 @@ def home():
 
 			else: 
 				session["scoreGauge"] = "{} You scored {} points.".format(game.score_gauge(score, maxPoints)[0], score)
-				session["addInfo"] = "The highest possible score was"
+				session["addInfo"] = "Keep trying! The highest possible score was"
 
 			session["maxList"] = [("{}, {}".format(bestWords[i][0].title(), bestWords[i][1])) for i in range(len(bestWords))]
 			session["oldBestList"] = [("{}, {}".format(oldBestWords[i][0].title(), oldBestWords[i][1])) for i in range(len(oldBestWords))]
 
 			session["numGuesses"] = session["numGuesses"] + 1
 
-			if session["numGuesses"] == 10:
+			if session["numGuesses"] == 5:
 
 				return redirect(url_for('done'))
 
@@ -201,16 +179,6 @@ def home():
 
 @app.route("/done", methods = ["GET", "POST"])
 def done():
-
-	time = readbucketdata.readbucketdata("letters.csv")["time"][0]
-
-	if "time" not in session:
-		session["time"] = time
-
-	elif session["time"] != time:
-		session["time"] = time
-		reset()
-		return redirect(url_for('home'))
 
 	if request.method == "POST":
 

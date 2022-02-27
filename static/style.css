@@ -25,10 +25,6 @@ p#invalid {
 	font-size: 15px;
 }
 
-.title {
-  width: 700px;
-}
-
 .top {
 	margin: 0 auto;
   text-align: center;
@@ -90,11 +86,12 @@ button.revealMore {
 }
 
 #title {
-	font-size: 30px;
+	font-size: 40px;
 	text-align: center;
 	justify-content: center;
 	right: 0;
 	left: 0;
+	font-family: 'Oswald', sans-serif;
 }
 
 #yesterday {
@@ -213,7 +210,6 @@ s}
   margin: 0 auto;
   text-align: center;
   bottom: 105px;
-	text-align: center;
 	right: 0;
 }
 
