@@ -99,24 +99,35 @@
 			});
 		});
 	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $("#moreID").click(function(){
+		        $("#additionalInfo").fadeIn("fast");
+		    }); 
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $("#closeAllInfo").click(function(){
+		        $("#additionalInfo").fadeOut("fast");
+		    }); 
+		});
+	</script>
 </head>
 <body>
 	<div id="completeOverlay"></div>
 	<div id="all">
-		<div id="mainContent">
-			<div class="top">
-				<header>
-					<div id="title">LEX</div>
-					<div id="more"><button class="revealMore" id="moreInfo" type="button" onfocus="this.blur();">More</button></div>
-					<div id="additionalInfo">
-						<div id="info"><button class="revealMore" id="showInfo" type="button" onfocus="this.blur();">How to Play</button></div>
-						<div id="yesterday">
-							<button class="revealMore" id="showYesterday" type="button" onfocus="this.blur();">Yesterday</button>&nbsp;
-						</div>
-						<a class="logButtons" href="{{ url_for('login') }}">Log In</a>
-					</div>
-				</header>
+		<div class="top">
+			<div id="title">LEX</div>
+			<div class="more" id="moreID"><button class="revealMore" id="moreInfo" type="button" onfocus="this.blur();">More</button></div>
+			<div class="more" id="additionalInfo">
+				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
+				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
+				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
+				<div id="login"><a class="revealEvenMore" href="{{ url_for('login') }}">Log In</a></div>
 			</div>
+		</div>
+		<div id="mainContent">
 			<div class="overlay" id="yesterdayOverlay">
 				<div class="sideBox" id="yesterdayInfo">	
 					<div class="close">
@@ -124,7 +135,7 @@
 					</div>		
 					<div class="popUp" id="yesterdayDetails">
 						<p class="head">Yesterday</p>
-						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:</p><br>
+						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br></p>
 						<div class="wordsDisplayed">
 							{% for item in oldBestList %}
 							<span class="best">{{item}}</span>
