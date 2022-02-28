@@ -225,7 +225,7 @@ a.revealEvenMore:hover {
 	display: flex;
 	margin-top: 40px;
 	padding-top: 5px;
-  width: 160px;
+  min-width: 160px;
   min-height: 65px;
   flex-direction: column;
   background-color: #FFFFFF;
