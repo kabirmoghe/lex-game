@@ -132,7 +132,7 @@ def score_gauge(pts, top):
         level = "Champ! 🟣 {}/{}".format(pts, top)
 
     elif (pts >= 0.8*top):
-        response = "You're amazing!"
+        response = "Amazing!"
         level = "Amazing! 🔵 {}/{}".format(pts, top)
 
     elif (pts >= 0.6*top):

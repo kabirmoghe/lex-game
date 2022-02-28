@@ -103,7 +103,7 @@ def home():
 		addInfo = ""
 
 	else: 
-		scoreGauge = "{} You scored {} points.".format(game.score_gauge(score, maxPoints)[0], score)
+		scoreGauge = "{} You scored ".format(game.score_gauge(score, maxPoints)[0])
 		addInfo = "Keep trying! The highest possible score was"
 
 	session["scoreGauge"] = scoreGauge
@@ -202,7 +202,7 @@ def home():
 				session["addInfo"] = ""
 
 			else: 
-				session["scoreGauge"] = "{} You scored {} points.".format(game.score_gauge(score, maxPoints)[0], score)
+				session["scoreGauge"] = "{} You scored".format(game.score_gauge(score, maxPoints)[0])
 				session["addInfo"] = "The highest possible score was"
 
 			session["maxList"] = [("{}, {}".format(bestWords[i][0].title(), bestWords[i][1])) for i in range(len(bestWords))]
