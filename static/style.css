@@ -508,25 +508,29 @@ a.button {
 
 span.tally {
 	background-color: #FFFFFF;
-	font-size: 19px;
+	font-size: 22px;
 	border-radius: 8px;
-	padding: 11.5px;
+	padding: 7px;
 	display: inline-block;
 	width: 50px;
 	float: right;
 	text-align: center;
+	border: 3px solid #404040;
+	color: #404040;
 } 
 
 @media only screen and (max-width: 500px) {
 	span.tally {
-		font-size: 11px;
+		font-size: 13px;
 		background-color: #FFFFFF;
 		border-radius: 6px;
-		padding: 7.5px 4px;
+		padding: 5px 1px;
 		display: inline-block;
 		width: 35px;
 		float:right;
 		text-align: center;
+		border: 2px solid #404040;
+		color: #404040;
 	}
 }
 
