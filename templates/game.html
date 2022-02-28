@@ -157,14 +157,20 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#moreID").click(function(){
-		        $("#additionalInfo").fadeIn("fast");
+		        $("#additionalInfo")
+		        	.toggle()
+		        	.hide()
+		        	.fadeIn("fast");
 		    }); 
 		});
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#closeAllInfo").click(function(){
-		        $("#additionalInfo").fadeOut("fast");
+		        $("#additionalInfo")
+		        	.toggle()
+		        	.show()
+		        	.fadeOut("fast");
 		    }); 
 		});
 	</script>
@@ -176,14 +182,6 @@
 		        	.css('display', 'flex')
 		        	.hide()
 		        	.fadeIn("fast");
-		    }); 
-		});
-	</script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-		    $("#closeDone").click(function(){
-		    	$("#completeOverlay").fadeOut("fast");
-		        $("#doneOverlay").fadeOut("fast");
 		    }); 
 		});
 	</script>
@@ -336,7 +334,7 @@
 		<div class="overlay" id="doneOverlay">
 			<div class="choiceBox" id="doneDisplay">
 				<div class="choiceInner" id="yesterdayDetails">
-					<span class="choice">Are you sure you're done?</span><br>
+					<span class="choice">Give up?</span><br>
 					<input class="choice" type="image" id="giveUp" value="done" src="{{url_for('static', filename = 'yes.svg')}}" onclick="window.location.href='{{ url_for( 'done') }}';" onfocus="this.blur();">
 					<input class="choice" type="image" id="notDone" value="not done" src="{{url_for('static', filename = 'no.svg')}}">
 				</div>
@@ -352,7 +350,7 @@
 				<div class="otherActions">
 					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="submit" form="letterField" onfocus="this.blur();">
 					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
-					<input type="image" id="done" value="done" src="{{url_for('static', filename = 'done.svg')}}" onfocus="this.blur();">
+					<input type="image" id="done" value="done" src="{{url_for('static', filename = 'giveUp.svg')}}" onfocus="this.blur();">
 				</div>
 			</div>
 		</div>

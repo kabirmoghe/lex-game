@@ -102,14 +102,20 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#moreID").click(function(){
-		        $("#additionalInfo").fadeIn("fast");
+		        $("#additionalInfo")
+		        	.toggle()
+		        	.hide()
+		        	.fadeIn("fast");
 		    }); 
 		});
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#closeAllInfo").click(function(){
-		        $("#additionalInfo").fadeOut("fast");
+		        $("#additionalInfo")
+		        	.toggle()
+		        	.show()
+		        	.fadeOut("fast");
 		    }); 
 		});
 	</script>
@@ -251,7 +257,7 @@
 				</div>
 			</div>
 			<div class="content" id="finished">
-				<p>{{scoreGauge}} {{maxPoints}} points.</p>
+				<p>{{scoreGauge}} {{score}} points.</p>
 				<!--<p>{{addInfo}} <span class="maxPoints">{{maxPoints}}</span> points.</p>-->
 				<!--
 				<form method="post">
@@ -260,7 +266,7 @@
 					</p>
 				</form>
 			    -->
-			    <input type="image" id="share" value="done" src="{{url_for('static', filename = 'share.svg')}}" onfocus="this.blur();">
+			    <input type="image" id="share" value="share" src="{{url_for('static', filename = 'share.svg')}}" onfocus="this.blur();">
 			</div>
 		</div>
 		<div class="keyBoard" id="disabledKeyboard">
@@ -273,7 +279,7 @@
 					<div class="otherActions">
 					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="submit" form="letterField" onfocus="this.blur();">
 					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
-					<input type="image" id="done" value="done" src="{{url_for('static', filename = 'done.svg')}}" onfocus="this.blur();">
+					<input type="image" id="done" value="done" src="{{url_for('static', filename = 'giveUp.svg')}}" onfocus="this.blur();">
 				</div>
 			</div>
 		</div>
