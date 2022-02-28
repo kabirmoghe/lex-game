@@ -346,8 +346,8 @@ input.tile {
 @media only screen and (max-width: 500px) {
 	input.tile {
 		font-family: 'Courier Prime', monospace;
-		height: 50px;
-		width: 50px;
+		height: 44px;
+		width: 44px;
 		line-height: 60px;
 		padding: 0px;
 		font-size: 55px;
@@ -499,7 +499,7 @@ span.tally {
 		border-radius: 6px;
 		padding: 7.5px 4px;
 		display: inline-block;
-		width: 40px;
+		width: 35px;
 		float:right;
 		text-align: center;
 	}
