@@ -339,7 +339,7 @@ input.tile {
 		font-size: 55px;
 	  text-align: center;
 		text-transform: uppercase;
-		border: 2px solid #BDBCBC;
+		border: 4px solid #BDBCBC;
 		border-radius: 3px;
 		caret-color: transparent;
 		margin: 2px;
