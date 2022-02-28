@@ -24,6 +24,8 @@ def reset():
 @app.route("/", methods = ["GET", "POST"])
 def home():
 
+	lid = readbucketdata.readbucketdata("letters.csv")["lid"][0]
+
 	word_info = readbucketdata.readbucketdata("letters.csv")
 	old_word_info = readbucketdata.readbucketdata("oldletters.csv")
 
@@ -217,9 +219,9 @@ def home():
 	session["level"] = game.score_gauge(session["score"], session["maxPoints"])[2]
 
 	if ("usr" in session) and (session["usr"] == "kabirmoghe"):
-		return render_template("adminGame.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"] , score = session["score"], scorePos = session["scorePos"], possWords = session["possWords"], time = session["time"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], maxList = session["maxList"])
+		return render_template("adminGame.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"] , score = session["score"], scorePos = session["scorePos"], possWords = session["possWords"], time = session["time"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], maxList = session["maxList"], lid = lid)
 	else:
-		return render_template("game.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"] , score = session["score"], scorePos = session["scorePos"], possWords = session["possWords"], time = session["time"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"])
+		return render_template("game.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"] , score = session["score"], scorePos = session["scorePos"], possWords = session["possWords"], time = session["time"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], lid = lid)
 
 @app.route("/done", methods = ["GET", "POST"])
 def done():
@@ -255,6 +257,9 @@ def done():
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
+
+	lid = readbucketdata.readbucketdata("letters.csv")["lid"][0]
+
 	if request.method == "POST":
 		if (request.form["usr"] == "kabirmoghe") and (request.form["pwd"] == "Daod10Bgr6"):
 
@@ -262,14 +267,16 @@ def login():
 
 			return redirect(url_for('home'))
 		else:
-			return render_template("invalidLogin.html")
+			return render_template("invalidLogin.html", lid = lid)
 
-	return render_template("login.html")
+	return render_template("login.html", lid = lid)
 
 @app.route("/feedback", methods = ["GET", "POST"])
 def feedback():
 
-	return render_template("feedback.html")
+	lid = readbucketdata.readbucketdata("letters.csv")["lid"][0]
+
+	return render_template("feedback.html", lid = lid)
 
 
 if __name__ == '__main__':
