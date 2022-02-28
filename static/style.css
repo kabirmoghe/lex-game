@@ -25,6 +25,11 @@ p#invalid {
 	font-size: 15px;
 }
 
+span.choice {
+	color: #646464;
+	font-size: 15px;
+}
+
 .content {
   align-items: center;
 	flex-direction: row;
@@ -199,6 +204,10 @@ a.revealEvenMore:hover {
   z-index: 1000;
 }
 
+#doneOverlay {
+	padding-top: 350px;
+}
+
 .popUpBox {
 	display: flex;
 	margin-top: 40px;
@@ -222,6 +231,19 @@ a.revealEvenMore:hover {
 	margin-bottom: 10px;
 	border-radius: 5px;
 	/*z-index: 99;*/
+}
+
+.choiceBox {
+	display: flex;
+	margin-top: 40px;
+	padding-top: 5px;
+  width: 160px;
+  min-height: 65px;
+  flex-direction: column;
+  background-color: #FFFFFF;
+	box-shadow: 0px 0px 10px 5px #CBCBCB;
+	margin-bottom: 10px;
+	border-radius: 5px;
 }
 
 .adminSideBox {
@@ -254,6 +276,13 @@ a.revealEvenMore:hover {
 	align-items: center;
 	padding-left: 20px;
 	padding-right: 20px;
+}
+
+.choiceInner {
+	text-align: center;
+	align-items: center;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 #mainContent {
@@ -457,6 +486,12 @@ input#logInSubmit {
 	background-color: #B3D1EA;
 	cursor: pointer;
 	-webkit-appearance: none;
+}
+
+input.choice {
+	max-height: 35px;
+	width: auto;
+	border: none;
 }
 
 a.logButtons {

@@ -168,6 +168,25 @@
 		    }); 
 		});
 	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $("#done").click(function(){
+		    	$("#completeOverlay").fadeIn("fast");
+		        $("#doneOverlay")
+		        	.css('display', 'flex')
+		        	.hide()
+		        	.fadeIn("fast");
+		    }); 
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $("#notDone").click(function(){
+		        $("#completeOverlay").fadeOut("fast");
+		        $("#doneOverlay").fadeOut("fast");
+		    }); 
+		});
+	</script>
 </head>
 <body>
 	<div id="completeOverlay"></div>
@@ -303,6 +322,15 @@
 				</div>
 			</div>
 		</div>
+		<div class="overlay" id="doneOverlay">
+			<div class="choiceBox" id="doneDisplay">
+				<div class="choiceInner" id="yesterdayDetails">
+					<span class="choice">Are you sure you're done?</span><br>
+					<input class="choice" type="image" id="giveUp" value="done" src="{{url_for('static', filename = 'yes.svg')}}" onclick="window.location.href='{{ url_for( 'done') }}';" onfocus="this.blur();">
+					<input class="choice" type="image" id="notDone" value="not done" src="{{url_for('static', filename = 'no.svg')}}">
+				</div>
+			</div>
+		</div>
 		<div class="keyBoard">
 			<div class="keyWidth">
 			 	<div class="keyRow">
@@ -313,7 +341,7 @@
 				<div class="otherActions">
 					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="submit" form="letterField" onfocus="this.blur();">
 					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
-					<input type="image" id="done" value="done" src="{{url_for('static', filename = 'done.svg')}}" onclick="window.location.href='{{ url_for( 'done') }}';" onfocus="this.blur();">
+					<input type="image" id="done" value="done" src="{{url_for('static', filename = 'done.svg')}}" onfocus="this.blur();">
 				</div>
 			</div>
 		</div>
