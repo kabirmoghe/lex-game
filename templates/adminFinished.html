@@ -117,31 +117,21 @@
 <body>
 	<div id="completeOverlay"></div>
 	<div id="all">
-		<!-- NON FEEDBACK (LOGIN)
 		<div class="top">
-			<div id="title">LEX</div>
+			<div id="title">LEX - Admin</div>
 			<div class="more" id="moreID"><button class="revealMore" id="moreInfo" type="button" onfocus="this.blur();">More</button></div>
 			<div class="more" id="additionalInfo">
 				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
 				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
 				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Last Hour</button></div>
-				<div id="login"><a class="revealEvenMore" href="{{ url_for('login') }}">Log In</a></div>
-			</div>
-		</div>
-	    -->
-	    <div class="top">
-			<div id="title">LEX</div>
-			<div class="more" id="moreID"><button class="revealMore" id="moreInfo" type="button" onfocus="this.blur();">More</button></div>
-			<div class="more" id="additionalInfo">
-				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
-				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
-				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Last Hour</button></div>
-				<div id="login"><a class="revealEvenMore" href="{{ url_for('feedback') }}">Feedback</a></div>
+				<form method="post">
+					<input class="revealEvenMore" name="submit" id="logOut" type="submit" onfocus="this.blur();" value="Log Out">
+				</form>
 			</div>
 		</div>
 		<div id="mainContent">
 			<div class="overlay" id="yesterdayOverlay">
-				<div class="sideBox" id="yesterdayInfo">	
+				<div class="adminSideBox" id="yesterdayInfo">	
 					<div class="close">
 						<button id="closeYesterday" type="button">✕</button>
 					</div>		
@@ -154,6 +144,12 @@
 							{% endfor %}
 						</div>
 						<p><br>How many did you find?</p>
+						<p>Today (<span class=maxPoints>{{maxPoints}}</span>):</p><br>	
+						<div class="wordsDisplayed">
+							{% for item in maxList %}
+							<span class="best">{{item}}</span>
+							{% endfor %}
+						</div>
 					</div>
 				</div>				  	
 			</div>

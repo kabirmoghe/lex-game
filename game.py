@@ -128,24 +128,24 @@ def score_gauge(pts, top):
     level = "Nice! 🟠 {}/{}".format(pts, top)
 
     if (pts == top):
-        response = "You're the master of masters!"
-        level = "Master of masters! 🟣 {}/{}".format(pts, top)
+        response = "You're the champ!"
+        level = "Champ! 🟣 {}/{}".format(pts, top)
 
     elif (pts >= 0.8*top):
-        response = "You're a master!"
-        level = "Master! 🔵 {}/{}".format(pts, top)
+        response = "You're amazing!"
+        level = "Amazing! 🔵 {}/{}".format(pts, top)
 
     elif (pts >= 0.6*top):
-        response = "Genius!"
-        level = "Genius! 🟢 {}/{}".format(pts, top)
+        response = "Wow!"
+        level = "Wow! 🟢 {}/{}".format(pts, top)
 
     elif (pts >= 0.4*top):
-        response = "Wow!"
-        level = "Wow! ⚪️ {}/{}".format(pts, top)
+        response = "Great!"
+        level = "Great! ⚪️ {}/{}".format(pts, top)
 
     elif (pts >= 0.2*top):
-        response = "Great!"
-        level = "Great! 🟡 {}/{}".format(pts, top)
+        response = "Good!"
+        level = "Good! 🟡 {}/{}".format(pts, top)
 
     elif (pts > 0):
         response = "Nice!"
