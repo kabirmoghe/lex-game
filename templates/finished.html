@@ -117,6 +117,7 @@
 <body>
 	<div id="completeOverlay"></div>
 	<div id="all">
+		<!-- NON FEEDBACK (LOGIN)
 		<div class="top">
 			<div id="title">LEX</div>
 			<div class="more" id="moreID"><button class="revealMore" id="moreInfo" type="button" onfocus="this.blur();">More</button></div>
@@ -125,6 +126,17 @@
 				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
 				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Last Hour</button></div>
 				<div id="login"><a class="revealEvenMore" href="{{ url_for('login') }}">Log In</a></div>
+			</div>
+		</div>
+	    -->
+	    <div class="top">
+			<div id="title">LEX</div>
+			<div class="more" id="moreID"><button class="revealMore" id="moreInfo" type="button" onfocus="this.blur();">More</button></div>
+			<div class="more" id="additionalInfo">
+				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
+				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
+				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Last Hour</button></div>
+				<div id="login"><a class="revealEvenMore" href="{{ url_for('feedback') }}">Feedback</a></div>
 			</div>
 		</div>
 		<div id="mainContent">
