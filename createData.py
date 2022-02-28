@@ -21,6 +21,7 @@ def main():
 
 	old_word_info["time"] = ["{}:{}".format(ts.hour, ts.minute)]
 
+
 	filename = 'oldletters.csv'
 	bucketname = 'wordskm'
     
@@ -33,6 +34,8 @@ def main():
 
     # NEW DATA
 
+	lid = oldGame["lid"][0]+1
+
 	newGame = game.create_word_info()
 
 	word_info = pd.DataFrame([[newGame.letters, newGame.letterPts, newGame.maxPoints, newGame.bestWords, newGame.possWords]])
@@ -40,6 +43,8 @@ def main():
 	word_info.columns = ["letters", "letterPts", "maxPoints", "bestWords", "possWords"]
 
 	word_info["time"] = ["{}:{}".format(ts.hour, ts.minute)]
+
+	word_info["lid"] = [lid]
 
 	filename = 'letters.csv'
 	bucketname = 'wordskm'

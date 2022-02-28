@@ -94,7 +94,9 @@ def home():
 	if session["status"] == "done":
 		return redirect(url_for('done'))
 
-	session["totalWords"] = "Find the 5 highest-value words out of {} possible words\n".format(len(possWords))
+	#session["totalWords"] = "Find the 5 highest-value words out of {} possible words\n".format(len(possWords))
+	session["totalWords"] = "{} points\n".format(session["maxPoints"])
+
 
 	if score == maxPoints:
 		scoreGauge = "{} You reached the highest possible score with ".format(game.score_gauge(score, maxPoints)[0])
@@ -113,7 +115,8 @@ def home():
 
 	session["oldBestList"] = [("{}, {}".format(oldBestWords[i][0].title(), oldBestWords[i][1])) for i in range(len(oldBestWords))]
 
-	session["totalWords"] = "Find the 5 highest-value words out of {} possible words\n".format(len(possWords))
+	#session["totalWords"] = "Find the 5 highest-value words out of {} possible words\n".format(len(possWords))
+	session["totalWords"] = "{} points\n".format(session["maxPoints"])
 
 	if request.method == "POST":
 
@@ -191,7 +194,8 @@ def home():
 			possWords.pop(guess)
 			session["possWords"] = possWords
 
-			session["totalWords"] = "Find the 5 highest-value words out of {} possible words\n".format(len(possWords))
+			#session["totalWords"] = "Find the 5 highest-value words out of {} possible words\n".format(len(possWords))
+			session["totalWords"] = "{} points\n".format(session["maxPoints"])
 
 			if score == maxPoints:
 				session["scoreGauge"] = "{} You reached the highest possible score with ".format(game.score_gauge(score, maxPoints)[0])
@@ -221,6 +225,7 @@ def home():
 def done():
 
 	time = readbucketdata.readbucketdata("letters.csv")["time"][0]
+	lid = readbucketdata.readbucketdata("letters.csv")["lid"][0]
 
 	if "time" not in session:
 		session["time"] = time
@@ -240,14 +245,13 @@ def done():
 
 		return redirect(url_for('home'))
 	else:
-		print(session["level"])
 		session["status"] = "done"
 		session["guesses"] = {word: pts for word, pts in sorted(session["guesses"].items(), key=lambda item: item[1], reverse = True)}
 
 		if ("usr" in session) and (session["usr"] == "kabirmoghe"):
-			return render_template("adminFinished.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], addInfo = session["addInfo"], letters = session["letters"], guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], score = session["score"], scorePos = session["scorePos"], maxPoints = session["maxPoints"], maxList = session["maxList"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], level = session["level"])
+			return render_template("adminFinished.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], addInfo = session["addInfo"], letters = session["letters"], guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], score = session["score"], scorePos = session["scorePos"], maxPoints = session["maxPoints"], maxList = session["maxList"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], level = session["level"], lid = lid)
 		else:
-			return render_template("finished.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], addInfo = session["addInfo"], letters = session["letters"], guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], score = session["score"], scorePos = session["scorePos"], maxPoints = session["maxPoints"], maxList = session["maxList"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], level = session["level"])
+			return render_template("finished.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], addInfo = session["addInfo"], letters = session["letters"], guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], score = session["score"], scorePos = session["scorePos"], maxPoints = session["maxPoints"], maxList = session["maxList"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], level = session["level"], lid = lid)
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():

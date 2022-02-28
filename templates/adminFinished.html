@@ -89,7 +89,7 @@
 		$(document).ready(function() {
 			$('#share').click(function(){
 			    navigator.clipboard
-			      .writeText('{{level}}')
+			      .writeText('Lex {{lid}}: {{level}}')
 			      .then(() => {
 			        alert("Results copied to clipboard!");
 			      })
@@ -124,7 +124,11 @@
 				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
 				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
 				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Last Hour</button></div>
-				<div id="login"><a class="revealEvenMore" href="{{ url_for('login') }}">Log In</a></div>
+				<div id="login">
+					<form method="post">
+						<input class="revealEvenMore" name="submit" id="logOut" type="submit" onfocus="this.blur();" value="Log Out">
+					</form>
+				</div>
 			</div>
 		</div>
 		<div id="mainContent">
@@ -209,7 +213,7 @@
 					<img class="tile" src="{{url_for('static', filename = letter+'.svg')}}">
 				{% endfor %}-->
 
-				<p>{{totalWords}}</p>
+				<p>Find the 5 highest-value words to reach <span class="maxPoints">{{maxPoints}}</span> points</p>
 
 				<p>
 					<div class="formContents">
@@ -243,7 +247,7 @@
 			</div>
 			<div class="content" id="finished">
 				<p>	{{scoreGauge}}</p>
-				<p>{{addInfo}} <span class="maxPoints">{{maxPoints}}</span> points.</p>
+				<!--<p>{{addInfo}} <span class="maxPoints">{{maxPoints}}</span> points.</p>-->
 				<!--
 				<form method="post">
 					<p>
