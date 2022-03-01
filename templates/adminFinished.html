@@ -85,7 +85,10 @@
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			  const shareData = 'Lex {{lid}}: {{level}}'
+			  const shareData = {
+				    title: 'Lex',
+				    text: 'Lex {{lid}}: {{level}}'
+				}
 
 			  const btn = document.querySelector('#share');
 			  const sharePara = document.querySelector('#shareDetails');
@@ -96,12 +99,11 @@
 			      await navigator.share(shareData)
 			    } catch(err) {
 				    navigator.clipboard
-				      .writeText(shareData)
+				      .writeText('Lex {{lid}}: {{level}}')
 				      .then(() => {
 				        sharePara.textContent = 'Results copied to clipboard!';
 				      })
 				      .catch(() => {
-				        sharePara.textContent = 'Could not copy results to clipboard.';
 				      });
 		    	$("#completeOverlay")
 		    		.fadeIn("fast")
