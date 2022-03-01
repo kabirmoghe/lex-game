@@ -203,7 +203,7 @@
 			<div class="more" id="additionalInfo">
 				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
 				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
-				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Last Hour</button></div>
+				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
 				<form method="post">
 					<input class="revealEvenMore" name="submit" id="logOut" type="submit" onfocus="this.blur();" value="Log Out">
 				</form>
@@ -216,8 +216,8 @@
 						<button id="closeYesterday" type="button">✕</button>
 					</div>		
 					<div class="popUp" id="yesterdayDetails">
-						<p class="head">Last Hour</p>
-						<p>Here are the last hour's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br></p>
+						<p class="head">Yesterday</p>
+						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br></p>
 						<div class="wordsDisplayed">
 							{% for item in oldBestList %}
 							<span class="best">{{item}}</span>
@@ -284,7 +284,7 @@
 
 						<br><br>
 
-						If you aren't able to get all of the words, that's okay! You'll be able to see the 5 best words the following hour.
+						If you aren't able to get all of the words, that's okay! You'll be able to see the 5 best words the next day.
 
 						<br><br>
 
