@@ -108,27 +108,27 @@
 			  const btn = document.querySelector('#share');
 			  const sharePara = document.querySelector('#shareDetails');
 
-			  // Share must be triggered by "user activation"
 			  btn.addEventListener('click', async () => {
-			    try {
-			      await navigator.share(shareData)
-			    } catch(err) {
-				    navigator.clipboard
-				      .writeText('Lex {{lid}}: {{level}}')
-				      .then(() => {
-				        sharePara.textContent = 'Results copied to clipboard!';
-				      })
-				      .catch(() => {
-				    	$("#completeOverlay")
-				    		.fadeIn("fast")
-				    		.delay(1100).fadeOut("fast");
-				        $("#shareOverlay")
-				        	.css('display', 'flex')
-				        	.hide()
-				        	.fadeIn().delay(1000).fadeOut("fast");
-						      });
-			    }
-			  });
+				if (navigator.canShare) {
+				  navigator.share(shareData)
+				} else {
+				 	navigator.clipboard
+						.writeText('Lex {{lid}}: {{level}}')
+						.then(() => {
+							sharePara.textContent = 'Results copied to clipboard!';
+							})
+						.catch(() => {
+							sharePara.textContent = 'Could not copy results.';
+							})
+					$("#completeOverlay")
+						.fadeIn("fast")
+						.delay(1100).fadeOut("fast");
+					$("#shareOverlay")
+						.css('display', 'flex')
+						.hide()
+						.fadeIn().delay(1000).fadeOut("fast");
+					};
+				});
 		});
 	</script>
 	<script type="text/javascript">
