@@ -85,16 +85,33 @@
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#share').click(function(){
-			    navigator.clipboard
-			      .writeText('Lex {{lid}}: {{level}}')
-			      .then(() => {
-			        alert("Results copied to clipboard!");
-			      })
-			      .catch(() => {
-			        alert("Could not copy results to clipboard.");
-			      });
-			});
+			  const shareData = 'Lex {{lid}}: {{level}}'
+
+			  const btn = document.querySelector('#share');
+			  const sharePara = document.querySelector('#shareDetails');
+
+			  // Share must be triggered by "user activation"
+			  btn.addEventListener('click', async () => {
+			    try {
+			      await navigator.share(shareData)
+			    } catch(err) {
+				    navigator.clipboard
+				      .writeText(shareData)
+				      .then(() => {
+				        sharePara.textContent = 'Results copied to clipboard!';
+				      })
+				      .catch(() => {
+				        sharePara.textContent = 'Could not copy results to clipboard.';
+				      });
+		    	$("#completeOverlay")
+		    		.fadeIn("fast")
+		    		.delay(1100).fadeOut("fast");
+		        $("#shareOverlay")
+		        	.css('display', 'flex')
+		        	.hide()
+		        	.fadeIn().delay(1000).fadeOut("fast");
+			    }
+			  });
 		});
 	</script>
 	<script type="text/javascript">
@@ -254,6 +271,12 @@
 					{% endfor %}
 				</div>
 			</div>
+			<div class="overlay" id="shareOverlay">
+				<div class="shareBox" id="shareDisplay">
+					<div class="shareInner" id="shareDetails">
+					</div>
+				</div>
+			</div>	
 			<div class="content" id="finished">
 				<p>{{scoreGauge}} {{score}} points.</p>
 				<!--<p>{{addInfo}} <span class="maxPoints">{{maxPoints}}</span> points.</p>-->

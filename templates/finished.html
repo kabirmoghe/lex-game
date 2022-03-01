@@ -100,7 +100,7 @@
 	</script>-->
 	<script type="text/javascript">
 		$(document).ready(function() {
-			const shareData = 'Lex {{lid}}: {{level}}'
+			  const shareData = 'Lex {{lid}}: {{level}}'
 
 			  const btn = document.querySelector('#share');
 			  const sharePara = document.querySelector('#shareDetails');
@@ -109,7 +109,6 @@
 			  btn.addEventListener('click', async () => {
 			    try {
 			      await navigator.share(shareData)
-			      alert('MDN shared successfully');
 			    } catch(err) {
 				    navigator.clipboard
 				      .writeText(shareData)
