@@ -218,6 +218,8 @@ def home():
 
 	session["level"] = game.score_gauge(session["score"], session["maxPoints"])[2]
 
+	session["oldMaxPoints"], session["oldBestWords"] = int(old_word_info["maxPoints"][0]), eval(old_word_info["bestWords"][0])
+
 	if ("usr" in session) and (session["usr"] == "kabirmoghe"):
 		return render_template("adminGame.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"] , score = session["score"], scorePos = session["scorePos"], possWords = session["possWords"], time = session["time"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], maxList = session["maxList"], lid = lid)
 	else:
