@@ -260,18 +260,26 @@
 				<p class="error"><em>{{error}}&nbsp;</em></p>
 			</div>
 			<div class='gauge'>
-					<img id="scoreArrow" style="max-width: 3.5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}"><span id="slide">{{slide}}</span>
+					<img id="scoreArrow" style="max-width: 5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}"><span id="slide">{{slide}}</span>
 					<br>
 					<img id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}}</span>
 			</div>
-		  	<div class="content">
+		  	<div class="content" style="max-width:500px;">
 		  		<br>
 				<div class="wordsDisplayed">
 					{% for guess in guesses %}
 						{% if guess in bestWordsOnly %}
-							<span class="best">{{guess}}, {{guesses[guess]}}</span>
+						    {% if guess in bestGuesses %}
+								<span class="best">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
+							{% else %}
+								<span class="best">{{guess}}, {{guesses[guess]}}</span>
+							{% endif %}
 						{% else %}
-							<span class="correct">{{guess}}, {{guesses[guess]}}</span>
+						    {% if guess in bestGuesses %}
+								<span class="correct">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
+						    {% else %}
+								<span class="correct">{{guess}}, {{guesses[guess]}}</span>
+							{% endif %}
 						{% endif %} 
 					{% endfor %}
 				</div>

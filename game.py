@@ -123,7 +123,7 @@ def score_gauge(pts, top):
         
     response = ""
         
-    score_pos = round((76.5*pts/top),2)
+    score_pos = round((75*pts/top),2)
 
     level = "{}/{}".format(pts, top)
 

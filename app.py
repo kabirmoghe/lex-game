@@ -96,9 +96,9 @@ def home():
 	if "slide" not in session:
 		session["slide"] = ""
 
-	if session["numGuesses"] == 10:
-
+	if (session["maxPoints"] == session["score"]) or (session["numGuesses"] == 10):
 		session["status"] = "done"
+
 		return redirect(url_for('done'))
 
 	if session["status"] == "done":
@@ -171,9 +171,9 @@ def home():
 			session["slide"] = game.score_gauge(session["score"], session["maxPoints"])[3]
 
 			if ("usr" in session) and (session["usr"] == "kabirmoghe"):
-				return render_template("adminGame.html", totalWords = session["totalWords"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], error = error, score = session["score"], scorePos = session["scorePos"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], maxList = session["maxList"], oldScorePos = session["oldScorePos"], slide = session["slide"])
+				return render_template("adminGame.html", totalWords = session["totalWords"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], error = error, score = session["score"], scorePos = session["scorePos"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], maxList = session["maxList"], oldScorePos = session["oldScorePos"], slide = session["slide"], bestGuesses = session["bestGuesses"])
 			else:
-				return render_template("game.html", totalWords = session["totalWords"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], error = error, score = session["score"], scorePos = session["scorePos"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], oldScorePos = session["oldScorePos"], slide = session["slide"])
+				return render_template("game.html", totalWords = session["totalWords"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], error = error, score = session["score"], scorePos = session["scorePos"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], oldScorePos = session["oldScorePos"], slide = session["slide"], bestGuesses = session["bestGuesses"])
 
 		else:
 
@@ -224,8 +224,7 @@ def home():
 
 			session["numGuesses"] = session["numGuesses"] + 1
 
-			if session["numGuesses"] == 10:
-
+			if (session["maxPoints"] == session["score"]) or (session["numGuesses"] == 10):
 				return redirect(url_for('done'))
 
 	session["level"] = game.score_gauge(session["score"], session["maxPoints"])[2]
@@ -236,12 +235,13 @@ def home():
 	session["guesses"] = {word: pts for word, pts in sorted(session["guesses"].items(), key=lambda item: item[1], reverse = True)}
 
 	if ("usr" in session) and (session["usr"] == "kabirmoghe"):
-		return render_template("adminGame.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"] , score = session["score"], scorePos = session["scorePos"], possWords = session["possWords"], time = session["time"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], maxList = session["maxList"], lid = lid, oldScorePos = session["oldScorePos"], slide = session["slide"])
+		return render_template("adminGame.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"] , score = session["score"], scorePos = session["scorePos"], possWords = session["possWords"], time = session["time"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], maxList = session["maxList"], lid = lid, oldScorePos = session["oldScorePos"], slide = session["slide"], bestGuesses = session["bestGuesses"])
 	else:
-		return render_template("game.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"] , score = session["score"], scorePos = session["scorePos"], possWords = session["possWords"], time = session["time"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], lid = lid, oldScorePos = session["oldScorePos"], slide = session["slide"])
+		return render_template("game.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"] , score = session["score"], scorePos = session["scorePos"], possWords = session["possWords"], time = session["time"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], lid = lid, oldScorePos = session["oldScorePos"], slide = session["slide"], bestGuesses = session["bestGuesses"])
 
 @app.route("/done", methods = ["GET", "POST"])
 def done():
+	session["error"] = ""
 
 	time = readbucketdata.readbucketdata("letters.csv")["time"][0]
 	lid = readbucketdata.readbucketdata("letters.csv")["lid"][0]
@@ -268,9 +268,9 @@ def done():
 		session["guesses"] = {word: pts for word, pts in sorted(session["guesses"].items(), key=lambda item: item[1], reverse = True)}
 
 		if ("usr" in session) and (session["usr"] == "kabirmoghe"):
-			return render_template("adminFinished.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], addInfo = session["addInfo"], letters = session["letters"], guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], score = session["score"], scorePos = session["scorePos"], maxPoints = session["maxPoints"], maxList = session["maxList"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], level = session["level"], lid = lid, oldScorePos = session["oldScorePos"], slide = session["slide"])
+			return render_template("adminFinished.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], addInfo = session["addInfo"], letters = session["letters"], guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], score = session["score"], scorePos = session["scorePos"], maxPoints = session["maxPoints"], maxList = session["maxList"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], level = session["level"], lid = lid, oldScorePos = session["oldScorePos"], slide = session["slide"], bestGuesses = session["bestGuesses"])
 		else:
-			return render_template("finished.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], addInfo = session["addInfo"], letters = session["letters"], guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], score = session["score"], scorePos = session["scorePos"], maxPoints = session["maxPoints"], maxList = session["maxList"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], level = session["level"], lid = lid, oldScorePos = session["oldScorePos"], slide = session["slide"])
+			return render_template("finished.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], addInfo = session["addInfo"], letters = session["letters"], guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"], score = session["score"], scorePos = session["scorePos"], maxPoints = session["maxPoints"], maxList = session["maxList"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], level = session["level"], lid = lid, oldScorePos = session["oldScorePos"], slide = session["slide"], bestGuesses = session["bestGuesses"])
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():

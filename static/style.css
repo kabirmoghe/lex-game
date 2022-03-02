@@ -581,10 +581,14 @@ span.tally {
 	width: 50px;
 	float: right;
 	text-align: center;
-	border: 3px solid #404040;
-	color: #404040;
+	border: 3px solid black;
+	color: black;
 	font-weight: bold;
 } 
+
+.wordsDisplayed span.check {
+	color: #B3EFC0;
+}
 
 @media only screen and (max-width: 500px) {
 	span.tally {
@@ -596,8 +600,8 @@ span.tally {
 		width: 37.5px;
 		float:right;
 		text-align: center;
-		border: 2px solid #404040;
-		color: #404040;
+		border: 2px solid black;
+		color: black;
 		font-weight: bold;
 	}
 }
