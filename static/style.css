@@ -441,7 +441,7 @@ input.tile {
 		border-radius: 3px;
 		caret-color: transparent;
 		margin: 2px;
-		vertical-align: middle;
+		vertical-align: top;
 	}
 }
 
