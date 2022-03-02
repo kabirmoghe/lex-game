@@ -430,10 +430,10 @@ input.tile {
 @media only screen and (max-width: 500px) {
 	input.tile {
 		font-family: 'Courier Prime', monospace;
-		height: 40px;
+		height: 35px;
 		width: 40px;
 		line-height: 60px;
-		padding: 0px;
+		padding: 0px 0px 5px 0px;
 		font-size: 45px;
 	  text-align: center;
 		text-transform: uppercase;
