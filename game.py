@@ -123,32 +123,40 @@ def score_gauge(pts, top):
         
     response = ""
         
-    score_pos = round((80*pts/top),2)
+    score_pos = round((76.5*pts/top),2)
 
     level = "{}/{}".format(pts, top)
+
+    slide=""
 
     if (pts == top):
         response = "You're the champ!"
         level = "Champ! 🟣 {}/{}".format(pts, top)
+        slide = "Champ!"
 
     elif (pts >= 0.8*top):
         response = "Amazing!"
         level = "Amazing! 🔵 {}/{}".format(pts, top)
+        slide = "Amazing!"
 
     elif (pts >= 0.6*top):
         response = "Wow!"
         level = "Wow! 🟢 {}/{}".format(pts, top)
+        slide = "Wow!"
 
     elif (pts >= 0.4*top):
         response = "Great!"
         level = "Great! ⚪️ {}/{}".format(pts, top)
+        slide = "Great!"
 
     elif (pts >= 0.2*top):
         response = "Good!"
         level = "Good! 🟡 {}/{}".format(pts, top)
+        slide = "Good!"
 
     elif (pts > 0):
         response = "Nice!"
         level = "Nice! 🟠 {}/{}".format(pts, top)
+        slide="Nice!"
 
-    return response, score_pos, level
+    return response, score_pos, level, slide

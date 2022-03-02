@@ -17,6 +17,10 @@ p.head {
 	font-size: 27.5px;
 }
 
+p#popUpTitle {
+	text-align: center;
+}
+
 p.error {
 	color: #646464;
 }
@@ -50,6 +54,7 @@ span.choice {
 .gauge {
   margin: 0 auto;
   max-width: 500px;
+  pointer-events: none;
 }
 
 .login {
@@ -275,10 +280,14 @@ a.revealEvenMore:hover {
 }
 
 .popUp {
-	text-align: center;
+	text-align: center; /*change this later*/
 	align-items: center;
 	padding-left: 20px;
 	padding-right: 20px;
+}
+
+div#wordExample {
+	text-align: center;
 }
 
 .choiceInner {
@@ -365,7 +374,7 @@ img.tile {
 img#score_gauge {
 	max-width: 80%;
 	height: auto;
-	vertical-align: top;
+	display: inline;
 }
 
 img.letterExplained {
@@ -421,11 +430,11 @@ input.tile {
 @media only screen and (max-width: 500px) {
 	input.tile {
 		font-family: 'Courier Prime', monospace;
-		height: 44px;
-		width: 44px;
+		height: 40px;
+		width: 40px;
 		line-height: 60px;
 		padding: 0px;
-		font-size: 50px;
+		font-size: 45px;
 	  text-align: center;
 		text-transform: uppercase;
 		border: 4px solid #BDBCBC;
@@ -567,7 +576,7 @@ span.tally {
 	background-color: #FFFFFF;
 	font-size: 22px;
 	border-radius: 8px;
-	padding: 7px;
+	padding: 1px 7px;
 	display: inline-block;
 	width: 50px;
 	float: right;
@@ -582,7 +591,7 @@ span.tally {
 		font-size: 13px;
 		background-color: #FFFFFF;
 		border-radius: 6px;
-		padding: 5px 1px;
+		padding: 1px 2px;
 		display: inline-block;
 		width: 37.5px;
 		float:right;
@@ -650,6 +659,15 @@ span#doneDone {
 span.maxPoints {
 	color: #8e7cc3;
 	font-weight: bold;
+}
+
+span#slide {
+	font-style: italic;
+	vertical-align: top;
+}
+
+div#haveFun {
+	text-align: center;
 }
 
 .iframe-container {

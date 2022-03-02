@@ -24,6 +24,17 @@
 		}
 	</script>
 	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$("#scoreArrow").css('marginLeft', '{{oldScorePos}}%');				
+
+			if ("{{error}}".length == 0){
+				var difference = {{scorePos}}-{{oldScorePos}};
+				$("#scoreArrow").animate({'marginLeft': '+=' + difference+'%'}, "slow");
+			}
+		})
+	</script>
+	<script type="text/javascript">
 		$(document).keydown(
 		    function(e)
 		    {    
@@ -53,14 +64,6 @@
 		   		}
 		   	}
 		);
-	</script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-
-			var position = (76.5*{{score}}/{{maxPoints}}).toFixed(2);
-
-			$("#scoreArrow").css('marginLeft', position+'%');
-		})
 	</script>
 	<script type="text/javascript">
 		$(document).keydown(
@@ -252,7 +255,7 @@
 					</div>		
 					<div class="popUp" id="playInfoDetails">
 						<p class="head">How to Play</p>
-						<p>Given 8 randomly chosen letters, which will always include at least 2 vowels, find the 5 words with the highest-scoring point tally. You have 10 guesses to find them, and your total score represents the 5 best words you have guessed. The words need to have least 3 letters, and point values are assigned as following:
+						<p>Given a max of 10 guesses and a set of 8 letters, find the 5 words with the highest-scoring point tally. The words need to have least 3 letters, and point values are assigned as following:
 						<br>
 						<br>
 
@@ -287,7 +290,7 @@
 
 
 						<br><br>
-						Each time you guess a valid word, it will show up above the keyboard. If you guess 1 of the 5 highest-value words, the word will show up as purple. <br><br>
+						When you guess a valid word, it will show up above the keyboard. If you guess a top word, it will show up as purple. <br><br>
 
 						<span class="best">Jump, 15</span>
 						<span class="correct">Plume, 9</span>
@@ -306,7 +309,7 @@
 			</div>
 			<div class="content">
 
-				<p>Find the 5 highest-value words to reach <span class="maxPoints">{{maxPoints}}</span> points</p>
+				<p>Find the 5 top words to reach <span class="maxPoints">{{maxPoints}}</span> points</p>
 
 				<form id="letterField" method="post">
 					<p>
@@ -322,8 +325,7 @@
 				<p class="error"><em>{{error}}&nbsp;</em></p>
 			</div>
 			<div class='gauge'>
-					<img id="scoreArrow" style="max-width: 3.5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}">
-					<br>
+					<img id="scoreArrow" style="max-width: 3.5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}"><span id="slide">{{slide}}</span><br>
 					<img id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}}</span>
 			</div>
 		  	<div class="content" style="max-width:500px;">

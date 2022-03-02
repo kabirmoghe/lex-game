@@ -31,9 +31,12 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 
-			var position = (76.5*{{score}}/{{maxPoints}}).toFixed(2);
+			$("#scoreArrow").css('marginLeft', '{{oldScorePos}}%');				
 
-			$("#scoreArrow").css('marginLeft', position+'%');
+			if ("{{error}}".length == 0){
+				var difference = {{scorePos}}-{{oldScorePos}};
+				$("#scoreArrow").animate({'marginLeft': '+=' + difference+'%'}, "slow");
+			}
 		})
 	</script>
 	<script type="text/javascript">
@@ -241,7 +244,7 @@
 					<img class="tile" src="{{url_for('static', filename = letter+'.svg')}}">
 				{% endfor %}-->
 
-				<p>Find the 5 highest-value words to reach <span class="maxPoints">{{maxPoints}}</span> points</p>
+				<p>Find the 5 top words to reach <span class="maxPoints">{{maxPoints}}</span> points</p>
 
 				<p>
 					<div class="formContents">
@@ -257,7 +260,7 @@
 				<p class="error"><em>{{error}}&nbsp;</em></p>
 			</div>
 			<div class='gauge'>
-					<img id="scoreArrow" style="max-width: 3.5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}">
+					<img id="scoreArrow" style="max-width: 3.5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}"><span id="slide">{{slide}}</span>
 					<br>
 					<img id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}}</span>
 			</div>
