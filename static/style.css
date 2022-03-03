@@ -586,8 +586,12 @@ span.tally {
 	font-weight: bold;
 } 
 
+span.check {
+	color: #A5F0B5;
+}
+
 .wordsDisplayed span.check {
-	color: #B3EFC0;
+	color: #A5F0B5;
 }
 
 @media only screen and (max-width: 500px) {

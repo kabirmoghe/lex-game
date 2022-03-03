@@ -22,6 +22,7 @@ def reset():
 	session["status"] = "not done"
 	session["level"] = ""
 	session["slide"] = ""
+	session["totalWords"] = ""
 
 @app.route("/", methods = ["GET", "POST"])
 def home():
@@ -95,6 +96,12 @@ def home():
 
 	if "slide" not in session:
 		session["slide"] = ""
+
+	if "totalWords" not in session:
+		session["totalWords"] = ""
+
+	if "bestGuesses" not in session:
+		session["bestGuesses"] = {}
 
 	if (session["maxPoints"] == session["score"]) or (session["numGuesses"] == 10):
 		session["status"] = "done"

@@ -196,6 +196,11 @@
 		    }); 
 		});
 	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#errorMsg").delay(1500).fadeOut('slow');
+		})
+	</script>
 </head>
 <body>
 	<div id="completeOverlay"></div>
@@ -244,7 +249,7 @@
 					<div class="popUp" id="playInfoDetails">
 						<p class="head">How to Play</p>
 
-						<p>Given 8 randomly chosen letters, which will always include at least 2 vowels, find the 5 words with the highest-scoring point tally. You have 10 guesses to find them, and your total score represents the 5 best words you have guessed. The words need to have least 3 letters, and point values are assigned as following:
+						<p>Given 10 guesses and a daily set of 8 letters, find the 5 highest-scoring words. Words must be at least 3 letters long and can repeat letters. Point values are assigned as following:
 						<br>
 						<br>
 
@@ -279,15 +284,15 @@
 
 
 						<br><br>
-						Each time you guess a valid word, it will show up above the keyboard. If you guess 1 of the 5 highest-value words, the word will show up as purple. <br><br>
+						If you guess 1 of the 5 highest-scoring words, the word will show up as purple. Your five best guesses determine your score and will have a check.<br><br>
 
-						<span class="best">Jump, 15</span>
-						<span class="correct">Plume, 9</span>
+						<span class="best">Jump, 15 <span class="check">✓</span></span>
+						<span class="correct">Plume, 9 <span class="check">✓</span></span>
 						<span class="correct">Hum, 8</span>
 
 						<br><br>
 
-						A new set of letters will show up each day. If you aren't able to find the best words, that's okay! You'll be able to see them next day.
+						If you aren't able to find the best words, that's okay! You'll be able to see them next day.
 
 						<br><br>
 
@@ -311,7 +316,7 @@
 						</div>
 					</p>
 				</form>			
-				<p class="error"><em>{{error}}&nbsp;</em></p>
+				<p class="error"><em><span id="errorMsg">{{error}}</span>&nbsp;</em></p>
 			</div>
 			<div class='gauge'>
 					<img id="scoreArrow" style="max-width: 5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}"><span id="slide">{{slide}}</span>
