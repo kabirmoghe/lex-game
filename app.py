@@ -232,6 +232,8 @@ def home():
 			session["numGuesses"] = session["numGuesses"] + 1
 
 			if (session["maxPoints"] == session["score"]) or (session["numGuesses"] == 10):
+				session["status"] = "done"
+
 				return redirect(url_for('done'))
 
 	session["level"] = game.score_gauge(session["score"], session["maxPoints"])[2]
@@ -261,15 +263,6 @@ def done():
 		reset()
 		return redirect(url_for('home'))
 
-	if request.method == "POST":
-
-		if ("submit" in request.form):
-			session.pop("usr")
-			return redirect(url_for("done"))
-
-		reset()
-
-		return redirect(url_for('home'))
 	else:
 		session["status"] = "done"
 		session["guesses"] = {word: pts for word, pts in sorted(session["guesses"].items(), key=lambda item: item[1], reverse = True)}
