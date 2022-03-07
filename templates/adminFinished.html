@@ -145,7 +145,7 @@
 	<div id="all">
 		<div class="top">
 			<div id="title">LEX - Admin</div>
-			<div class="more" id="moreID"><button class="revealMore" id="moreInfo" type="button" onfocus="this.blur();">More</button></div>
+			<div class="more" id="moreID"><img id="moreButton" src="{{url_for('static', filename='more.svg')}}"></div>
 			<div class="more" id="additionalInfo">
 				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
 				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
@@ -187,7 +187,7 @@
 					<div class="popUp" id="playInfoDetails">
 						<p class="head">How to Play</p>
 
-						<p>Given 10 guesses and a daily set of 8 letters, find the 5 highest-scoring words. Words must be at least 3 letters long and can repeat letters. Point values are assigned as following:
+						<p>Given 10 guesses and 8 letters, find the 5 highest-scoring words. Words must be at least 3 letters long and can repeat letters. Point values are assigned as following:
 						<br>
 						<br>
 
@@ -260,7 +260,7 @@
 				<p class="error"><em>{{error}}&nbsp;</em></p>
 			</div>
 			<div class='gauge'>
-					<img id="scoreArrow" style="max-width: 5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}"><span id="slide">{{slide}}</span>
+					<img id="scoreArrow" style="max-width: 5.5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}"><span id="slide">{{slide}}</span>
 					<br>
 					<img id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}}</span>
 			</div>

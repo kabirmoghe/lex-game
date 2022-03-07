@@ -117,7 +117,7 @@ def home():
 
 
 	if score == maxPoints:
-		scoreGauge = "{} You reached the highest possible score with ".format(game.score_gauge(score, maxPoints)[0])
+		scoreGauge = "{} You reached ".format(game.score_gauge(score, maxPoints)[0])
 		addInfo = ""
 
 	else: 
@@ -220,7 +220,7 @@ def home():
 			session["totalWords"] = "{} points\n".format(session["maxPoints"])
 
 			if score == maxPoints:
-				session["scoreGauge"] = "{} You reached the highest possible score with ".format(game.score_gauge(score, maxPoints)[0])
+				session["scoreGauge"] = "{} You reached ".format(game.score_gauge(score, maxPoints)[0])
 				session["addInfo"] = ""
 
 			else: 
