@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request, session
 import game
 import readbucketdata
+import createData
 
 app = Flask(__name__)
 app.secret_key = 'hello'
@@ -294,6 +295,24 @@ def feedback():
 	lid = readbucketdata.readbucketdata("letters.csv")["lid"][0]
 
 	return render_template("feedback.html", lid = lid)
+
+@app.route("/data", methods = ["GET", "POST"])
+def data():
+
+	lid = readbucketdata.readbucketdata("letters.csv")["lid"][0]
+
+	if "usr" not in session:
+		return redirect(url_for('home'))
+
+	else:
+
+		if request.method == "POST":
+
+			createData.main()
+
+			return redirect(url_for("home"))
+
+		return render_template("data.html", lid = lid)
 
 
 if __name__ == '__main__':

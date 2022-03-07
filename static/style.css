@@ -555,6 +555,18 @@ input.choice {
 	border: none;
 }
 
+input.genData {
+	font-family: 'Oxygen', sans-serif;
+	background-color: #FFFFFF;
+	color: black;
+	border-radius: 5px;
+	font-size: 15px;
+	border: none;
+	padding: 5px;
+	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.2));
+	cursor: pointer;
+}
+
 a.logButtons {
 	font-family: 'Oxygen', sans-serif;
 	background-color: #FFFFFF;
