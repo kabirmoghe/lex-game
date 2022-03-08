@@ -5,6 +5,7 @@ import createData
 
 app = Flask(__name__)
 app.secret_key = 'hello'
+app.permanent_session_lifetime = timedelta(days=1)
 
 def reset():
 	if "possWords" in session:
