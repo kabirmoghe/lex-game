@@ -2,11 +2,10 @@ from flask import Flask, redirect, url_for, render_template, request, session
 import game
 import readbucketdata
 import createData
-from datetime import timedelta
 
 app = Flask(__name__)
 app.secret_key = 'hello'
-app.permanent_session_lifetime = timedelta(days=1)
+session.permanent = True
 
 def reset():
 	if "possWords" in session:
