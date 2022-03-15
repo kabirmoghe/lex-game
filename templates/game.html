@@ -128,6 +128,15 @@
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+		    $("#next").click(function(){
+		    	if (active() > 3){
+		    		$('form#letterField').submit();
+		    	}
+		    })
+		})
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
 		    $("#showYesterday").click(function(){
 		        $("#completeOverlay").fadeIn("fast");		    	
 		        $("#yesterdayOverlay")
@@ -373,7 +382,7 @@
 					{% endfor %}
 				</div>
 				<div class="otherActions">
-					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="submit" form="letterField" onfocus="this.blur();">
+					<input type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" onfocus="this.blur();">
 					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
 					<!--<input type="image" id="done" value="done" src="{{url_for('static', filename = 'giveUp.svg')}}" onfocus="this.blur();">-->
 				</div>
