@@ -27,6 +27,8 @@ def reset():
 @app.route("/", methods = ["GET", "POST"])
 def home():
 
+	session.permanent = True
+
 	word_info = readbucketdata.readbucketdata("letters.csv")
 	old_word_info = readbucketdata.readbucketdata("oldletters.csv")
 
