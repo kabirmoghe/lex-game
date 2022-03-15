@@ -43,6 +43,7 @@ def home():
 
 	if "lid" not in session:
 		session["lid"] = lid
+		reset()
 
 	elif session["lid"] != lid:
 		session["lid"] = lid
@@ -246,6 +247,8 @@ def done():
 
 	if "lid" not in session:
 		session["lid"] = lid
+		reset()
+		return redirect(url_for("home"))
 
 	elif session["lid"] != lid:
 		session["lid"] = lid
