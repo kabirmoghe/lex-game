@@ -1,8 +1,10 @@
 body {
 	background-color: #E9E9E9;
-	font-family: 'Oxygen', sans-serif;
+	font-family: 'Roboto Slab', serif;
 	height: 100%;
+	user-select: none;
 }
+
 
 #all {
   min-height: 100%;
@@ -74,6 +76,10 @@ span.choice {
 	background-color: #E9E9E9;
 	display: flex;
 	align-items: center;
+}
+
+#shareOverlay {
+	position: fixed;
 }
 
 button.revealMore {
@@ -214,6 +220,20 @@ a.revealEvenMore:hover {
 	border-radius: 5px;
 }
 
+@media only screen and (max-width: 500px){
+	.popUpBox {
+		display: flex;
+	  width: 700px;
+	  margin-top: 0px;
+	  min-height: 650px;
+	  flex-direction: column;
+	  background-color: #FFFFFF;
+		box-shadow: 0px 0px 20px 10px #CBCBCB;
+		margin-bottom: 10px;
+		border-radius: 5px;
+	}
+}
+
 .sideBox {
 	display: flex;
 	margin-top: 0px;
@@ -282,7 +302,6 @@ a.revealEvenMore:hover {
 
 .popUp {
 	text-align: center; /*change this later*/
-	align-items: center;
 	padding-left: 20px;
 	padding-right: 20px;
 }
@@ -641,7 +660,7 @@ span.check {
 
 .wordsDisplayed {
 	line-height: 42px;
-	font-size: 20px;
+	font-size: 19px;
 }
 
 span.correct {
@@ -701,8 +720,14 @@ span.maxPoints {
 }
 
 span#slide {
-	font-style: italic;
 	vertical-align: top;
+}
+
+@media only screen and (max-width: 500px) {
+	span#slide {
+		vertical-align: top;
+		font-size: 12px;
+	}
 }
 
 div#haveFun {
@@ -724,3 +749,55 @@ div#haveFun {
   height: 100%;
 }
 
+/* SLIDE IN */
+
+.slideIn {
+  /* Height & width depends on how you want to reveal the overlay (see JS below) */   
+  height: 100%;
+  width: 0;
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Sit on top */
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white; /* Black w/opacity */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.2s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+  border: none;
+  border-radius: 0px 20px 20px 0px;
+  display: flex;
+}
+
+/* Position the content inside the overlay */
+.slideIn-content {
+	display: flex;
+  width: 90%; /* 100% width */
+  align-items: center;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#showSlide {
+	position: fixed;
+	top: 4%;
+	left: 0;
+	background-color: white;
+	border-radius: 0px 10px 10px 0px;
+	padding: 6px 10px;
+	cursor: pointer;
+	z-index: 99;
+	transition: 0.5s;
+	white-space: nowrap;
+	font-size: 16px;
+}
+
+#closeNav {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	font-color: black;
+}

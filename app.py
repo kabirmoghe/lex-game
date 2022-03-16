@@ -189,6 +189,8 @@ def home():
 			    for word in list(guesses.keys())[:5]:
 			        bestGuesses[word] = guesses[word]
 
+			bestGuesses = {word: pts for word, pts in sorted(bestGuesses.items(), key=lambda item: item[1], reverse = True)}
+
 			session["bestGuesses"] = bestGuesses
 
 			session["guesses"] = guesses
@@ -259,6 +261,7 @@ def done():
 
 	if "guesses" in session:
 		session["guesses"] = {word: pts for word, pts in sorted(session["guesses"].items(), key=lambda item: item[1], reverse = True)}
+		session["bestGuesses"] = {word: pts for word, pts in sorted(session["bestGuesses"].items(), key=lambda item: item[1], reverse = True)}
 	else:
 		reset()
 		return redirect(url_for('home'))

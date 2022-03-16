@@ -11,6 +11,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">	
 	<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 		
 	<link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.ico') }}">
 
@@ -72,6 +73,8 @@
 		        	$("#completeOverlay").fadeOut("fast");
 		            $(".overlay").fadeOut("fast");
 		            $("#additionalInfo").fadeOut("fast");
+			        document.getElementById("myNav").style.width = "0%";
+					document.getElementById("myNav").style.boxShadow = "none";
 		        }
 		    }
 		);
@@ -218,9 +221,32 @@
 			$("#errorMsg").delay(1500).fadeOut('slow');
 		})
 	</script>
+
+	<script type="text/javascript">
+		function openNav() {
+			if (Math.min(window.screen.width, window.screen.height) < 768) {
+		  		document.getElementById("myNav").style.width = "98%";
+		  		document.getElementById("myNav").style.boxShadow = "0px 0px 6px 2px #CBCBCB";
+			}
+			else {
+				document.getElementById("myNav").style.width = "25%";
+		  		document.getElementById("myNav").style.boxShadow = "0px 0px 6px 2px #CBCBCB";
+
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $("#closeNav").click(function(){
+		        document.getElementById("myNav").style.width = "0%";
+				document.getElementById("myNav").style.boxShadow = "none";
+		    }); 
+		});
+	</script>
 </head>
 <body>
 	<div id="completeOverlay"></div>
+	<span id="showSlide" onclick="openNav()">→</span>
 	<div id="all">
 		<!-- NON FEEDBACK (LOGIN)
 		<div class="top">
@@ -245,6 +271,36 @@
 			</div>
 		</div>
 		<div id="mainContent">
+			<div id="myNav" class="slideIn">
+			  	<div class="close">
+				    <button id="closeNav" type="button">✕</button>
+			    </div>		
+				  	
+			  <!-- Button to close the overlay navigation -->
+			  <!-- Overlay content -->
+			  <div class="slideIn-content" style="max-width:500px;">
+					<div class="wordsDisplayed">
+						<p style="float: center" class="head">All Guesses:</p>
+						{% for guess in guesses %}
+							{% if guess in bestWordsOnly %}
+								{% if guess in bestGuesses %}
+									<span class="best">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
+								{% else %}
+									<span class="best">{{guess}}, {{guesses[guess]}}</span>
+								{% endif %}
+							{% else %}
+								{% if guess in bestGuesses %}
+									<span class="correct">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
+								{% else %}
+									<span class="correct">{{guess}}, {{guesses[guess]}}</span>
+								{% endif %}
+							{% endif %} 
+						{% endfor %}
+						<br><br><em>({{10 - guesses|length}} correct guesses left)</em>
+					</div>
+			  </div>
+
+			</div>
 			<div class="overlay" id="yesterdayOverlay">
 				<div class="sideBox" id="yesterdayInfo">	
 					<div class="close">
@@ -305,10 +361,10 @@
 
 
 						<br><br>
-						If you guess 1 of the 5 highest-scoring words, the word will show up as purple. Your five best guesses determine your score and will have a check.<br><br>
+						If you guess 1 of the 5 highest-scoring words, the word will show up as purple. Your five best guesses determine your score and are displayed above the keyboard. If you want to see all of your guesses, click the arrow button at the top left.<br><br>
 
-						<span class="best">Jump, 15 <span class="check">✓</span></span>
-						<span class="correct">Plume, 9 <span class="check">✓</span></span>
+						<span class="best">Jump, 15</span>
+						<span class="correct">Plume, 9</span>
 						<span class="correct">Hum, 8</span>
 
 						<br><br>
@@ -324,7 +380,7 @@
 			</div>
 			<div class="content">
 
-				<p>Find the 5 top words to reach <span class="maxPoints">{{maxPoints}}</span> points</p>
+				<p>Win by reaching <span class="maxPoints">{{maxPoints}}</span> points</p>
 
 				<form id="letterField" method="post">
 					<p>
@@ -344,21 +400,13 @@
 					<img id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}}</span>
 			</div>
 		  	<div class="content" style="max-width:500px;">
-		  		<br>
+		  		<br><br>
 				<div class="wordsDisplayed">
-					{% for guess in guesses %}
+					{% for guess in bestGuesses %}
 						{% if guess in bestWordsOnly %}
-						    {% if guess in bestGuesses %}
-								<span class="best">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
-							{% else %}
-								<span class="best">{{guess}}, {{guesses[guess]}}</span>
-							{% endif %}
+						    <span class="best">{{guess}}, {{guesses[guess]}}</span>
 						{% else %}
-						    {% if guess in bestGuesses %}
-								<span class="correct">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
-						    {% else %}
-								<span class="correct">{{guess}}, {{guesses[guess]}}</span>
-							{% endif %}
+						    <span class="correct">{{guess}}, {{guesses[guess]}}</span>
 						{% endif %} 
 					{% endfor %}
 				</div>
