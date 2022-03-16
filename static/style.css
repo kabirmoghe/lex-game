@@ -312,6 +312,7 @@ a.revealEvenMore:hover {
 		border: none;
 		cursor: pointer;
 		color: black;
+		right: 0;
 	}
 }
 
