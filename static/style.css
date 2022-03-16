@@ -774,7 +774,7 @@ div#haveFun {
   height: 100%;
   width: 0;
   position: fixed; /* Stay in place */
-  z-index: 9999; /* Sit on top */
+  z-index: 998; /* Sit on top */
   left: 0;
   top: 0;
   right: 0;
