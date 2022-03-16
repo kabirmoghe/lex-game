@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="theme-color" content="#D5D5D5">
 	<title>Lex</title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css', v=lid)}}">
 
@@ -183,9 +184,7 @@
 			  const sharePara = document.querySelector('#shareDetails');
 
 			  btn.addEventListener('click', async () => {
-				if (navigator.canShare) {
-				  navigator.share(shareData)
-				} else {
+				if (!navigator.canShare) {
 				 	navigator.clipboard
 						.writeText('Lex {{lid}}: {{level}}')
 						.then(() => {
@@ -201,6 +200,9 @@
 						.css('display', 'flex')
 						.hide()
 						.fadeIn().delay(1000).fadeOut("fast");
+
+				} else {
+				  	navigator.share(shareData);
 					};
 				});
 		});

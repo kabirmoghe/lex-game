@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="theme-color" content="#D5D5D5">
 	<title>Lex</title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css', v=lid)}}">
 
@@ -24,7 +25,7 @@
 		        if (e.keyCode == 27) {      
 		        	$("#completeOverlay").fadeOut("fast");
 		            $(".overlay").fadeOut("fast");
-		            $("#additionalInfo").fadeOut("fast");	      
+		            $("#additionalInfo").fadeOut("fast");
 			        document.getElementById("myNav").style.width = "0%";
 					document.getElementById("myNav").style.boxShadow = "none";
 		        }
@@ -41,6 +42,74 @@
 				$("#scoreArrow").animate({'marginLeft': '+=' + difference+'%'}, "slow");
 			}
 		})
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			const Countdown = (() => {
+
+			  let nextMidnight = new Date();
+			  nextMidnight.setHours(24,0,0,0);
+
+			  const getRemainingTime = () => {
+			    let now = new Date();
+
+			    let time = (nextMidnight.getTime() - now.getTime())/1000;
+			    
+			    if(time < 0) {
+			      nextMidnight = new Date();
+			      nextMidnight.setHours(24,0,0,0);
+			      
+			      return getRemainingTime();
+			    }
+			    
+			    return time;
+			  }
+			  
+			  const parseTime = (time) => {
+			    const hours = Math.floor(time/3600);
+			    let rest = time-(hours*3600);
+			    const minutes = Math.floor(rest/60);
+			    rest = rest-(minutes*60);
+			    const seconds = Math.floor(rest);
+			    const milliseconds = (rest-seconds)*1000;
+
+			    return [hours, minutes, seconds, milliseconds];
+			  };
+			  
+			  const formatTime = (parsedTime) => {
+			      return '<span class="hours">' + parsedTime[0] + '</span><span class="hSep">:</span><span class="minutes">' + ("0" + parsedTime[1]).slice(-2) + '</span><span class="mSep">:</span><span class="seconds">' + ("0" + parsedTime[2]).slice(-2) + '</span>';
+			  };
+			  
+			  const els = [];
+			  let timeout;
+			  
+			  return (el) => {
+			    els.push(el);
+			    
+			    if(!timeout) {
+			    
+			      const refresh = () => {
+			        const parsedTime = parseTime(getRemainingTime());
+			        const formattedTimes = formatTime(parsedTime);
+			        
+			        for(let i = 0, iend = els.length; i < iend; i++) {
+			          els[i].innerHTML = formattedTimes;
+			        }
+			        
+			        setTimeout(() => {
+			          refresh();
+			        }, parsedTime[3]);
+			      };
+			      refresh();
+			      
+			    }
+			    else el.innerHTML = formatTime(parseTime(getRemainingTime()));
+			  };
+
+			})();
+
+			Countdown(document.getElementById('countdown'));
+		})			
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function () {
@@ -89,6 +158,21 @@
 		    }); 
 		});
 	</script>
+	<!--
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#share').click(function(){
+			    navigator.clipboard
+			      .writeText('Lex {{lid}}: {{level}}')
+			      .then(() => {
+			        alert("Results copied to clipboard!");
+			      })
+			      .catch(() => {
+			        alert("Could not copy results to clipboard.");
+			      });
+			});
+		});
+	</script>-->
 	<script type="text/javascript">
 		$(document).ready(function() {
 			  const shareData = {
@@ -99,27 +183,27 @@
 			  const btn = document.querySelector('#share');
 			  const sharePara = document.querySelector('#shareDetails');
 
-			  // Share must be triggered by "user activation"
 			  btn.addEventListener('click', async () => {
-			    try {
-			      await navigator.share(shareData)
-			    } catch(err) {
-				    navigator.clipboard
-				      .writeText('Lex {{lid}}: {{level}}')
-				      .then(() => {
-				        sharePara.textContent = 'Results copied to clipboard!';
-				      })
-				      .catch(() => {
-				      });
-		    	$("#completeOverlay")
-		    		.fadeIn("fast")
-		    		.delay(1100).fadeOut("fast");
-		        $("#shareOverlay")
-		        	.css('display', 'flex')
-		        	.hide()
-		        	.fadeIn().delay(1000).fadeOut("fast");
-			    }
-			  });
+				if (navigator.canShare) {
+				  navigator.share(shareData)
+				} else {
+				 	navigator.clipboard
+						.writeText('Lex {{lid}}: {{level}}')
+						.then(() => {
+							sharePara.textContent = 'Results copied to clipboard!';
+							})
+						.catch(() => {
+							sharePara.textContent = 'Could not copy results.';
+							})
+					$("#completeOverlay")
+						.fadeIn("fast")
+						.delay(1100).fadeOut("fast");
+					$("#shareOverlay")
+						.css('display', 'flex')
+						.hide()
+						.fadeIn().delay(1000).fadeOut("fast");
+					};
+				});
 		});
 	</script>
 	<script type="text/javascript">
@@ -152,13 +236,16 @@
 			else {
 				document.getElementById("myNav").style.width = "25%";
 		  		document.getElementById("myNav").style.boxShadow = "0px 0px 6px 2px #CBCBCB";
-
 			}
+			$(".slideIn-content").delay(50).fadeToggle();
 		}
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#closeNav").click(function(){
+
+		    	$(".slideIn-content").toggle();
+
 		        document.getElementById("myNav").style.width = "0%";
 				document.getElementById("myNav").style.boxShadow = "none";
 		    }); 
@@ -167,18 +254,30 @@
 </head>
 <body>
 	<div id="completeOverlay"></div>
-	<span id="showSlide" onclick="openNav()">→</span>
+	<span id="showSlide" onclick="openNav()"></span>
 	<div id="all">
+		<!-- NON FEEDBACK (LOGIN)
 		<div class="top">
-			<div id="title">LEX - Admin</div>
-			<div class="more" id="moreID"><img id="moreButton" src="{{url_for('static', filename='more.svg')}}"></div>
+			<div id="title">LEX</div>
+			<div class="more" id="moreID"><button class="revealMore" id="moreInfo" type="button" onfocus="this.blur();">More</button></div>
 			<div class="more" id="additionalInfo">
 				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
 				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
 				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
-				<form method="post">
-					<input class="revealEvenMore" name="submit" id="logOut" type="submit" onfocus="this.blur();" value="Log Out">
-				</form>
+				<div id="login"><a class="revealEvenMore" href="{{ url_for('login') }}">Log In</a></div>
+			</div>
+		</div>
+	    -->
+	    <div id="topContainer">
+		    <div class="top">
+				<div id="title">LEX - Admin</div>
+				<div class="more" id="moreID"><img id="moreButton" src="{{url_for('static', filename='more.svg')}}"></div>
+				<div class="more" id="additionalInfo">
+					<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
+					<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
+					<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
+					<div id="login"><a class="revealEvenMore" href="{{ url_for('feedback') }}" target="_blank">Feedback</a></div>
+				</div>
 			</div>
 		</div>
 		<div id="mainContent">
@@ -189,9 +288,11 @@
 				  	
 			  <!-- Button to close the overlay navigation -->
 			  <!-- Overlay content -->
-			  <div class="slideIn-content" style="max-width:500px;">
+			  <div id="navContent" class="slideIn-content" style="max-width:500px;">
 					<div class="wordsDisplayed">
-						<p class="head">Guesses:</p>
+						<div id="newLex">NEW LEX</div>
+						<div id="countdown"></div> <br><br>
+						<p style="text-decoration: underline;" class="head">Guesses</p>
 						{% for guess in guesses %}
 							{% if guess in bestWordsOnly %}
 								{% if guess in bestGuesses %}
@@ -211,7 +312,7 @@
 			  </div>
 			</div>
 			<div class="overlay" id="yesterdayOverlay">
-				<div class="adminSideBox" id="yesterdayInfo">	
+				<div class="sideBox" id="yesterdayInfo">	
 					<div class="close">
 						<button id="closeYesterday" type="button">✕</button>
 					</div>		
@@ -229,7 +330,7 @@
 							{% for item in maxList %}
 							<span class="best">{{item}}</span>
 							{% endfor %}
-						</div>
+						</div>						
 					</div>
 				</div>				  	
 			</div>

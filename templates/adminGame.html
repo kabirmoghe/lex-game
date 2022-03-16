@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="theme-color" content="#D5D5D5">
 	<title>Lex</title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css', v=lid)}}">
 
@@ -17,6 +18,103 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script type="text/javascript">
+		window.onload = function() {
+			var current_url = window.location.href
+			if (current_url == "https://lexgame.herokuapp.com/") {
+			    window.location.href = "https://www.thelexgame.com";
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$("#scoreArrow").css('marginLeft', '{{oldScorePos}}%');				
+
+			if ("{{error}}".length == 0){
+				var difference = {{scorePos}}-{{oldScorePos}};
+				$("#scoreArrow").animate({'marginLeft': '+=' + difference+'%'}, "slow");
+			}
+		})
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#wordCheck")
+				.fadeIn("slow")
+				.delay(2500)
+				.fadeOut("slow");
+		})
+	</script>
+	<!-- TIME LEFT -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			const Countdown = (() => {
+
+			  let nextMidnight = new Date();
+			  nextMidnight.setHours(24,0,0,0);
+
+			  const getRemainingTime = () => {
+			    let now = new Date();
+
+			    let time = (nextMidnight.getTime() - now.getTime())/1000;
+			    
+			    if(time < 0) {
+			      nextMidnight = new Date();
+			      nextMidnight.setHours(24,0,0,0);
+			      
+			      return getRemainingTime();
+			    }
+			    
+			    return time;
+			  }
+			  
+			  const parseTime = (time) => {
+			    const hours = Math.floor(time/3600);
+			    let rest = time-(hours*3600);
+			    const minutes = Math.floor(rest/60);
+			    rest = rest-(minutes*60);
+			    const seconds = Math.floor(rest);
+			    const milliseconds = (rest-seconds)*1000;
+
+			    return [hours, minutes, seconds, milliseconds];
+			  };
+			  
+			  const formatTime = (parsedTime) => {
+			      return '<span class="hours">' + parsedTime[0] + '</span><span class="hSep">:</span><span class="minutes">' + ("0" + parsedTime[1]).slice(-2) + '</span><span class="mSep">:</span><span class="seconds">' + ("0" + parsedTime[2]).slice(-2) + '</span>';
+			  };
+			  
+			  const els = [];
+			  let timeout;
+			  
+			  return (el) => {
+			    els.push(el);
+			    
+			    if(!timeout) {
+			    
+			      const refresh = () => {
+			        const parsedTime = parseTime(getRemainingTime());
+			        const formattedTimes = formatTime(parsedTime);
+			        
+			        for(let i = 0, iend = els.length; i < iend; i++) {
+			          els[i].innerHTML = formattedTimes;
+			        }
+			        
+			        setTimeout(() => {
+			          refresh();
+			        }, parsedTime[3]);
+			      };
+			      refresh();
+			      
+			    }
+			    else el.innerHTML = formatTime(parseTime(getRemainingTime()));
+			  };
+
+			})();
+
+			Countdown(document.getElementById('countdown'));
+		})			
+	</script>
+
+	<script type="text/javascript">
 		$(document).keydown(
 		    function(e)
 		    {    
@@ -25,8 +123,19 @@
 
 			        if (e.keyCode == 8)      
 			            del();
-			        else if ( ((document.getElementById("1").value.length == 1) && (document.getElementById("2").value.length == 1) && (document.getElementById("3").value.length == 1)) && (e.keyCode == 13))
+
+			        else if ( ((document.getElementById("1").value.length == 1) && (document.getElementById("2").value.length == 1) && (document.getElementById("3").value.length == 1)) && (e.keyCode == 13)) {
+
+				        $(".slideIn-content").hide();
+
+				        document.getElementById("myNav").style.width = "0%";
+						document.getElementById("myNav").style.boxShadow = "none";
+
+						$("#additionalInfo").fadeOut("fast");
+
 			        	$('form#letterField').submit();
+
+			        }
 
 			        else if ((!(e.metaKey)) && (e.key >= "a" && e.key <= "z")) {
 
@@ -42,21 +151,17 @@
 				        		document.getElementById(active()-1).style.border = "4px solid black";
 			        		}	        		
 			        	}
+
+						$("#additionalInfo").fadeOut("fast");
+
+			        	$(".slideIn-content").hide();
+
+			        	document.getElementById("myNav").style.width = "0%";
+						document.getElementById("myNav").style.boxShadow = "none";
 					}
 		   		}
 		   	}
 		);
-	</script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-
-			$("#scoreArrow").css('marginLeft', '{{oldScorePos}}%');				
-
-			if ("{{error}}".length == 0){
-				var difference = {{scorePos}}-{{oldScorePos}};
-				$("#scoreArrow").animate({'marginLeft': '+=' + difference+'%'}, "slow");
-			}
-		})
 	</script>
 	<script type="text/javascript">
 		$(document).keydown(
@@ -65,6 +170,7 @@
 		        	$("#completeOverlay").fadeOut("fast");
 		            $(".overlay").fadeOut("fast");
 		            $("#additionalInfo").fadeOut("fast");
+				    $(".slideIn-content").hide();
 			        document.getElementById("myNav").style.width = "0%";
 					document.getElementById("myNav").style.boxShadow = "none";
 		        }
@@ -89,9 +195,17 @@
 		function activeTile() {
 			var currentActive = active();
 
+			$("#additionalInfo").fadeOut("fast");
+
+			$(".slideIn-content").hide();
+
+			document.getElementById("myNav").style.width = "0%";
+			document.getElementById("myNav").style.boxShadow = "none";
+
 		    if (!(document.getElementById("5").value.length == 1)) {
 
 				document.getElementById(currentActive).style.border = "4px solid black";
+
 
 				return currentActive;
 			}
@@ -114,12 +228,27 @@
 			}
 
 		    document.getElementById(moveTo).style.border = "4px solid #BDBCBC";
-			document.getElementById(moveTo).style.margin = "2px";
 
 			document.getElementById(moveTo).value = '';
 
+			$("#additionalInfo").fadeOut("fast");
+
+			$(".slideIn-content").hide();
+
+			document.getElementById("myNav").style.width = "0%";
+			document.getElementById("myNav").style.boxShadow = "none";
+
 			return moveTo;
 		}
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $("#next").click(function(){
+		    	if (active() > 3){
+		    		$('form#letterField').submit();
+		    	}
+		    })
+		})
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -214,13 +343,16 @@
 			else {
 				document.getElementById("myNav").style.width = "25%";
 		  		document.getElementById("myNav").style.boxShadow = "0px 0px 6px 2px #CBCBCB";
-
 			}
+			$(".slideIn-content").delay(50).fadeToggle();
 		}
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#closeNav").click(function(){
+
+		    	$(".slideIn-content").toggle();
+
 		        document.getElementById("myNav").style.width = "0%";
 				document.getElementById("myNav").style.boxShadow = "none";
 		    }); 
@@ -229,18 +361,30 @@
 </head>
 <body>
 	<div id="completeOverlay"></div>
-	<span id="showSlide" onclick="openNav()">→</span>
+	<span id="showSlide" onclick="openNav()"><span id="wordCheck">{{check}}</span></span>
 	<div id="all">
+		<!-- NON FEEDBACK (LOGIN)
 		<div class="top">
-			<div id="title">LEX - Admin</div>
-			<div class="more" id="moreID"><img id="moreButton" src="{{url_for('static', filename='more.svg')}}"></div>
+			<div id="title">LEX</div>
+			<div class="more" id="moreID"><button class="revealMore" id="moreInfo" type="button" onfocus="this.blur();">More</button></div>
 			<div class="more" id="additionalInfo">
 				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
 				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
 				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
-				<form method="post">
-					<input class="revealEvenMore" name="submit" id="logOut" type="submit" onfocus="this.blur();" value="Log Out">
-				</form>
+				<div id="login"><a class="revealEvenMore" href="{{ url_for('login') }}">Log In</a></div>
+			</div>
+		</div>
+	    -->
+	    <div id="topContainer">
+		    <div class="top">
+				<div id="title">LEX - Admin</div>
+				<div class="more" id="moreID"><img id="moreButton" src="{{url_for('static', filename='more.svg')}}"></div>
+				<div class="more" id="additionalInfo">
+					<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
+					<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
+					<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
+					<div id="login"><a class="revealEvenMore" href="{{ url_for('feedback') }}" target="_blank">Feedback</a></div>
+				</div>
 			</div>
 		</div>
 		<div id="mainContent">
@@ -251,9 +395,11 @@
 				  	
 			  <!-- Button to close the overlay navigation -->
 			  <!-- Overlay content -->
-			  <div class="slideIn-content" style="max-width:500px;">
+			  <div id="navContent" class="slideIn-content" style="max-width:500px;">
 					<div class="wordsDisplayed">
-						<p class="head">Guesses:</p>
+						<div id="newLex">NEW LEX</div>
+						<div id="countdown"></div> <br><br>
+						<p style="text-decoration: underline;" class="head">Guesses ({{10 - guesses|length}} left)</p>
 						{% for guess in guesses %}
 							{% if guess in bestWordsOnly %}
 								{% if guess in bestGuesses %}
@@ -269,12 +415,12 @@
 								{% endif %}
 							{% endif %} 
 						{% endfor %}
-						<br><br><em>({{10 - guesses|length}} correct guesses left)</em>
 					</div>
 			  </div>
+
 			</div>
 			<div class="overlay" id="yesterdayOverlay">
-				<div class="adminSideBox" id="yesterdayInfo">	
+				<div class="sideBox" id="yesterdayInfo">	
 					<div class="close">
 						<button id="closeYesterday" type="button">✕</button>
 					</div>		
@@ -292,7 +438,7 @@
 							{% for item in maxList %}
 							<span class="best">{{item}}</span>
 							{% endfor %}
-						</div>
+						</div>						
 					</div>
 				</div>				  	
 			</div>
@@ -339,10 +485,10 @@
 
 
 						<br><br>
-						If you guess 1 of the 5 highest-scoring words, the word will show up as purple. Your five best guesses determine your score and will have a check.<br><br>
+						If you guess 1 of the 5 highest-scoring words, the word will show up as purple. Your five best guesses determine your score and are displayed above the keyboard. If you want to see all of your guesses, click the button at the top left.<br><br>
 
-						<span class="best">Jump, 15 <span class="check">✓</span></span>
-						<span class="correct">Plume, 9 <span class="check">✓</span></span>
+						<span class="best">Jump, 15</span>
+						<span class="correct">Plume, 9</span>
 						<span class="correct">Hum, 8</span>
 
 						<br><br>
@@ -360,7 +506,7 @@
 
 				<p>Win by reaching <span class="maxPoints">{{maxPoints}}</span> points</p>
 
-				<form id="letterField" method="post" name="myForms" value="guessWords">
+				<form id="letterField" method="post">
 					<p>
 						<div class="formContents">
 							<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus"autocomplete="off" onfocus="blur();">
@@ -374,8 +520,7 @@
 				<p class="error"><em><span id="errorMsg">{{error}}</span>&nbsp;</em></p>
 			</div>
 			<div class='gauge'>
-					<img id="scoreArrow" style="max-width: 5.5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}"><span id="slide">{{slide}}</span>
-					<br>
+					<img id="scoreArrow" style="max-width: 5.5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}"><span id="slide">{{slide}}</span><br>
 					<img id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}}</span>
 			</div>
 		  	<div class="content" style="max-width:500px;">
@@ -394,14 +539,13 @@
 		<!--
 		<div class="overlay" id="doneOverlay">
 			<div class="choiceBox" id="doneDisplay">
-				<div class="choiceInner" id="done">
-					<span class="choice">Give up?</span><br>
+				<div class="choiceInner" id="doneDetails">
+					<<span class="choice">Give up?</span><br>
 					<input class="choice" type="image" id="giveUp" value="done" src="{{url_for('static', filename = 'yes.svg')}}" onclick="window.location.href='{{ url_for( 'done') }}';" onfocus="this.blur();">
 					<input class="choice" type="image" id="notDone" value="not done" src="{{url_for('static', filename = 'no.svg')}}">
 				</div>
 			</div>
-		</div>
-		-->
+		</div>-->
 		<div class="keyBoard">
 			<div class="keyWidth">
 			 	<div class="keyRow">
@@ -410,7 +554,7 @@
 					{% endfor %}
 				</div>
 				<div class="otherActions">
-					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="submit" form="letterField" onfocus="this.blur();">
+					<input type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" onfocus="this.blur();">
 					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
 					<!--<input type="image" id="done" value="done" src="{{url_for('static', filename = 'giveUp.svg')}}" onfocus="this.blur();">-->
 				</div>
