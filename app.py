@@ -164,6 +164,7 @@ def home():
 			    for word in list(session["guesses"].keys())[:5]:
 			        bestGuesses[word] = session["guesses"][word]
 
+			bestGuesses = {word: pts for word, pts in sorted(bestGuesses.items(), key=lambda item: item[1], reverse = True)}
 			session["bestGuesses"] = bestGuesses
 
 			session["level"] = game.score_gauge(session["score"], session["maxPoints"])[2]
