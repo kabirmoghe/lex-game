@@ -15,6 +15,208 @@
 	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">	
 
 	<link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.ico') }}">
+</head>
+<body>
+	<div id="completeOverlay"></div>
+	<span id="showSlide" onclick="openNav()"></span>
+	<div id="all">
+		<!-- NON FEEDBACK (LOGIN)
+		<div class="top">
+			<div id="title">LEX</div>
+			<div class="more" id="moreID"><button class="revealMore" id="moreInfo" type="button" onfocus="this.blur();">More</button></div>
+			<div class="more" id="additionalInfo">
+				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
+				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
+				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
+				<div id="login"><a class="revealEvenMore" href="{{ url_for('login') }}">Log In</a></div>
+			</div>
+		</div>
+	    -->
+	    <div id="topContainer">
+		    <div class="top">
+				<div id="title">LEX</div>
+				<div class="more" id="moreID"><img id="moreButton" src="{{url_for('static', filename='more.svg')}}"></div>
+				<div class="more" id="additionalInfo">
+					<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
+					<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
+					<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
+					<div id="login"><a class="revealEvenMore" href="{{ url_for('feedback') }}" target="_blank">Feedback</a></div>
+				</div>
+			</div>
+		</div>
+		<div id="mainContent">
+			<div id="myNav" class="slideIn">
+			  	<div class="close">
+				    <button id="closeNav" type="button">✕</button>
+			    </div>		
+				  	
+			  <!-- Button to close the overlay navigation -->
+			  <!-- Overlay content -->
+			  <div id="navContent" class="slideIn-content" style="max-width:500px;">
+					<div class="wordsDisplayed">
+						<div id="newLex">NEW LEX</div>
+						<div id="countdown"></div> <br><br>
+						<p style="text-decoration: underline;" class="head">Guesses</p>
+						{% for guess in guesses %}
+							{% if guess in bestWordsOnly %}
+								{% if guess in bestGuesses %}
+									<span class="best">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
+								{% else %}
+									<span class="best">{{guess}}, {{guesses[guess]}}</span>
+								{% endif %}
+							{% else %}
+								{% if guess in bestGuesses %}
+									<span class="correct">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
+								{% else %}
+									<span class="correct">{{guess}}, {{guesses[guess]}}</span>
+								{% endif %}
+							{% endif %} 
+						{% endfor %}
+					</div>
+			  </div>
+			</div>
+			<div class="overlay" id="yesterdayOverlay">
+				<div class="sideBox" id="yesterdayInfo">	
+					<div class="close">
+						<button id="closeYesterday" type="button">✕</button>
+					</div>		
+					<div class="popUp" id="yesterdayDetails">
+						<p class="head">Yesterday</p>
+						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br></p>
+						<div class="wordsDisplayed">
+							{% for item in oldBestList %}
+							<span class="best">{{item}}</span>
+							{% endfor %}
+						</div>
+						<p><br>How many did you find?</p>
+					</div>
+				</div>				  	
+			</div>
+			<div class="overlay" id="infoOverlay">
+				<div class="popUpBox" id="playInfo">	
+					<div class="close">
+						<button id="closePlayInfo" type="button">✕</button>
+					</div>		
+					<div class="popUp" id="playInfoDetails">
+						<p class="head">How to Play</p>
+
+						<p>Given 10 guesses and 8 letters, find the 5 highest-scoring words. Words must be at least 3 letters long and can repeat letters. Point values are assigned as following:
+						<br>
+						<br>
+
+						<!-- ALL LETTERS -->
+
+						<img class="letterExplained" src="{{url_for('static', filename = 'a.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'b.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'c.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'd.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'e.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'f.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'g.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'h.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'i.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'j.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'k.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'l.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'm.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'n.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'o.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'p.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'q.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'r.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 's.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 't.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'u.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'v.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'w.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'x.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'y.svg')}}">
+						<img class="letterExplained" src="{{url_for('static', filename = 'z.svg')}}">
+
+
+						<br><br>
+						If you guess 1 of the 5 highest-scoring words, the word will show up as purple. Your five best guesses determine your score and will have a check.<br><br>
+
+						<span class="best">Jump, 15 <span class="check">✓</span></span>
+						<span class="correct">Plume, 9 <span class="check">✓</span></span>
+						<span class="correct">Hum, 8</span>
+
+						<br><br>
+
+						If you aren't able to find the best words, that's okay! You'll be able to see them next day.
+
+						<br><br>
+
+						Have fun!
+						</p>
+					</div>
+				</div>	
+			</div>
+			<div class="content">
+				<!--{% for letter in letters %}
+					<img class="tile" src="{{url_for('static', filename = letter+'.svg')}}">
+				{% endfor %}-->
+
+				<p>Win by reaching <span class="maxPoints">{{maxPoints}}</span> points</p>
+
+				<p>
+					<div class="formContents">
+						<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus"autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" autocomplete="off" onfocus="blur();">
+					</div>
+					<!--<input class="submit" type="submit" id="doneNext" name="nextButton" value="Guess" disabled>
+					<span id="doneDone">Done</span>-->
+				</p>
+				<p class="error"><em>{{error}}&nbsp;</em></p>
+			</div>
+			<div class='gauge'>
+					<img id="scoreArrow" style="max-width: 5.5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}"><span id="slide">{{slide}}</span>
+					<br>
+					<img id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}}</span>
+			</div>
+		  	<div class="content" style="max-width:500px;">
+		  		<br><br>
+				<div class="wordsDisplayed">
+					{% for guess in bestGuesses %}
+						{% if guess in bestWordsOnly %}
+						    <span class="best">{{guess}}, {{guesses[guess]}}</span>
+						{% else %}
+						    <span class="correct">{{guess}}, {{guesses[guess]}}</span>
+						{% endif %} 
+					{% endfor %}
+				</div>
+			</div>
+			<div class="overlay" id="shareOverlay">
+				<div class="shareBox" id="shareDisplay">
+					<div class="shareInner" id="shareDetails">
+					</div>
+				</div>
+			</div>	
+			<div class="content" id="finished">
+				<p>{{scoreGauge}} {{score}} points.</p>
+			    <input type="image" id="share" value="share" src="{{url_for('static', filename = 'share.svg')}}" onfocus="this.blur();">
+			</div>
+		</div>
+		<div class="keyBoard" id="disabledKeyboard">
+			<div class="keyWidth">
+			 	<div class="keyRow">
+					{% for letter in letters %}
+						<input type="image" value="{{letter}}" src="{{url_for('static', filename = letter+'.svg')}}">
+					{% endfor %}
+				</div>
+					<div class="otherActions">
+					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="submit" form="letterField" onfocus="this.blur();">
+					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
+					<!--<input type="image" id="done" value="done" src="{{url_for('static', filename = 'giveUp.svg')}}" onfocus="this.blur();">-->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- SCRIPTS -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script type="text/javascript">
@@ -252,205 +454,5 @@
 		    }); 
 		});
 	</script>
-</head>
-<body>
-	<div id="completeOverlay"></div>
-	<span id="showSlide" onclick="openNav()"></span>
-	<div id="all">
-		<!-- NON FEEDBACK (LOGIN)
-		<div class="top">
-			<div id="title">LEX</div>
-			<div class="more" id="moreID"><button class="revealMore" id="moreInfo" type="button" onfocus="this.blur();">More</button></div>
-			<div class="more" id="additionalInfo">
-				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
-				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
-				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
-				<div id="login"><a class="revealEvenMore" href="{{ url_for('login') }}">Log In</a></div>
-			</div>
-		</div>
-	    -->
-	    <div id="topContainer">
-		    <div class="top">
-				<div id="title">LEX</div>
-				<div class="more" id="moreID"><img id="moreButton" src="{{url_for('static', filename='more.svg')}}"></div>
-				<div class="more" id="additionalInfo">
-					<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
-					<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
-					<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
-					<div id="login"><a class="revealEvenMore" href="{{ url_for('feedback') }}" target="_blank">Feedback</a></div>
-				</div>
-			</div>
-		</div>
-		<div id="mainContent">
-			<div id="myNav" class="slideIn">
-			  	<div class="close">
-				    <button id="closeNav" type="button">✕</button>
-			    </div>		
-				  	
-			  <!-- Button to close the overlay navigation -->
-			  <!-- Overlay content -->
-			  <div id="navContent" class="slideIn-content" style="max-width:500px;">
-					<div class="wordsDisplayed">
-						<div id="newLex">NEW LEX</div>
-						<div id="countdown"></div> <br><br>
-						<p style="text-decoration: underline;" class="head">Guesses</p>
-						{% for guess in guesses %}
-							{% if guess in bestWordsOnly %}
-								{% if guess in bestGuesses %}
-									<span class="best">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
-								{% else %}
-									<span class="best">{{guess}}, {{guesses[guess]}}</span>
-								{% endif %}
-							{% else %}
-								{% if guess in bestGuesses %}
-									<span class="correct">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
-								{% else %}
-									<span class="correct">{{guess}}, {{guesses[guess]}}</span>
-								{% endif %}
-							{% endif %} 
-						{% endfor %}
-					</div>
-			  </div>
-			</div>
-			<div class="overlay" id="yesterdayOverlay">
-				<div class="sideBox" id="yesterdayInfo">	
-					<div class="close">
-						<button id="closeYesterday" type="button">✕</button>
-					</div>		
-					<div class="popUp" id="yesterdayDetails">
-						<p class="head">Yesterday</p>
-						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br></p>
-						<div class="wordsDisplayed">
-							{% for item in oldBestList %}
-							<span class="best">{{item}}</span>
-							{% endfor %}
-						</div>
-						<p><br>How many did you find?</p>
-					</div>
-				</div>				  	
-			</div>
-			<div class="overlay" id="infoOverlay">
-				<div class="popUpBox" id="playInfo">	
-					<div class="close">
-						<button id="closePlayInfo" type="button">✕</button>
-					</div>		
-					<div class="popUp" id="playInfoDetails">
-						<p class="head">How to Play</p>
-
-						<p>Given 10 guesses and 8 letters, find the 5 highest-scoring words. Words must be at least 3 letters long and can repeat letters. Point values are assigned as following:
-						<br>
-						<br>
-
-						<!-- ALL LETTERS -->
-
-						<img class="letterExplained" src="{{url_for('static', filename = 'a.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'b.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'c.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'd.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'e.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'f.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'g.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'h.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'i.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'j.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'k.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'l.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'm.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'n.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'o.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'p.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'q.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'r.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 's.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 't.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'u.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'v.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'w.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'x.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'y.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'z.svg')}}">
-
-
-						<br><br>
-						If you guess 1 of the 5 highest-scoring words, the word will show up as purple. Your five best guesses determine your score and will have a check.<br><br>
-
-						<span class="best">Jump, 15 <span class="check">✓</span></span>
-						<span class="correct">Plume, 9 <span class="check">✓</span></span>
-						<span class="correct">Hum, 8</span>
-
-						<br><br>
-
-						If you aren't able to find the best words, that's okay! You'll be able to see them next day.
-
-						<br><br>
-
-						Have fun!
-						</p>
-					</div>
-				</div>	
-			</div>
-			<div class="content">
-				<!--{% for letter in letters %}
-					<img class="tile" src="{{url_for('static', filename = letter+'.svg')}}">
-				{% endfor %}-->
-
-				<p>Win by reaching <span class="maxPoints">{{maxPoints}}</span> points</p>
-
-				<p>
-					<div class="formContents">
-						<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus"autocomplete="off" onfocus="blur();">
-						<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" autocomplete="off" onfocus="blur();">
-						<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" autocomplete="off" onfocus="blur();">
-						<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" autocomplete="off" onfocus="blur();">
-						<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" autocomplete="off" onfocus="blur();">
-					</div>
-					<!--<input class="submit" type="submit" id="doneNext" name="nextButton" value="Guess" disabled>
-					<span id="doneDone">Done</span>-->
-				</p>
-				<p class="error"><em>{{error}}&nbsp;</em></p>
-			</div>
-			<div class='gauge'>
-					<img id="scoreArrow" style="max-width: 5.5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}"><span id="slide">{{slide}}</span>
-					<br>
-					<img id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}}</span>
-			</div>
-		  	<div class="content" style="max-width:500px;">
-		  		<br><br>
-				<div class="wordsDisplayed">
-					{% for guess in bestGuesses %}
-						{% if guess in bestWordsOnly %}
-						    <span class="best">{{guess}}, {{guesses[guess]}}</span>
-						{% else %}
-						    <span class="correct">{{guess}}, {{guesses[guess]}}</span>
-						{% endif %} 
-					{% endfor %}
-				</div>
-			</div>
-			<div class="overlay" id="shareOverlay">
-				<div class="shareBox" id="shareDisplay">
-					<div class="shareInner" id="shareDetails">
-					</div>
-				</div>
-			</div>	
-			<div class="content" id="finished">
-				<p>{{scoreGauge}} {{score}} points.</p>
-			    <input type="image" id="share" value="share" src="{{url_for('static', filename = 'share.svg')}}" onfocus="this.blur();">
-			</div>
-		</div>
-		<div class="keyBoard" id="disabledKeyboard">
-			<div class="keyWidth">
-			 	<div class="keyRow">
-					{% for letter in letters %}
-						<input type="image" value="{{letter}}" src="{{url_for('static', filename = letter+'.svg')}}">
-					{% endfor %}
-				</div>
-					<div class="otherActions">
-					<input class="submit" type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" name="submit" form="letterField" onfocus="this.blur();">
-					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
-					<!--<input type="image" id="done" value="done" src="{{url_for('static', filename = 'giveUp.svg')}}" onfocus="this.blur();">-->
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 </html>
