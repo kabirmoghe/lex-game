@@ -18,7 +18,7 @@
 </head>
 <body>
 	<div id="completeOverlay"></div>
-	<span id="showSlide" onclick="openNav()"><span id="wordCheck">{{check}}</span></span>
+	<span id="showSlide" onclick="openNav()"><span id="wordCheck">{{10 - guesses|length}}</span></span>
 	<div id="all">
 		<!-- NON FEEDBACK (LOGIN)
 		<div class="top">
@@ -233,14 +233,6 @@
 				var difference = {{scorePos}}-{{oldScorePos}};
 				$("#scoreArrow").animate({'marginLeft': '+=' + difference+'%'}, "slow");
 			}
-		})
-	</script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#wordCheck")
-				.fadeIn("slow")
-				.delay(2500)
-				.fadeOut("slow");
 		})
 	</script>
 	<!-- TIME LEFT -->
