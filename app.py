@@ -238,6 +238,7 @@ def home():
 	session["oldMaxPoints"], session["oldBestWords"] = int(old_word_info["maxPoints"][0]), eval(old_word_info["bestWords"][0])
 
 	session["guesses"] = {word: pts for word, pts in sorted(session["guesses"].items(), key=lambda item: item[1], reverse = True)}
+	session["bestGuesses"] = {word: pts for word, pts in sorted(session["bestGuesses"].items(), key=lambda item: item[1], reverse = True)}
 
 	if ("usr" in session) and (session["usr"] == "kabirmoghe"):
 		return render_template("adminGame.html", totalWords = session["totalWords"], scoreGauge = session["scoreGauge"], letters = letters, guesses = session["guesses"], bestWordsOnly = session["bestWordsOnly"] , score = session["score"], scorePos = session["scorePos"], possWords = session["possWords"], lid = session["lid"], oldMaxPoints = session["oldMaxPoints"], oldBestList = session["oldBestList"], maxPoints = session["maxPoints"], maxList = session["maxList"], oldScorePos = session["oldScorePos"], slide = session["slide"], bestGuesses = session["bestGuesses"])
