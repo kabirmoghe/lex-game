@@ -159,6 +159,12 @@ a.revealEvenMore:hover {
 	right: 25px;
 }
 
+.shareIcon {
+	display: none;
+	position:absolute; 
+	right: 60px;
+}
+
 #additionalInfo {
 	background-color: white;
 	border-radius: 5px;
@@ -214,12 +220,24 @@ a.revealEvenMore:hover {
 
 .popUpBox {
 	display: flex;
-	margin-top: 40px;
+	bottom: 30px;
   width: 700px;
   min-height: 650px;
   flex-direction: column;
   background-color: #FFFFFF;
 	box-shadow: 0px 0px 20px 10px #CBCBCB;
+	margin-bottom: 10px;
+	border-radius: 5px;
+}
+
+#overInfo {
+	display: flex;
+	bottom: 30px;
+  width: 600px;
+  min-height: 600px;
+  flex-direction: column;
+  background-color: #FFFFFF;
+	filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.05));
 	margin-bottom: 10px;
 	border-radius: 5px;
 }
@@ -230,6 +248,20 @@ a.revealEvenMore:hover {
 	  width: 700px;
 	  margin-top: 0px;
 	  min-height: 650px;
+	  flex-direction: column;
+	  background-color: #FFFFFF;
+		box-shadow: 0px 0px 20px 10px #CBCBCB;
+		margin-bottom: 10px;
+		border-radius: 5px;
+	}
+}
+
+@media only screen and (max-width: 500px){
+	#overInfo {
+		display: flex;
+	  width: 700px;
+	  margin-top: 0px;
+	  min-height: 550px;
 	  flex-direction: column;
 	  background-color: #FFFFFF;
 		box-shadow: 0px 0px 20px 10px #CBCBCB;
@@ -339,13 +371,13 @@ div#wordExample {
 
 .shareBox {
 	display: flex;
-	margin-top: 285px;
+	margin-top: 20px;
 	padding-top: 5px;
   width: 200px;
   min-height: 50px;
   flex-direction: column;
-  background-color: #FFFFFF;
-	box-shadow: 0px 0px 6px 3px #CBCBCB;
+  /*background-color: #EEEEEE;
+	box-shadow: 0px 0px 6px 3px #CBCBCB;*/
 	margin-bottom: 10px;
 	border-radius: 5px;
 }
@@ -353,13 +385,13 @@ div#wordExample {
 @media only screen and (max-width: 500px){
 	.shareBox {
 		display: flex;
-		margin-top: 100px;
+		margin-top: 20px;
 		padding-top: 5px;
 	  width: 200px;
 	  min-height: 50px;
 	  flex-direction: column;
-	  background-color: #FFFFFF;
-		box-shadow: 0px 0px 6px 3px #CBCBCB;
+	  /*background-color: #EEEEEE;
+		box-shadow: 0px 0px 6px 3px #CBCBCB;*/
 		margin-bottom: 5px;
 		border-radius: 5px;
 	}	
@@ -426,6 +458,17 @@ img#moreButton {
 }
 
 img#moreButton:hover {
+	filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.30));
+	cursor: pointer;
+}
+
+img#shareIconInner {
+	height: 25px; 
+	width: auto;
+	transition: 0.2s;
+}
+
+img#shareIconInner:hover {
 	filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.30));
 	cursor: pointer;
 }
@@ -688,6 +731,7 @@ span.correct {
 	color: #FFFFFF;
 	margin-bottom: 5px;
 	white-space: pre;
+	text-transform: capitalize;
 }
 
 span.correctBest {
@@ -698,6 +742,7 @@ span.correctBest {
 	margin-bottom: 5px;
 	white-space: pre;
 	border: 3px solid black;
+	text-transform: capitalize;
 
 }
 
@@ -708,6 +753,7 @@ span.best {
 	color: #FFFFFF;
 	margin-bottom: 40px;
 	white-space: pre;
+	text-transform: capitalize;
 }
 
 input#doneNext {
@@ -828,13 +874,17 @@ div#haveFun {
 	font-color: black;
 }
 
-#countdown {
+.countdown {
 	font-size: 40px;
 }
 
-#newLex {
+.newLex {
 	font-size: 15px;
 	margin-top: 40px;
+}
+
+#finishedTop {
+	margin-top: 125px;
 }
 
 #wordCheck {

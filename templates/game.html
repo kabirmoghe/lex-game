@@ -18,7 +18,7 @@
 </head>
 <body>
 	<div id="completeOverlay"></div>
-	<span id="showSlide" onclick="openNav()"><span id="wordCheck">{{10 - guesses|length}}</span></span>
+	<span id="showSlide" onclick="openNav()"><span id="wordCheck"></span></span>
 	<div id="all">
 		<!-- NON FEEDBACK (LOGIN)
 		<div class="top">
@@ -35,6 +35,7 @@
 	    <div id="topContainer">
 		    <div class="top">
 				<div id="title">LEX</div>
+				<div class="shareIcon" id="shareID"><img id="shareIconInner" src="{{url_for('static', filename='shareIcon.svg')}}"></div>
 				<div class="more" id="moreID"><img id="moreButton" src="{{url_for('static', filename='more.svg')}}"></div>
 				<div class="more" id="additionalInfo">
 					<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
@@ -53,25 +54,27 @@
 			  <!-- Button to close the overlay navigation -->
 			  <!-- Overlay content -->
 			  <div id="navContent" class="slideIn-content" style="max-width:500px;">
-					<div class="wordsDisplayed">
-						<div id="newLex">NEW LEX</div>
-						<div id="countdown"></div> <br><br>
-						<p style="text-decoration: underline;" class="head">Guesses ({{10 - guesses|length}} left)</p>
-						{% for guess in guesses %}
-							{% if guess in bestWordsOnly %}
-								{% if guess in bestGuesses %}
-									<span class="best">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
+					<div id="sideWordBox" class="wordsDisplayed">
+						<div class="newLex">NEW LEX</div>
+						<div id="countdown1" class="countdown"></div> <br><br>
+						<p id="guessesLeft" style="text-decoration: underline;" class="head"></p>
+						<div id="wordsSideOnly">
+							{% for guess in guesses %}
+								{% if guess in bestWordsOnly %}
+									{% if guess in bestGuesses %}
+										<span class="best">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
+									{% else %}
+										<span class="best">{{guess}}, {{guesses[guess]}}</span>
+									{% endif %}
 								{% else %}
-									<span class="best">{{guess}}, {{guesses[guess]}}</span>
-								{% endif %}
-							{% else %}
-								{% if guess in bestGuesses %}
-									<span class="correct">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
-								{% else %}
-									<span class="correct">{{guess}}, {{guesses[guess]}}</span>
-								{% endif %}
-							{% endif %} 
-						{% endfor %}
+									{% if guess in bestGuesses %}
+										<span class="correct">{{guess}}, {{guesses[guess]}} <span class="check">✓</span></span>
+									{% else %}
+										<span class="correct">{{guess}}, {{guesses[guess]}}</span>
+									{% endif %}
+								{% endif %} 
+							{% endfor %}
+						</div>
 					</div>
 			  </div>
 
@@ -83,16 +86,35 @@
 					</div>		
 					<div class="popUp" id="yesterdayDetails">
 						<p class="head">Yesterday</p>
-						<p>Here are yesterday's best words with a total score of <span class=maxPoints>{{oldMaxPoints}}</span>:<br></p>
-						<div class="wordsDisplayed">
-							{% for item in oldBestList %}
-							<span class="best">{{item}}</span>
-							{% endfor %}
+						<p>Here are yesterday's best words with a total score of <span id="yesterdayMax" class=maxPoints></span>:<br></p>
+						<div class="wordsDisplayed" id="yesterdayWords">
 						</div>
 						<p><br>How many did you find?</p>
 					</div>
 				</div>				  	
 			</div>
+			<div class="overlay" id="overOverlay">
+				<div class="popUpBox" id="overInfo">	
+					<div class="close">
+						<button id="closeOverInfo" type="button">✕</button>
+					</div>		
+					<div class="popUp" id="overInfoDetails">
+						<div class="content" id="finished">
+							<div id="finishedTop" class="newLex">NEW LEX</div>
+							<div id="countdown2" class="countdown"></div> <br><br>
+							<p id="scoreFinal"></p>
+						    <input type="image" id="share" value="share" src="{{url_for('static', filename = 'share.svg')}}" onclick='shareData()' onfocus="this.blur();">
+						    <div class="overlay" id="shareOverlay">
+								<div class="shareBox" id="shareDisplay">
+									<div class="shareInner" id="shareDetails">
+									</div>
+								</div>
+							</div>	
+						</div>	
+					</div>
+				</div>	
+			</div>
+
 			<div class="overlay" id="infoOverlay">
 				<div class="popUpBox" id="playInfo">	
 					<div class="close">
@@ -157,46 +179,27 @@
 
 				<p>Win by reaching <span class="maxPoints">{{maxPoints}}</span> points</p>
 
-				<form id="letterField" method="post">
-					<p>
-						<div class="formContents">
-							<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus"autocomplete="off" onfocus="blur();">
-							<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" autocomplete="off" onfocus="blur();">
-							<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" autocomplete="off" onfocus="blur();">
-							<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" autocomplete="off" onfocus="blur();">
-							<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" autocomplete="off" onfocus="blur();">
-						</div>
-					</p>
-				</form>			
-				<p class="error"><em><span id="errorMsg">{{error}}</span>&nbsp;</em></p>
+				<p>
+					<div class="formContents">
+						<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus"autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" autocomplete="off" onfocus="blur();">
+					</div>
+				</p>		
+				<p class="error"><em><span id="errorMsg"></span>&nbsp;</em></p>
 			</div>
 			<div class='gauge'>
 					<img id="scoreArrow" style="max-width: 5.5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}"><span id="slide">{{slide}}</span><br>
-					<img id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span class="tally">{{score}}</span>
+					<img id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span id="tally" class="tally">{{score}}</span>
 			</div>
 		  	<div class="content" style="max-width:500px;">
 		  		<br><br>
-				<div class="wordsDisplayed">
-					{% for guess in bestGuesses %}
-						{% if guess in bestWordsOnly %}
-						    <span class="best">{{guess}}, {{guesses[guess]}}</span>
-						{% else %}
-						    <span class="correct">{{guess}}, {{guesses[guess]}}</span>
-						{% endif %} 
-					{% endfor %}
+				<div id="wordBox" class="wordsDisplayed">
 				</div>
 			</div>
 		</div>
-		<!--
-		<div class="overlay" id="doneOverlay">
-			<div class="choiceBox" id="doneDisplay">
-				<div class="choiceInner" id="doneDetails">
-					<<span class="choice">Give up?</span><br>
-					<input class="choice" type="image" id="giveUp" value="done" src="{{url_for('static', filename = 'yes.svg')}}" onclick="window.location.href='{{ url_for( 'done') }}';" onfocus="this.blur();">
-					<input class="choice" type="image" id="notDone" value="not done" src="{{url_for('static', filename = 'no.svg')}}">
-				</div>
-			</div>
-		</div>-->
 		<div class="keyBoard">
 			<div class="keyWidth">
 			 	<div class="keyRow">
@@ -215,7 +218,454 @@
 
 	<!-- SCRIPTS -->
 
+	<!-- GAME CODE --> 
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript">
+			function gaugeScore(pts, top){
+
+				let response = "";
+			    let level = pts+'/'+top;
+			    let slide="";
+
+			    if (pts == top) {
+			        response = "You're the champ!";
+			        level = "Champ! 🟣 " + pts + "/" + top;
+			        slide = "Champ!";
+			    } else if (pts >= 0.8*top) {
+			        response = "Amazing!";
+			        level = "Amazing! 🔵 " + pts + "/" + top;
+			        slide = "Amazing!";
+				} else if (pts >= 0.6*top) {
+			        response = "Wow!";
+			        level = "Wow! 🟢 " + pts + "/" + top;
+			        slide = "Wow!";
+			    } else if (pts >= 0.4*top) {
+			        response = "Great!";
+			        level = "Great! ⚪️ " + pts + "/" + top;
+			        slide = "Great!";
+			    } else if (pts >= 0.2*top) {
+			        response = "Good!";
+			        level = "Good! 🟡 " + pts + "/" + top;
+			        slide = "Good!";
+			    } else if (pts > 0) {
+			        response = "Nice!";
+			        level = "Nice! 🟠 " + pts + "/" + top;
+			        slide="Nice!";
+				}
+
+				return [response, level, slide];
+			}
+	</script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+
+			function sortingGuesses(guess1, guess2) {
+				if (possWords[guess1] > possWords[guess2]) {
+					return -1;
+				}
+				else if (possWords[guess1] < possWords[guess2]) {
+					return 1;
+				}
+				else {
+					if (guess1.name > guess2.name){
+						return -1;
+					}
+					else {
+						return 1;
+					}
+				}
+			}
+
+			/* Define all constant variables */
+
+			localStorage.setItem('letters', {{letters | tojson}});
+			localStorage.setItem('letterPts', {{letterPts | safe}});
+			localStorage.setItem('maxPoints', {{maxPoints | safe}});
+
+			if ({{lid | tojson}} != localStorage.getItem('lid')) {
+				localStorage.setItem('guesses', JSON.stringify([]));
+				localStorage.setItem('score', 0);
+				localStorage.setItem('status', 'not done');
+			}
+
+			localStorage.setItem('lid', {{lid | tojson}});
+
+			/* Create changing UI for user */
+			var score = parseInt(localStorage.getItem('score'));
+			var maxPoints = parseInt((localStorage.getItem('maxPoints')));
+			var scorePos = (74.5*score/maxPoints).toFixed(2);
+			var guesses = JSON.parse(localStorage.getItem('guesses'));
+			var possWords = JSON.parse({{possWords | tojson}});
+			var bestWords = JSON.parse({{bestWords | tojson}});
+
+			var slide = gaugeScore(score, maxPoints)[2];
+		    guesses = guesses.sort(sortingGuesses);
+			$("#scoreArrow").css('marginLeft', scorePos+'%');				
+			$("#tally").text(score);
+			$("#wordCheck").text(10-JSON.parse(localStorage.getItem('guesses')).length);
+			$("#slide").text(slide);
+			$("#yesterdayMax").text({{oldMaxPoints}});
+
+			var oldBestWords = JSON.parse({{oldBestWords | tojson}});
+			var oldBestWordsOnly = {{oldBestWordsOnly | tojson}};
+			oldBestWordsOnly.forEach((word) => {
+				$("#yesterdayWords").append("<span class='best'>"+word+', '+oldBestWords[word]+'</span> ');
+			});
+
+			// EDITS BOX OF WORDS ON MAIN SCREEN
+			if (guesses.length > 5){
+				for (let i = 0; i < 5; i++){
+					var guess = guesses[i];
+					if (guess in bestWords) {
+						$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+					}
+					else {
+						$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
+					}
+				}				
+			}
+			else {
+				guesses.forEach((guess) => {
+					if (guess in bestWords) {
+						$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+					}
+					else {
+						$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
+					}
+				});				
+			}
+
+
+			// EDITS SIDE BOX OF WORDS
+			let i = 0;
+			guesses.forEach((guess) => {
+				if (i < 5){
+					if (guess in bestWords){
+						$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+					}
+					else {
+						$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+					}
+
+					i++;
+				}
+				else {
+					$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');					
+				}
+			});
+
+			if (localStorage.getItem('status') == 'Done') {
+
+	       		var maxPoints = parseInt(localStorage.getItem('maxPoints'));
+		        var response = gaugeScore(score, maxPoints)[0];
+
+		        $(".shareIcon")
+		        	.css('display', 'inline-block')
+		        	.hide()
+		        	.fadeIn("fast");
+				$("#guessesLeft").text('Guesses:');
+				$("#wordCheck").text("✓");
+				$(".keyBoard input").css('pointer-events', 'none');
+				$("#completeOverlay").delay(1000).fadeIn("slow");
+		        $("#overOverlay")
+		        	.css('display', 'flex')
+		        	.hide()
+		        	.delay(1000)
+		        	.fadeIn("slow");
+		        $("#scoreFinal").text(response + ' You scored ' + score + ' points.');
+			}
+
+			else {
+				$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left):');
+				$("#wordCheck").text(10-JSON.parse(localStorage.getItem('guesses')).length);
+
+				// Game 
+
+				$("#next").click(function(){	    
+				    	if (active() > 3){
+				    		var guess = $('#1').val() + $('#2').val() + $('#3').val() + $('#4').val() + $('#5').val();
+				    		
+				    		var possWords = JSON.parse({{possWords | tojson}});
+				    		var bestWords = JSON.parse({{bestWords | tojson}});
+
+				    		if (guess in possWords) {
+				    			var guesses = JSON.parse(localStorage.getItem('guesses'));
+
+				    			console.log(localStorage.getItem('status'));
+
+			    				if (guesses.length == 0){
+									$('#1')
+										.delay(750)
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#2')
+										.delay(750)
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#3')
+										.delay(750)
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#4')
+										.delay(750)
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#5')
+										.delay(750)
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+
+
+			    					guesses.push(guess);
+			    					guesses = guesses.sort(sortingGuesses);
+				    				localStorage.setItem('guesses', JSON.stringify(guesses));
+
+				    				var score = 0;
+
+				    				if (guesses.length > 5) {
+				    					for (let i = 0; i < 5; i++){
+				    						let guess = guesses[i];
+				    						score += possWords[guess];
+				    					}
+				    				}
+				    				else {
+				    					guesses.forEach((guess) => {
+				    						score += possWords[guess];
+				    					})
+				    				}
+
+				    				localStorage.setItem('score', score);
+									var scorePos = (74.5*score/maxPoints).toFixed(2);
+									var slide = gaugeScore(score, maxPoints)[2];
+
+
+									$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");				
+									$("#tally").text(score);
+									$("#wordCheck").text(10-guesses.length);
+									$("#slide").text(slide);
+
+									$("#wordBox").text("");
+									// EDITS BOX OF WORDS ON MAIN SCREEN
+									if (guesses.length > 5){
+										for (let i = 0; i < 5; i++){
+											var guess = guesses[i];
+											if (guess in bestWords) {
+												$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+											}
+											else {
+												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
+											}
+										}				
+									}
+									else {
+										guesses.forEach((guess) => {
+											if (guess in bestWords) {
+												$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+											}
+											else {
+												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
+											}
+										});				
+									}
+									
+									$("#wordsSideOnly").text("");
+
+									// EDITS SIDE BOX OF WORDS
+									let i = 0;
+									guesses.forEach((guess) => {
+										if (i < 5){
+											if (guess in bestWords){
+												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+											}
+											else {
+												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+											}
+
+											i++;
+										}
+										else {
+											$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');					
+										}
+									});
+									
+									$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left):');
+			    				}
+			    				
+				    			else if ($.inArray(guess, guesses) == -1) {
+									$('#1')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#2')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#3')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#4')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#5')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+
+				    				guesses.push(guess);
+			    					guesses = guesses.sort(sortingGuesses);    				
+				    				localStorage.setItem('guesses', JSON.stringify(guesses));
+
+				    				var score = 0;
+
+				    				if (guesses.length > 5) {
+				    					for (let i = 0; i < 5; i++){
+				    						let guess = guesses[i];
+				    						score += possWords[guess];
+				    					}
+				    				}
+				    				else {
+				    					guesses.forEach((guess) => {
+				    						score += possWords[guess];
+				    					})
+				    				}
+
+				    				localStorage.setItem('score', score);
+									var scorePos = (74.5*score/maxPoints).toFixed(2);
+									var slide = gaugeScore(score, maxPoints)[2];
+
+									$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");				
+									$("#tally").text(score);
+									$("#wordCheck").text(10-guesses.length);
+									$("#slide").text(slide);
+
+									$("#wordBox").text("");
+									// EDITS BOX OF WORDS ON MAIN SCREEN
+									if (guesses.length > 5){
+										for (let i = 0; i < 5; i++){
+											var guess = guesses[i];
+											if (guess in bestWords) {
+												$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+											}
+											else {
+												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
+											}
+										}				
+									}
+									else {
+										guesses.forEach((guess) => {
+											if (guess in bestWords) {
+												$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+											}
+											else {
+												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
+											}
+										});				
+									}
+
+									$("#wordsSideOnly").text("");
+
+									// EDITS SIDE BOX OF WORDS
+									let i = 0;
+									guesses.forEach((guess) => {
+										if (i < 5){
+											if (guess in bestWords){
+												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+											}
+											else {
+												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+											}
+
+											i++;
+										}
+										else {
+											$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');					
+										}
+									});
+									
+									$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left):');
+
+
+				    				if (guesses.length == 10){
+				    					localStorage.setItem('status', 'Done');
+
+								        var response = gaugeScore(score, maxPoints)[0];
+								        var level = gaugeScore(score, maxPoints)[1];
+								        $(".shareIcon")
+								        	.css('display', 'inline-block')
+								        	.hide()
+								        	.fadeIn("fast");
+										$("#guessesLeft").text('Guesses:');
+										$("#wordCheck").text("✓");
+										$(".keyBoard input").css('pointer-events', 'none');
+										$("#completeOverlay").fadeIn("slow");
+								        $("#overOverlay")
+								        	.css('display', 'flex')
+								        	.hide()
+								        	.delay(1000)
+								        	.fadeIn("slow");
+								        $("#scoreFinal").text(response + ' You scored ' + score + ' points.');
+				    				}
+
+				    			}
+
+				    			else {
+				    				$("#errorMsg").text("Already guessed");
+				    				$("#errorMsg")
+				    					.fadeIn("fast")
+				    					.delay(1000)
+				    					.fadeOut("fast");
+									$('#1')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#2')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#3')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#4')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#5')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+
+
+				    			}
+
+				    		}
+
+				    		else {
+				    			$("#errorMsg").text("Invalid word");
+				    			$("#errorMsg")
+				    				.fadeIn("fast")
+				    				.delay(1000)
+				    				.fadeOut("fast");
+								$('#1')
+									.css('border', '4px solid #BDBCBC')
+									.val("");
+								$('#2')
+									.css('border', '4px solid #BDBCBC')
+									.val("");
+								$('#3')
+									.css('border', '4px solid #BDBCBC')
+									.val("");
+								$('#4')
+									.css('border', '4px solid #BDBCBC')
+									.val("");
+								$('#5')
+									.css('border', '4px solid #BDBCBC')
+									.val("");				    				
+				    		}
+				    	}
+				    })
+			}
+		})
+	</script>
+
+	<!-- UI STUFF -->
+
+
 	<script type="text/javascript">
 		window.onload = function() {
 			var current_url = window.location.href
@@ -225,15 +675,38 @@
 		}
 	</script>
 	<script type="text/javascript">
-		$(document).ready(function() {
+		function shareData() {
 
-			$("#scoreArrow").css('marginLeft', '{{oldScorePos}}%');				
+				  var score = parseInt(localStorage.getItem('score'));
+				  var maxPoints = parseInt(localStorage.getItem('maxPoints'));
+				  var level = gaugeScore(score, maxPoints)[1];
 
-			if ("{{error}}".length == 0){
-				var difference = {{scorePos}}-{{oldScorePos}};
-				$("#scoreArrow").animate({'marginLeft': '+=' + difference+'%'}, "slow");
-			}
-		})
+				  const shareData = {
+					    title: 'Lex',
+					    text: 'Lex {{lid}}: '+level
+					};
+
+				  const btn = document.querySelector('#share');
+				  const sharePara = document.querySelector('#shareDetails');
+
+				  if (!navigator.canShare) {
+					 	navigator.clipboard
+							.writeText('Lex {{lid}}: '+level)
+							.then(() => {
+								sharePara.textContent = 'Results copied to clipboard!';
+								})
+							.catch(() => {
+								sharePara.textContent = 'Could not copy results.';
+								})
+						$("#shareOverlay")
+							.css('display', 'flex')
+							.hide()
+							.fadeIn().delay(1000).fadeOut("fast");
+
+					} else {
+					  	navigator.share(shareData);
+						};
+			}	
 	</script>
 	<!-- TIME LEFT -->
 	<script type="text/javascript">
@@ -301,7 +774,8 @@
 
 			})();
 
-			Countdown(document.getElementById('countdown'));
+			Countdown(document.getElementById('countdown1'));
+			Countdown(document.getElementById('countdown2'));
 		})			
 	</script>
 
@@ -317,15 +791,12 @@
 
 			        else if ( ((document.getElementById("1").value.length == 1) && (document.getElementById("2").value.length == 1) && (document.getElementById("3").value.length == 1)) && (e.keyCode == 13)) {
 
-				        $(".slideIn-content").hide();
-
-				        document.getElementById("myNav").style.width = "0%";
-						document.getElementById("myNav").style.boxShadow = "none";
-
 						$("#additionalInfo").fadeOut("fast");
 
+						/* THIS IS HOW FORM WAS BEING SUBMITTED WITH ENTER
 			        	$('form#letterField').submit();
-
+						*/
+						alert("guess attempted (enter)")
 			        }
 
 			        else if ((!(e.metaKey)) && (e.key >= "a" && e.key <= "z")) {
@@ -345,10 +816,6 @@
 
 						$("#additionalInfo").fadeOut("fast");
 
-			        	$(".slideIn-content").hide();
-
-			        	document.getElementById("myNav").style.width = "0%";
-						document.getElementById("myNav").style.boxShadow = "none";
 					}
 		   		}
 		   	}
@@ -388,11 +855,6 @@
 
 			$("#additionalInfo").fadeOut("fast");
 
-			$(".slideIn-content").hide();
-
-			document.getElementById("myNav").style.width = "0%";
-			document.getElementById("myNav").style.boxShadow = "none";
-
 		    if (!(document.getElementById("5").value.length == 1)) {
 
 				document.getElementById(currentActive).style.border = "4px solid black";
@@ -424,22 +886,8 @@
 
 			$("#additionalInfo").fadeOut("fast");
 
-			$(".slideIn-content").hide();
-
-			document.getElementById("myNav").style.width = "0%";
-			document.getElementById("myNav").style.boxShadow = "none";
-
 			return moveTo;
 		}
-	</script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-		    $("#next").click(function(){
-		    	if (active() > 3){
-		    		$('form#letterField').submit();
-		    	}
-		    })
-		})
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -460,7 +908,17 @@
 		    }); 
 		});
 	</script>
-
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $("#shareIconInner").click(function(){
+		        $("#completeOverlay").fadeIn("fast");		    	
+		        $("#overOverlay")
+		        	.css('display', 'flex')
+		        	.hide()
+		        	.fadeIn("fast");
+		    }); 
+		});
+	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#showInfo").click(function(){
@@ -477,6 +935,14 @@
 		    $("#closePlayInfo").click(function(){
 		        $("#completeOverlay").fadeOut("fast");
 		        $("#infoOverlay").fadeOut("fast");
+		    }); 
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $("#closeOverInfo").click(function(){
+		        $("#completeOverlay").fadeOut("fast");
+		        $("#overOverlay").fadeOut("fast");
 		    }); 
 		});
 	</script>
