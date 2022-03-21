@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<meta name="theme-color" content="#D5D5D5">
 	<title>Lex</title>
-	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css', v=lid)}}">
-
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'dark.css', v=lid)}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'light.css', v=lid)}}">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap" rel="stylesheet">
@@ -18,6 +18,87 @@
 </head>
 <body>
 	<div id="completeOverlay"></div>
+	<div class="overlay" id="infoOverlay">
+		<div class="popUpBox" id="playInfo">	
+			<div class="close">
+				<button id="closePlayInfo" type="button">✕</button>
+			</div>		
+			<div class="popUp" id="playInfoDetails">
+				<p class="head">How to Play</p>
+
+				<p>Given 10 guesses and 8 letters, find the 5 highest-scoring words. Words must be at least 3 letters long and can repeat letters. Point values are assigned as following:
+				<br>
+				<br>
+
+				<!-- ALL LETTERS -->
+
+				<img class="letterExplained" src="{{url_for('static', filename = 'a.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'b.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'c.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'd.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'e.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'f.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'g.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'h.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'i.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'j.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'k.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'l.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'm.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'n.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'o.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'p.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'q.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'r.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 's.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 't.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'u.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'v.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'w.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'x.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'y.svg')}}">
+				<img class="letterExplained" src="{{url_for('static', filename = 'z.svg')}}">
+
+
+				<br><br>
+				If you guess 1 of the 5 highest-scoring words, the word will show up as purple. Your five best guesses determine your score and are displayed above the keyboard. If you want to see all of your guesses, click the button at the top left.<br><br>
+
+				<span class="best">Jump, 15</span>
+				<span class="correct">Plume, 9</span>
+				<span class="correct">Hum, 8</span>
+
+				<br><br>
+
+				If you aren't able to find the best words, that's okay! You'll be able to see them next day.
+
+				<br><br>
+
+				Have fun!
+				</p>
+			</div>
+		</div>	
+	</div>
+	<div class="overlay" id="overOverlay">
+		<div class="popUpBox" id="overInfo">	
+			<div class="close">
+				<button id="closeOverInfo" type="button">✕</button>
+			</div>		
+			<div class="popUp" id="overInfoDetails">
+				<div class="content" id="finished">
+					<div id="finishedTop" class="newLex">NEW LEX</div>
+					<div id="countdown2" class="countdown"></div> <br><br>
+					<p id="scoreFinal"></p>
+				    <input type="image" id="share" value="share" src="{{url_for('static', filename = 'share.svg')}}" onclick='shareData()' onfocus="this.blur();">
+				    <div class="overlay" id="shareOverlay">
+						<div class="shareBox" id="shareDisplay">
+							<div class="shareInner" id="shareDetails">
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>	
+	</div>
 	<span id="showSlide" onclick="openNav()"><span id="wordCheck"></span></span>
 	<div id="all">
 		<!-- NON FEEDBACK (LOGIN)
@@ -74,7 +155,14 @@
 									{% endif %}
 								{% endif %} 
 							{% endfor %}
-						</div>
+						</div>	
+					</div>
+					<div id="switch">
+						<label class="switch">
+						  <input type="checkbox" id="mode">
+						  <span class="slider round"></span>
+						</label> &nbsp;
+						<span id="darkMmode">Dark mode</span>
 					</div>
 			  </div>
 
@@ -93,94 +181,18 @@
 					</div>
 				</div>				  	
 			</div>
-			<div class="overlay" id="overOverlay">
-				<div class="popUpBox" id="overInfo">	
-					<div class="close">
-						<button id="closeOverInfo" type="button">✕</button>
-					</div>		
-					<div class="popUp" id="overInfoDetails">
-						<div class="content" id="finished">
-							<div id="finishedTop" class="newLex">NEW LEX</div>
-							<div id="countdown2" class="countdown"></div> <br><br>
-							<p id="scoreFinal"></p>
-						    <input type="image" id="share" value="share" src="{{url_for('static', filename = 'share.svg')}}" onclick='shareData()' onfocus="this.blur();">
-						    <div class="overlay" id="shareOverlay">
-								<div class="shareBox" id="shareDisplay">
-									<div class="shareInner" id="shareDetails">
-									</div>
-								</div>
-							</div>	
-						</div>	
-					</div>
-				</div>	
-			</div>
-
-			<div class="overlay" id="infoOverlay">
-				<div class="popUpBox" id="playInfo">	
-					<div class="close">
-						<button id="closePlayInfo" type="button">✕</button>
-					</div>		
-					<div class="popUp" id="playInfoDetails">
-						<p class="head">How to Play</p>
-
-						<p>Given 10 guesses and 8 letters, find the 5 highest-scoring words. Words must be at least 3 letters long and can repeat letters. Point values are assigned as following:
-						<br>
-						<br>
-
-						<!-- ALL LETTERS -->
-
-						<img class="letterExplained" src="{{url_for('static', filename = 'a.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'b.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'c.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'd.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'e.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'f.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'g.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'h.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'i.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'j.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'k.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'l.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'm.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'n.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'o.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'p.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'q.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'r.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 's.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 't.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'u.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'v.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'w.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'x.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'y.svg')}}">
-						<img class="letterExplained" src="{{url_for('static', filename = 'z.svg')}}">
-
-
-						<br><br>
-						If you guess 1 of the 5 highest-scoring words, the word will show up as purple. Your five best guesses determine your score and are displayed above the keyboard. If you want to see all of your guesses, click the button at the top left.<br><br>
-
-						<span class="best">Jump, 15</span>
-						<span class="correct">Plume, 9</span>
-						<span class="correct">Hum, 8</span>
-
-						<br><br>
-
-						If you aren't able to find the best words, that's okay! You'll be able to see them next day.
-
-						<br><br>
-
-						Have fun!
-						</p>
-					</div>
-				</div>	
-			</div>
 			<div class="content">
 
 				<p>Win by reaching <span class="maxPoints">{{maxPoints}}</span> points</p>
 
 				<p>
-					<div class="formContents">
+					<div class="formContents"><!--
+						<div class="tile" id="1" onfocus="blur();"></div>
+						<div class="tile" id="2" onfocus="blur();"></div>
+						<div class="tile" id="3" onfocus="blur();"></div>
+						<div class="tile" id="4" onfocus="blur();"></div>
+						<div class="tile" id="5" onfocus="blur();"></div>-->
+						
 						<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus"autocomplete="off" onfocus="blur();">
 						<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" autocomplete="off" onfocus="blur();">
 						<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" autocomplete="off" onfocus="blur();">
@@ -261,6 +273,39 @@
 	<script type="text/javascript">
 
 		$(document).ready(function(){
+
+
+			if ("mode" in localStorage){
+				mode = localStorage.getItem('mode');
+				if (mode == "dark"){
+					$('link[href*="light.css"]').prop('disabled', true);
+					$('link[href*="dark.css"]').prop('disabled', false);
+					$("div#switch input[type='checkbox']").attr('checked','checked')			
+				}
+				else {
+					$('link[href*="light.css"]').prop('disabled', false);
+					$('link[href*="dark.css"]').prop('disabled', true);
+				}
+			}
+			else {
+				$('link[href*="light.css"]').prop('disabled', false);
+				$('link[href*="dark.css"]').prop('disabled', true);
+			}
+
+			$("#mode").click(function(){
+				mode = localStorage.getItem('mode');
+				if (mode == "light"){
+					$('link[href*="light.css"]').prop('disabled', true);
+					$('link[href*="dark.css"]').prop('disabled', false);
+					localStorage.setItem('mode', 'dark');					
+				}
+				else {
+					$('link[href*="light.css"]').prop('disabled', false);
+					$('link[href*="dark.css"]').prop('disabled', true);
+					localStorage.setItem('mode', 'light');					
+				}
+
+			})
 
 			function sortingGuesses(guess1, guess2) {
 				if (possWords[guess1] > possWords[guess2]) {
@@ -366,7 +411,7 @@
 		        	.css('display', 'inline-block')
 		        	.hide()
 		        	.fadeIn("fast");
-				$("#guessesLeft").text('Guesses:');
+				$("#guessesLeft").text('Guesses');
 				$("#wordCheck").text("✓");
 				$(".keyBoard input").css('pointer-events', 'none');
 				$("#completeOverlay").delay(1000).fadeIn("slow");
@@ -379,7 +424,7 @@
 			}
 
 			else {
-				$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left):');
+				$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left)');
 				$("#wordCheck").text(10-JSON.parse(localStorage.getItem('guesses')).length);
 
 				// Game 
@@ -491,7 +536,7 @@
 										}
 									});
 									
-									$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left):');
+									$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left)');
 			    				}
 			    				
 				    			else if ($.inArray(guess, guesses) == -1) {
@@ -582,7 +627,7 @@
 										}
 									});
 									
-									$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left):');
+									$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left)');
 
 
 				    				if (guesses.length == 10){
@@ -594,7 +639,7 @@
 								        	.css('display', 'inline-block')
 								        	.hide()
 								        	.fadeIn("fast");
-										$("#guessesLeft").text('Guesses:');
+										$("#guessesLeft").text('Guesses');
 										$("#wordCheck").text("✓");
 										$(".keyBoard input").css('pointer-events', 'none');
 										$("#completeOverlay").fadeIn("slow");
@@ -659,6 +704,286 @@
 				    		}
 				    	}
 				    })
+				
+				$(document).keydown(
+				    function(e)
+				    {    
+				    	if ($("#completeOverlay").is(":hidden") && (e.keyCode == 13)){    
+					    	if (active() > 3){
+					    		var guess = $('#1').val() + $('#2').val() + $('#3').val() + $('#4').val() + $('#5').val();
+					    		
+					    		var possWords = JSON.parse({{possWords | tojson}});
+					    		var bestWords = JSON.parse({{bestWords | tojson}});
+
+					    		if (guess in possWords) {
+					    			var guesses = JSON.parse(localStorage.getItem('guesses'));
+
+					    			console.log(localStorage.getItem('status'));
+
+				    				if (guesses.length == 0){
+										$('#1')
+											.delay(750)
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#2')
+											.delay(750)
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#3')
+											.delay(750)
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#4')
+											.delay(750)
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#5')
+											.delay(750)
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+
+
+				    					guesses.push(guess);
+				    					guesses = guesses.sort(sortingGuesses);
+					    				localStorage.setItem('guesses', JSON.stringify(guesses));
+
+					    				var score = 0;
+
+					    				if (guesses.length > 5) {
+					    					for (let i = 0; i < 5; i++){
+					    						let guess = guesses[i];
+					    						score += possWords[guess];
+					    					}
+					    				}
+					    				else {
+					    					guesses.forEach((guess) => {
+					    						score += possWords[guess];
+					    					})
+					    				}
+
+					    				localStorage.setItem('score', score);
+										var scorePos = (74.5*score/maxPoints).toFixed(2);
+										var slide = gaugeScore(score, maxPoints)[2];
+
+
+										$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");				
+										$("#tally").text(score);
+										$("#wordCheck").text(10-guesses.length);
+										$("#slide").text(slide);
+
+										$("#wordBox").text("");
+										// EDITS BOX OF WORDS ON MAIN SCREEN
+										if (guesses.length > 5){
+											for (let i = 0; i < 5; i++){
+												var guess = guesses[i];
+												if (guess in bestWords) {
+													$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+												}
+												else {
+													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
+												}
+											}				
+										}
+										else {
+											guesses.forEach((guess) => {
+												if (guess in bestWords) {
+													$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+												}
+												else {
+													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
+												}
+											});				
+										}
+										
+										$("#wordsSideOnly").text("");
+
+										// EDITS SIDE BOX OF WORDS
+										let i = 0;
+										guesses.forEach((guess) => {
+											if (i < 5){
+												if (guess in bestWords){
+													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+												}
+												else {
+													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+												}
+
+												i++;
+											}
+											else {
+												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');					
+											}
+										});
+										
+										$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left)');
+				    				}
+				    				
+					    			else if ($.inArray(guess, guesses) == -1) {
+										$('#1')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#2')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#3')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#4')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#5')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+
+					    				guesses.push(guess);
+				    					guesses = guesses.sort(sortingGuesses);    				
+					    				localStorage.setItem('guesses', JSON.stringify(guesses));
+
+					    				var score = 0;
+
+					    				if (guesses.length > 5) {
+					    					for (let i = 0; i < 5; i++){
+					    						let guess = guesses[i];
+					    						score += possWords[guess];
+					    					}
+					    				}
+					    				else {
+					    					guesses.forEach((guess) => {
+					    						score += possWords[guess];
+					    					})
+					    				}
+
+					    				localStorage.setItem('score', score);
+										var scorePos = (74.5*score/maxPoints).toFixed(2);
+										var slide = gaugeScore(score, maxPoints)[2];
+
+										$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");				
+										$("#tally").text(score);
+										$("#wordCheck").text(10-guesses.length);
+										$("#slide").text(slide);
+
+										$("#wordBox").text("");
+										// EDITS BOX OF WORDS ON MAIN SCREEN
+										if (guesses.length > 5){
+											for (let i = 0; i < 5; i++){
+												var guess = guesses[i];
+												if (guess in bestWords) {
+													$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+												}
+												else {
+													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
+												}
+											}				
+										}
+										else {
+											guesses.forEach((guess) => {
+												if (guess in bestWords) {
+													$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+												}
+												else {
+													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
+												}
+											});				
+										}
+
+										$("#wordsSideOnly").text("");
+
+										// EDITS SIDE BOX OF WORDS
+										let i = 0;
+										guesses.forEach((guess) => {
+											if (i < 5){
+												if (guess in bestWords){
+													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+												}
+												else {
+													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+												}
+
+												i++;
+											}
+											else {
+												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');					
+											}
+										});
+										
+										$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left)');
+
+
+					    				if (guesses.length == 10){
+					    					localStorage.setItem('status', 'Done');
+
+									        var response = gaugeScore(score, maxPoints)[0];
+									        var level = gaugeScore(score, maxPoints)[1];
+									        $(".shareIcon")
+									        	.css('display', 'inline-block')
+									        	.hide()
+									        	.fadeIn("fast");
+											$("#guessesLeft").text('Guesses');
+											$("#wordCheck").text("✓");
+											$(".keyBoard input").css('pointer-events', 'none');
+											$("#completeOverlay").fadeIn("slow");
+									        $("#overOverlay")
+									        	.css('display', 'flex')
+									        	.hide()
+									        	.delay(1000)
+									        	.fadeIn("slow");
+									        $("#scoreFinal").text(response + ' You scored ' + score + ' points.');
+					    				}
+
+					    			}
+
+					    			else {
+					    				$("#errorMsg").text("Already guessed");
+					    				$("#errorMsg")
+					    					.fadeIn("fast")
+					    					.delay(1000)
+					    					.fadeOut("fast");
+										$('#1')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#2')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#3')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#4')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#5')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+
+
+					    			}
+
+					    		}
+
+					    		else {
+					    			$("#errorMsg").text("Invalid word");
+					    			$("#errorMsg")
+					    				.fadeIn("fast")
+					    				.delay(1000)
+					    				.fadeOut("fast");
+									$('#1')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#2')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#3')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#4')
+										.css('border', '4px solid #BDBCBC')
+										.val("");
+									$('#5')
+										.css('border', '4px solid #BDBCBC')
+										.val("");				    				
+					    		}
+					    	}
+						}
+					})
 			}
 		})
 	</script>
@@ -789,28 +1114,38 @@
 			        if (e.keyCode == 8)      
 			            del();
 
-			        else if ( ((document.getElementById("1").value.length == 1) && (document.getElementById("2").value.length == 1) && (document.getElementById("3").value.length == 1)) && (e.keyCode == 13)) {
+			        /*else if ( ((document.getElementById("1").value.length == 1) && (document.getElementById("2").value.length == 1) && (document.getElementById("3").value.length == 1)) && (e.keyCode == 13)) {
 
 						$("#additionalInfo").fadeOut("fast");
 
-						/* THIS IS HOW FORM WAS BEING SUBMITTED WITH ENTER
+						THIS IS HOW FORM WAS BEING SUBMITTED WITH ENTER
 			        	$('form#letterField').submit();
-						*/
+						
 						alert("guess attempted (enter)")
-			        }
+			        }*/
 
 			        else if ((!(e.metaKey)) && (e.key >= "a" && e.key <= "z")) {
 
 			        	if (!(document.getElementById("5").value.length == 1)) {
 
 			        		if ((active() == 5)){
-								document.getElementById("5").value = e.key;
-				        		document.getElementById("5").style.border = "4px solid black";
+								document.getElementById("5").value = (e.key);
+								if (localStorage.getItem('mode') == "light"){
+				        			document.getElementById("5").style.border = "4px solid black";
+				        		}
+				        		else {
+				        			document.getElementById("5").style.border = "4px solid #BDBCBC";
+				        		}
 			        		}
 
 			        		else {
 				        		document.getElementById(active()).value = e.key;
-				        		document.getElementById(active()-1).style.border = "4px solid black";
+								if (localStorage.getItem('mode') == "light"){
+				        			document.getElementById(active()-1).style.border = "4px solid black";
+				        		}
+				        		else {
+				        			document.getElementById(active()-1).style.border = "4px solid #BDBCBC";
+				        		}
 			        		}	        		
 			        	}
 
@@ -830,7 +1165,7 @@
 		            $("#additionalInfo").fadeOut("fast");
 				    $(".slideIn-content").hide();
 			        document.getElementById("myNav").style.width = "0%";
-					document.getElementById("myNav").style.boxShadow = "none";
+					//document.getElementById("myNav").style.boxShadow = "none";
 		        }
 		    }
 		);
@@ -857,7 +1192,12 @@
 
 		    if (!(document.getElementById("5").value.length == 1)) {
 
-				document.getElementById(currentActive).style.border = "4px solid black";
+				if (localStorage.getItem('mode') == "light"){
+    				document.getElementById(currentActive).style.border = "4px solid black";
+	    		}
+	    		else {
+	    			document.getElementById(currentActive).style.border = "4px solid #BDBCBC";
+	    		}
 
 
 				return currentActive;
@@ -880,7 +1220,12 @@
 				}
 			}
 
-		    document.getElementById(moveTo).style.border = "4px solid #BDBCBC";
+				if (localStorage.getItem('mode') == "light"){
+    				document.getElementById(moveTo).style.border = "4px solid #BDBCBC";
+	    		}
+	    		else {
+	    			document.getElementById(moveTo).style.border = "4px solid #808080";
+	    		}
 
 			document.getElementById(moveTo).value = '';
 
@@ -995,11 +1340,11 @@
 		function openNav() {
 			if (Math.min(window.screen.width, window.screen.height) < 768) {
 		  		document.getElementById("myNav").style.width = "98%";
-		  		document.getElementById("myNav").style.boxShadow = "0px 0px 6px 2px #CBCBCB";
+		  		//document.getElementById("myNav").style.boxShadow = "0px 0px 6px 2px #CBCBCB";
 			}
 			else {
 				document.getElementById("myNav").style.width = "25%";
-		  		document.getElementById("myNav").style.boxShadow = "0px 0px 6px 2px #CBCBCB";
+		  		//document.getElementById("myNav").style.boxShadow = "0px 0px 6px 2px #CBCBCB";
 			}
 			$(".slideIn-content").delay(50).fadeToggle();
 		}
@@ -1011,7 +1356,7 @@
 		    	$(".slideIn-content").toggle();
 
 		        document.getElementById("myNav").style.width = "0%";
-				document.getElementById("myNav").style.boxShadow = "none";
+				//document.getElementById("myNav").style.boxShadow = "none";
 		    }); 
 		});
 	</script>

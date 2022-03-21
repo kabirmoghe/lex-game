@@ -1,8 +1,9 @@
 body {
-	background-color: #E9E9E9;
+	background-color: #121212;
 	font-family: 'Roboto Slab', serif;
 	height: 100%;
 	user-select: none;
+	color: #D7D7D7;
 }
 
 
@@ -72,14 +73,14 @@ span.choice {
 .top {
 	padding-top: 17px;
 	padding-bottom: 6px;
-	background-color: #D5D5D5;
+	background-color: #333333;
 	display: flex;
 	align-items: center;
 	position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  border-bottom: 1.5px solid #BDBDBD;
+  border-bottom: 1.5px solid #4f4f4f;
 }
 
 #shareOverlay {
@@ -89,19 +90,18 @@ span.choice {
 button.revealMore {
 	font-family: 'Oxygen', sans-serif;
 	background-color: #FFFFFF;
-	color: black;
+	color: #D7D7D7;
 	border-radius: 15px;
 	font-size: 15px;
 	border: none;
 	padding: 5px;
 	cursor: pointer;
-	box-shadow: 0px 0px 3px 1px #CBCBCB;
 }
 
 button.revealEvenMore {
 	font-family: 'Oxygen', sans-serif;
-	background-color: #FFFFFF;
-	color: black;
+	background-color: #232323;
+	color: #D7D7D7;
 	font-size: 15px;
 	border: none;
 	padding: 5px;
@@ -109,14 +109,14 @@ button.revealEvenMore {
 }
 
 button.revealEvenMore:hover {
-	background-color: #D9D9D9;
+	background-color: #333333;
 	border-radius: 5px;
 }
 
 input.revealEvenMore {
 	font-family: 'Oxygen', sans-serif;
-	background-color: #FFFFFF;
-	color: black;
+	background-color: #232323;
+	color: #D7D7D7;
 	font-size: 15px;
 	border: none;
 	padding: 5px;
@@ -125,13 +125,13 @@ input.revealEvenMore {
 }
 
 input.revealEvenMore:hover {
-	background-color: #D9D9D9;
+	background-color: #333333;
 	border-radius: 5px;
 }
 
 a.revealEvenMore {
 	font-family: 'Oxygen', sans-serif;
-	color: black;
+	color: #D7D7D7;
 	font-size: 15px;
 	border: none;
 	padding: 5px;
@@ -141,16 +141,17 @@ a.revealEvenMore {
 }
 
 a.revealEvenMore:hover {
-	background-color: #D9D9D9;
-	border-radius: 5px;
+	background-color: #333333;
+	border-radius: 5px; 
 }
 
 #title {
 	font-size: 40px;
   font-family: 'Courier Prime', monospace;
   font-weight: 700;
-  display: inline-block;
+  display: inline-block; /*#626262*/
   margin: 0 auto;
+  color: #D7D7D7;
 }
 
 .more {
@@ -166,9 +167,8 @@ a.revealEvenMore:hover {
 }
 
 #additionalInfo {
-	background-color: white;
+	background-color: #232323;
 	border-radius: 5px;
-	box-shadow: 0px 0px 4px 1px #CBCBCB;
 	padding: 3px;
 	padding-bottom: 9px;
 	top: 10px;
@@ -226,8 +226,7 @@ a.revealEvenMore:hover {
   width: 700px;
   height: 100%;
   flex-direction: column;
-  background-color: #FFFFFF;
-	box-shadow: 0px 0px 20px 10px #CBCBCB;
+  background-color: #333333;
 	border-radius: 5px;
 }
 
@@ -237,8 +236,7 @@ a.revealEvenMore:hover {
   margin-top: 10%;
   min-height: 600px;
   flex-direction: column;
-  background-color: #FFFFFF;
-	filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.05));
+  background-color: #333333;
 	margin-bottom: 10px;
 	border-radius: 5px;
 }
@@ -251,8 +249,7 @@ a.revealEvenMore:hover {
 	  margin-top: 10px;
 	  margin-bottom: 10px;
 	  min-height: 100%;
-	  background-color: #FFFFFF;
-		box-shadow: 0px 0px 10px 5px #CBCBCB;
+	  background-color: #333333;
 		border-radius: 5px;
 	}
 }
@@ -264,8 +261,7 @@ a.revealEvenMore:hover {
 	  margin-left: 10px;
 	  margin-top: 40%;
 	  min-height: 500px;
-	  background-color: #FFFFFF;
-		box-shadow: 0px 0px 10px 5px #CBCBCB;
+	  background-color: #333333;
 		border-radius: 5px;
 	}
 }
@@ -276,9 +272,8 @@ a.revealEvenMore:hover {
 	height: 400px;
   width: 400px;
   flex-direction: column;
-  background-color: #FFFFFF;
-	box-shadow: 0px 0px 20px 10px #CBCBCB;
-	margin-bottom: 10px;
+  background-color: #333333;
+	margin-bottom: 10px;a
 	border-radius: 5px;
 	/*z-index: 99;*/
 }
@@ -290,8 +285,7 @@ a.revealEvenMore:hover {
   width: 160px;
   min-height: 65px;
   flex-direction: column;
-  background-color: #FFFFFF;
-	box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.25);
+  background-color: #333333;
 	margin-bottom: 10px;
 	border-radius: 10px;
 }
@@ -304,8 +298,7 @@ a.revealEvenMore:hover {
 	  width: 200px;
 	  min-height: 65px;
 	  flex-direction: column;
-	  background-color: #FFFFFF;
-		box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.25);
+	  background-color: #333333;
 		margin-bottom: 10px;
 		border-radius: 10px;
 	}	
@@ -317,8 +310,7 @@ a.revealEvenMore:hover {
 	min-height: 400px;
   width: 400px;
   flex-direction: column;
-  background-color: #FFFFFF;
-	box-shadow: 0px 0px 20px 10px #CBCBCB;
+  background-color: #333333;
 	margin-bottom: 10px;
 	border-radius: 5px;
 	/*z-index: 99;*/
@@ -326,7 +318,7 @@ a.revealEvenMore:hover {
 
 .close {
 	text-align: right;
-	color: black;
+	color: #D7D7D7;
 }
 
 .close button {
@@ -334,7 +326,7 @@ a.revealEvenMore:hover {
 	font-size: 20px;
 	border: none;
 	cursor: pointer;
-	color: black;
+	color: #D7D7D7;
 }
 
 @media only screen and (max-width: 500px){
@@ -343,7 +335,7 @@ a.revealEvenMore:hover {
 		font-size: 30px;
 		border: none;
 		cursor: pointer;
-		color: black;
+		color: #D7D7D7;
 		right: 0;
 	}
 }
@@ -427,10 +419,9 @@ div#wordExample {
 
 .keyWidth {
 	display: inline-block;
-	background-color: white;
+	background-color: #565656;
 	border-radius: 30px;
 	padding: 10px;
-	box-shadow: 0px 0px 5px 2.5px #CBCBCB;
 	margin-left: 10px;
 	margin-right: 10px;
 }
@@ -446,6 +437,13 @@ img#score_gauge {
 	display: inline;
 }
 
+/* img.letterExplained, input#img#scoreArrow, .keyRow input, .otherActions input {*/
+
+img#scoreArrow{
+	filter: invert(85%);
+}
+
+
 img.letterExplained {
 	height: 45px;
 	width: auto;
@@ -455,10 +453,10 @@ img#moreButton {
 	height: 25px; 
 	width: auto;
 	transition: 0.2s;
+	filter: invert(90%);
 }
 
 img#moreButton:hover {
-	filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.30));
 	cursor: pointer;
 }
 
@@ -466,10 +464,10 @@ img#shareIconInner {
 	height: 25px; 
 	width: auto;
 	transition: 0.2s;
+	filter: invert(90%);
 }
 
 img#shareIconInner:hover {
-	filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.30));
 	cursor: pointer;
 }
 
@@ -479,15 +477,12 @@ input#share {
 	margin: 3px 1px;
 	border: none;
 	touch-action: manipulation;
-	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.50));
 }
 
 input#share:hover {
-	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.60));
 }
 
 input#share:active {
-	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.70));
 }
 
 input {
@@ -511,11 +506,13 @@ input.tile {
 	font-size: 55px;
   text-align: center;
 	text-transform: uppercase;
-	border: 4px solid #BDBCBC;
+	border: 4px solid #808080;
 	border-radius: 6px;
 	caret-color: transparent;
 	margin: 2px;
 	-webkit-appearance: none;
+	background-color: #333333;
+	color: #D7D7D7;
 }
 
 @media only screen and (max-width: 500px) {
@@ -528,7 +525,7 @@ input.tile {
 		font-size: 44px;
 	  text-align: center;
 		text-transform: uppercase;
-		border: 4px solid #BDBCBC;
+		border: 4px solid #808080;
 		border-radius: 3px;
 		caret-color: transparent;
 		margin: 2px;
@@ -556,7 +553,6 @@ input#tryAgain {
 	border-radius: 5px;
 	font-size: 18px;
 	padding: 5px 10px;
-	box-shadow: 0px 0px 4px 2px #CBCBCB;
 }
 
 .keyRow input {
@@ -570,19 +566,16 @@ input#tryAgain {
 .keyRow input:hover {
 	width: auto;
 	cursor: pointer;
-	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.75));
 }
 
 .keyRow input:focus {
 	width: auto;
 	cursor: pointer;
-	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.75));
 }
 
 .keyRow input:active {
 	width: auto;
 	cursor: pointer;
-	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.99));
 }
 
 .otherActions input {
@@ -595,13 +588,11 @@ input#tryAgain {
 .otherActions input:hover {
 	width: auto;
 	cursor: pointer;
-	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.75));
 }
 
 .otherActions input:active {
 	width: auto;
 	cursor: pointer;
-	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.99));
 }
 
 #disabledKeyboard input { 
@@ -654,7 +645,6 @@ input.genData {
 	font-size: 15px;
 	border: none;
 	padding: 5px;
-	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.2));
 	cursor: pointer;
 }
 
@@ -667,7 +657,6 @@ a.logButtons {
 	border: none;
 	padding: 5px;
 	cursor: pointer;
-	box-shadow: 0px 0px 3px 1px #CBCBCB;
   text-decoration: none;
   color: initial;
 }
@@ -682,7 +671,7 @@ a.button {
 }
 
 span.tally {
-	background-color: #FFFFFF;
+	background-color: #333333;
 	font-size: 22px;
 	border-radius: 8px;
 	padding: 1px 7px;
@@ -690,8 +679,8 @@ span.tally {
 	width: 50px;
 	float: right;
 	text-align: center;
-	border: 3px solid black;
-	color: black;
+	border: 3px solid #D7D7D7;
+	color: #D7D7D7;
 	font-weight: bold;
 } 
 
@@ -706,15 +695,15 @@ span.check {
 @media only screen and (max-width: 500px) {
 	span.tally {
 		font-size: 13px;
-		background-color: #FFFFFF;
+		background-color: #333333;
 		border-radius: 6px;
 		padding: 1px 2px;
 		display: inline-block;
 		width: 37.5px;
 		float:right;
 		text-align: center;
-		border: 2px solid black;
-		color: black;
+		border: 2px solid #D7D7D7;
+		color: #D7D7D7;
 		font-weight: bold;
 	}
 }
@@ -728,7 +717,7 @@ span.correct {
 	background-color: #A5A5A5;
 	border-radius: 5px;
 	padding: 5px;
-	color: #FFFFFF;
+	color: black;
 	margin-bottom: 5px;
 	white-space: pre;
 	text-transform: capitalize;
@@ -738,7 +727,7 @@ span.correctBest {
 	background-color: #9BD1A5;
 	border-radius: 5px;
 	padding: 5px;
-	color: #8e7cc3;
+	color: black;
 	margin-bottom: 5px;
 	white-space: pre;
 	border: 3px solid black;
@@ -750,7 +739,7 @@ span.best {
 	background-color: #8e7cc3;
 	border-radius: 5px;
 	padding: 5px;
-	color: #FFFFFF;
+	color: black;
 	margin-bottom: 40px;
 	white-space: pre;
 	text-transform: capitalize;
@@ -785,6 +774,7 @@ span.maxPoints {
 
 span#slide {
 	vertical-align: top;
+	font-style: italic;
 }
 
 @media only screen and (max-width: 500px) {
@@ -825,7 +815,7 @@ div#haveFun {
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: white; /* Black w/opacity */
+  background-color: #232323; /* Black w/opacity */
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.2s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
   border: none;
@@ -849,7 +839,7 @@ div#haveFun {
 	position: fixed;
 	top: 17px;
 	left: 0;
-	background-color: white;
+	background-color: #121212;
 	border-radius: 0px 10px 10px 0px;
 	cursor: pointer;
 	z-index: 99;
@@ -861,10 +851,6 @@ div#haveFun {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
-
-#showSlide:hover {
-	filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.20));
 }
 
 #closeNav {
@@ -888,10 +874,9 @@ div#haveFun {
 }
 
 #wordCheck {
-	color: black;
+	color: #D7D7D7;
 	font-weight: bolder;
 }
-
 
 
 
