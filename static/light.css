@@ -899,13 +899,15 @@ div#haveFun {
 /* SWITCH */
 
 #darkMode {
-	margin-top: 5px;
 	margin-left: 5px;
 }
 
 #switch {
-	float: left;
-	margin-top: 150px;
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
+	display: flex;
+	align-items: center;
 }
 
 /* The switch - the box around the slider */
