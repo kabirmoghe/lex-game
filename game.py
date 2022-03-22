@@ -107,7 +107,13 @@ def create_word_info():
         poss_words = word_tallies(final_words)
 
         if len(poss_words) >= 5:
-            best_words = list(poss_words.items())[:5]
+            
+            cutoff = 0
+
+            while (list(poss_words.items())[cutoff][1] >= list(poss_words.items())[4][1]):
+                cutoff += 1
+            
+            best_words = list(poss_words.items())[:cutoff]
         else:
             best_words = list(poss_words.items())
             
@@ -118,45 +124,3 @@ def create_word_info():
         
         newGame = WordInfo(picked_letters, letter_pts, poss_words, best_words, max_points)
         return newGame
-
-def score_gauge(pts, top):
-        
-    response = ""
-        
-    score_pos = round((74.5*pts/top),2)
-
-    level = "{}/{}".format(pts, top)
-
-    slide=""
-
-    if (pts == top):
-        response = "You're the champ!"
-        level = "Champ! 🟣 {}/{}".format(pts, top)
-        slide = "Champ!"
-
-    elif (pts >= 0.8*top):
-        response = "Amazing!"
-        level = "Amazing! 🔵 {}/{}".format(pts, top)
-        slide = "Amazing!"
-
-    elif (pts >= 0.6*top):
-        response = "Wow!"
-        level = "Wow! 🟢 {}/{}".format(pts, top)
-        slide = "Wow!"
-
-    elif (pts >= 0.4*top):
-        response = "Great!"
-        level = "Great! ⚪️ {}/{}".format(pts, top)
-        slide = "Great!"
-
-    elif (pts >= 0.2*top):
-        response = "Good!"
-        level = "Good! 🟡 {}/{}".format(pts, top)
-        slide = "Good!"
-
-    elif (pts > 0):
-        response = "Nice!"
-        level = "Nice! 🟠 {}/{}".format(pts, top)
-        slide="Nice!"
-
-    return response, score_pos, level, slide

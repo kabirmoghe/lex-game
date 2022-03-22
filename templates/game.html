@@ -203,7 +203,8 @@
 				<p class="error"><em><span id="errorMsg"></span>&nbsp;</em></p>
 			</div>
 			<div class='gauge'>
-					<img id="scoreArrow" style="max-width: 5.5%; height: auto;" src="{{url_for('static', filename='score_arrow.svg')}}"><span id="slide">{{slide}}</span><br>
+					<span id="slide">{{slide}}</span><br>
+					<img id="scoreArrow" src="{{url_for('static', filename='score_arrow.svg')}}">
 					<img id="score_gauge" src="{{url_for('static', filename = 'score_gauge.svg')}}"> &nbsp; &nbsp; <span id="tally" class="tally">{{score}}</span>
 			</div>
 		  	<div class="content" style="max-width:500px;">
@@ -278,8 +279,8 @@
 			if ("mode" in localStorage){
 				mode = localStorage.getItem('mode');
 				if (mode == "dark"){
-					$('link[href*="light.css"]').prop('disabled', true);
 					$('link[href*="dark.css"]').prop('disabled', false);
+					$('link[href*="light.css"]').prop('disabled', true);
 					document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#333333');
 					$("div#switch input[type='checkbox']").attr('checked','checked')			
 				}
@@ -298,8 +299,8 @@
 			$("#mode").click(function(){
 				mode = localStorage.getItem('mode');
 				if (mode == "light"){
-					$('link[href*="light.css"]').prop('disabled', true);
 					$('link[href*="dark.css"]').prop('disabled', false);
+					$('link[href*="light.css"]').prop('disabled', true);
 					document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#333333');
 					
 					for (let i = 0; i <=5; i++){
@@ -385,7 +386,8 @@
 
 			var slide = gaugeScore(score, maxPoints)[2];
 		    guesses = guesses.sort(sortingGuesses);
-			$("#scoreArrow").css('marginLeft', scorePos+'%');				
+			$("#scoreArrow").css('marginLeft', scorePos+'%');
+			$("#slide").css('marginLeft', scorePos+'%');				
 			$("#tally").text(score);
 			$("#wordCheck").text(10-JSON.parse(localStorage.getItem('guesses')).length);
 			$("#slide").text(slide);
@@ -538,7 +540,8 @@
 									var slide = gaugeScore(score, maxPoints)[2];
 
 
-									$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");				
+									$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");
+									$("#slide").animate({'marginLeft': scorePos+'%'}, "slow");
 									$("#tally").text(score);
 									$("#wordCheck").text(10-guesses.length);
 									$("#slide").text(slide);
@@ -648,9 +651,12 @@
 									var scorePos = (74.5*score/maxPoints).toFixed(2);
 									var slide = gaugeScore(score, maxPoints)[2];
 
-									$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");				
+									$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");		
+									$("#slide").animate({'marginLeft': scorePos+'%'}, "slow");		
 									$("#tally").text(score);
 									$("#wordCheck").text(10-guesses.length);
+									$("#wordCheck").delay(1000).append(guess);
+									$("#wordCheck").delay(1000).text(10-guesses.length);
 									$("#slide").text(slide);
 
 									$("#wordBox").text("");
@@ -889,7 +895,8 @@
 										var slide = gaugeScore(score, maxPoints)[2];
 
 
-										$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");				
+										$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");		
+										$("#slide").animate({'marginLeft': scorePos+'%'}, "slow");											
 										$("#tally").text(score);
 										$("#wordCheck").text(10-guesses.length);
 										$("#slide").text(slide);
@@ -999,7 +1006,8 @@
 										var scorePos = (74.5*score/maxPoints).toFixed(2);
 										var slide = gaugeScore(score, maxPoints)[2];
 
-										$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");				
+										$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");		
+										$("#slide").animate({'marginLeft': scorePos+'%'}, "slow");											
 										$("#tally").text(score);
 										$("#wordCheck").text(10-guesses.length);
 										$("#slide").text(slide);

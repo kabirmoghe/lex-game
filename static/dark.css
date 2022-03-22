@@ -58,6 +58,7 @@ span.choice {
   margin: 0 auto;
   max-width: 500px;
   pointer-events: none;
+  position: relative;
 }
 
 .login {
@@ -435,14 +436,19 @@ img#score_gauge {
 	max-width: 80%;
 	height: auto;
 	display: inline;
+	position: absolute;
 }
 
 /* img.letterExplained, input#img#scoreArrow, .keyRow input, .otherActions input {*/
 
-img#scoreArrow{
-	filter: invert(85%);
+img#scoreArrow {
+	max-width: 5.5%;
+	height: auto;
+	position: absolute;
+	z-index: 20;
+	bottom: 20px;
+	filter: invert(90%);
 }
-
 
 img.letterExplained {
 	height: 45px;
@@ -566,16 +572,19 @@ input#tryAgain {
 .keyRow input:hover {
 	width: auto;
 	cursor: pointer;
+	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.75));
 }
 
 .keyRow input:focus {
 	width: auto;
 	cursor: pointer;
+	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.75));
 }
 
 .keyRow input:active {
 	width: auto;
 	cursor: pointer;
+	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.99));
 }
 
 .otherActions input {
@@ -588,11 +597,13 @@ input#tryAgain {
 .otherActions input:hover {
 	width: auto;
 	cursor: pointer;
+	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.75));
 }
 
 .otherActions input:active {
 	width: auto;
 	cursor: pointer;
+	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.99));
 }
 
 #disabledKeyboard input { 
@@ -773,13 +784,14 @@ span.maxPoints {
 }
 
 span#slide {
-	vertical-align: top;
 	font-style: italic;
+	position: absolute;
+	bottom: 50px;
 }
 
 @media only screen and (max-width: 500px) {
 	span#slide {
-		vertical-align: top;
+		bottom: 40px;
 		font-size: 12px;
 	}
 }
