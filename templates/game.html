@@ -479,26 +479,40 @@
 				    			console.log(localStorage.getItem('status'));
 
 			    				if (guesses.length == 0){
-									$('#1')
-										.delay(750)
-										.css('border', '4px solid #BDBCBC')
-										.val("");
-									$('#2')
-										.delay(750)
-										.css('border', '4px solid #BDBCBC')
-										.val("");
-									$('#3')
-										.delay(750)
-										.css('border', '4px solid #BDBCBC')
-										.val("");
-									$('#4')
-										.delay(750)
-										.css('border', '4px solid #BDBCBC')
-										.val("");
-									$('#5')
-										.delay(750)
-										.css('border', '4px solid #BDBCBC')
-										.val("");
+				    				if (localStorage.getItem('mode') == "light"){
+										$('#1')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#2')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#3')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#4')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#5')
+											.css('border', '4px solid #BDBCBC')
+											.val("");				    					
+				    				}
+				    				else {
+										$('#1')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#2')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#3')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#4')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#5')
+											.css('border', '4px solid #808080')
+											.val("");						    					
+				    				}
 
 
 			    					guesses.push(guess);
@@ -577,21 +591,40 @@
 			    				}
 			    				
 				    			else if ($.inArray(guess, guesses) == -1) {
-									$('#1')
-										.css('border', '4px solid #BDBCBC')
-										.val("");
-									$('#2')
-										.css('border', '4px solid #BDBCBC')
-										.val("");
-									$('#3')
-										.css('border', '4px solid #BDBCBC')
-										.val("");
-									$('#4')
-										.css('border', '4px solid #BDBCBC')
-										.val("");
-									$('#5')
-										.css('border', '4px solid #BDBCBC')
-										.val("");
+				    				if (localStorage.getItem('mode') == "light"){
+										$('#1')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#2')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#3')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#4')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#5')
+											.css('border', '4px solid #BDBCBC')
+											.val("");				    					
+				    				}
+				    				else {
+										$('#1')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#2')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#3')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#4')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#5')
+											.css('border', '4px solid #808080')
+											.val("");						    					
+				    				}
 
 				    				guesses.push(guess);
 			    					guesses = guesses.sort(sortingGuesses);    				
@@ -797,26 +830,40 @@
 					    			console.log(localStorage.getItem('status'));
 
 				    				if (guesses.length == 0){
-										$('#1')
-											.delay(750)
-											.css('border', '4px solid #BDBCBC')
-											.val("");
-										$('#2')
-											.delay(750)
-											.css('border', '4px solid #BDBCBC')
-											.val("");
-										$('#3')
-											.delay(750)
-											.css('border', '4px solid #BDBCBC')
-											.val("");
-										$('#4')
-											.delay(750)
-											.css('border', '4px solid #BDBCBC')
-											.val("");
-										$('#5')
-											.delay(750)
-											.css('border', '4px solid #BDBCBC')
-											.val("");
+					    				if (localStorage.getItem('mode') == "light"){
+											$('#1')
+												.css('border', '4px solid #BDBCBC')
+												.val("");
+											$('#2')
+												.css('border', '4px solid #BDBCBC')
+												.val("");
+											$('#3')
+												.css('border', '4px solid #BDBCBC')
+												.val("");
+											$('#4')
+												.css('border', '4px solid #BDBCBC')
+												.val("");
+											$('#5')
+												.css('border', '4px solid #BDBCBC')
+												.val("");				    					
+					    				}
+					    				else {
+											$('#1')
+												.css('border', '4px solid #808080')
+												.val("");
+											$('#2')
+												.css('border', '4px solid #808080')
+												.val("");
+											$('#3')
+												.css('border', '4px solid #808080')
+												.val("");
+											$('#4')
+												.css('border', '4px solid #808080')
+												.val("");
+											$('#5')
+												.css('border', '4px solid #808080')
+												.val("");						    					
+					    				}
 
 
 				    					guesses.push(guess);
@@ -895,21 +942,40 @@
 				    				}
 				    				
 					    			else if ($.inArray(guess, guesses) == -1) {
-										$('#1')
-											.css('border', '4px solid #BDBCBC')
-											.val("");
-										$('#2')
-											.css('border', '4px solid #BDBCBC')
-											.val("");
-										$('#3')
-											.css('border', '4px solid #BDBCBC')
-											.val("");
-										$('#4')
-											.css('border', '4px solid #BDBCBC')
-											.val("");
-										$('#5')
-											.css('border', '4px solid #BDBCBC')
-											.val("");
+					    				if (localStorage.getItem('mode') == "light"){
+											$('#1')
+												.css('border', '4px solid #BDBCBC')
+												.val("");
+											$('#2')
+												.css('border', '4px solid #BDBCBC')
+												.val("");
+											$('#3')
+												.css('border', '4px solid #BDBCBC')
+												.val("");
+											$('#4')
+												.css('border', '4px solid #BDBCBC')
+												.val("");
+											$('#5')
+												.css('border', '4px solid #BDBCBC')
+												.val("");				    					
+					    				}
+					    				else {
+											$('#1')
+												.css('border', '4px solid #808080')
+												.val("");
+											$('#2')
+												.css('border', '4px solid #808080')
+												.val("");
+											$('#3')
+												.css('border', '4px solid #808080')
+												.val("");
+											$('#4')
+												.css('border', '4px solid #808080')
+												.val("");
+											$('#5')
+												.css('border', '4px solid #808080')
+												.val("");						    					
+					    				}
 
 					    				guesses.push(guess);
 				    					guesses = guesses.sort(sortingGuesses);    				
