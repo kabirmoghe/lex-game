@@ -290,6 +290,7 @@
 			else {
 				$('link[href*="light.css"]').prop('disabled', false);
 				$('link[href*="dark.css"]').prop('disabled', true);
+				localStorage.setItem('mode', 'light');
 			}
 
 			$("#mode").click(function(){
@@ -297,11 +298,43 @@
 				if (mode == "light"){
 					$('link[href*="light.css"]').prop('disabled', true);
 					$('link[href*="dark.css"]').prop('disabled', false);
+					
+					for (let i = 0; i <=5; i++){
+						$("#"+i).css('border', '4px solid #808080');						
+					}
+
+
+					let j = 1;
+					while (j < active()){
+						$("#"+j).css('border', '4px solid #BDBCBC');
+						j++;
+					}
+
+					if ($("#5").val().length == 1){
+						$("#5").css('border', '4px solid #BDBCBC');
+					}
 					localStorage.setItem('mode', 'dark');					
 				}
 				else {
 					$('link[href*="light.css"]').prop('disabled', false);
 					$('link[href*="dark.css"]').prop('disabled', true);
+
+					
+					for (let i = 0; i <=5; i++){
+						$("#"+i).css('border', '4px solid #BDBCBC');						
+					}
+
+
+					let j = 1;
+					while (j < active()){
+						$("#"+j).css('border', '4px solid black');
+						j++;
+					}
+
+					if ($("#5").val().length == 1){
+						$("#5").css('border', '4px solid black');
+					}
+
 					localStorage.setItem('mode', 'light');					
 				}
 
@@ -659,6 +692,54 @@
 				    					.fadeIn("fast")
 				    					.delay(1000)
 				    					.fadeOut("fast");
+				    				if (localStorage.getItem('mode') == "light"){
+										$('#1')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#2')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#3')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#4')
+											.css('border', '4px solid #BDBCBC')
+											.val("");
+										$('#5')
+											.css('border', '4px solid #BDBCBC')
+											.val("");				    					
+				    				}
+				    				else {
+										$('#1')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#2')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#3')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#4')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#5')
+											.css('border', '4px solid #808080')
+											.val("");						    					
+				    				}
+
+
+
+				    			}
+
+				    		}
+
+				    		else {
+				    			$("#errorMsg").text("Invalid word");
+				    			$("#errorMsg")
+				    				.fadeIn("fast")
+				    				.delay(1000)
+				    				.fadeOut("fast");
+			    				if (localStorage.getItem('mode') == "light"){
 									$('#1')
 										.css('border', '4px solid #BDBCBC')
 										.val("");
@@ -673,34 +754,25 @@
 										.val("");
 									$('#5')
 										.css('border', '4px solid #BDBCBC')
+										.val("");				    					
+			    				}
+			    				else {
+									$('#1')
+										.css('border', '4px solid #808080')
 										.val("");
-
-
-				    			}
-
-				    		}
-
-				    		else {
-				    			$("#errorMsg").text("Invalid word");
-				    			$("#errorMsg")
-				    				.fadeIn("fast")
-				    				.delay(1000)
-				    				.fadeOut("fast");
-								$('#1')
-									.css('border', '4px solid #BDBCBC')
-									.val("");
-								$('#2')
-									.css('border', '4px solid #BDBCBC')
-									.val("");
-								$('#3')
-									.css('border', '4px solid #BDBCBC')
-									.val("");
-								$('#4')
-									.css('border', '4px solid #BDBCBC')
-									.val("");
-								$('#5')
-									.css('border', '4px solid #BDBCBC')
-									.val("");				    				
+									$('#2')
+										.css('border', '4px solid #808080')
+										.val("");
+									$('#3')
+										.css('border', '4px solid #808080')
+										.val("");
+									$('#4')
+										.css('border', '4px solid #808080')
+										.val("");
+									$('#5')
+										.css('border', '4px solid #808080')
+										.val("");						    					
+			    				}		    				
 				    		}
 				    	}
 				    })
@@ -938,6 +1010,53 @@
 					    					.fadeIn("fast")
 					    					.delay(1000)
 					    					.fadeOut("fast");
+					    				if (localStorage.getItem('mode') == "light"){
+											$('#1')
+												.css('border', '4px solid #BDBCBC')
+												.val("");
+											$('#2')
+												.css('border', '4px solid #BDBCBC')
+												.val("");
+											$('#3')
+												.css('border', '4px solid #BDBCBC')
+												.val("");
+											$('#4')
+												.css('border', '4px solid #BDBCBC')
+												.val("");
+											$('#5')
+												.css('border', '4px solid #BDBCBC')
+												.val("");				    					
+					    				}
+					    				else {
+											$('#1')
+												.css('border', '4px solid #808080')
+												.val("");
+											$('#2')
+												.css('border', '4px solid #808080')
+												.val("");
+											$('#3')
+												.css('border', '4px solid #808080')
+												.val("");
+											$('#4')
+												.css('border', '4px solid #808080')
+												.val("");
+											$('#5')
+												.css('border', '4px solid #808080')
+												.val("");						    					
+					    					}		
+
+
+					    			}
+
+					    		}
+
+					    		else {
+					    			$("#errorMsg").text("Invalid word");
+					    			$("#errorMsg")
+					    				.fadeIn("fast")
+					    				.delay(1000)
+					    				.fadeOut("fast");
+				    				if (localStorage.getItem('mode') == "light"){
 										$('#1')
 											.css('border', '4px solid #BDBCBC')
 											.val("");
@@ -952,34 +1071,25 @@
 											.val("");
 										$('#5')
 											.css('border', '4px solid #BDBCBC')
+											.val("");				    					
+				    				}
+				    				else {
+										$('#1')
+											.css('border', '4px solid #808080')
 											.val("");
-
-
-					    			}
-
-					    		}
-
-					    		else {
-					    			$("#errorMsg").text("Invalid word");
-					    			$("#errorMsg")
-					    				.fadeIn("fast")
-					    				.delay(1000)
-					    				.fadeOut("fast");
-									$('#1')
-										.css('border', '4px solid #BDBCBC')
-										.val("");
-									$('#2')
-										.css('border', '4px solid #BDBCBC')
-										.val("");
-									$('#3')
-										.css('border', '4px solid #BDBCBC')
-										.val("");
-									$('#4')
-										.css('border', '4px solid #BDBCBC')
-										.val("");
-									$('#5')
-										.css('border', '4px solid #BDBCBC')
-										.val("");				    				
+										$('#2')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#3')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#4')
+											.css('border', '4px solid #808080')
+											.val("");
+										$('#5')
+											.css('border', '4px solid #808080')
+											.val("");						    					
+				    					}		    				
 					    		}
 					    	}
 						}
