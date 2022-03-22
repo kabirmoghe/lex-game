@@ -119,7 +119,7 @@ def create_word_info():
             
         max_points = 0
         
-        for pair in best_words:
+        for pair in best_words[:5]:
             max_points += pair[1]
         
         newGame = WordInfo(picked_letters, letter_pts, poss_words, best_words, max_points)
