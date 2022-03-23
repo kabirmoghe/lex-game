@@ -414,8 +414,20 @@ div#wordExample {
   position: fixed;
   margin: 0 auto;
   text-align: center;
-  bottom: 105px;
-	right: 0;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+}
+
+@media only screen and (max-width: 500px){
+	.keyBoard {
+	  height: 120px; 
+	  width:100%;
+	  position: fixed;
+	  margin: 0 auto;
+	  text-align: center;
+	  bottom: 105px;
+	}
 }
 
 .keyWidth {
@@ -425,6 +437,7 @@ div#wordExample {
 	padding: 10px;
 	margin-left: 10px;
 	margin-right: 10px;
+	width: auto;
 }
 
 img.tile {

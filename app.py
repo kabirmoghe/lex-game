@@ -9,24 +9,6 @@ import json
 app = Flask(__name__)
 app.secret_key = 'hello'
 
-def reset():
-	if "possWords" in session:
-		session.pop("possWords")
-	session["maxList"] = []
-	session["guesses"] = {}
-	session["bestGuesses"] = {}
-	session["score"] = 0
-	session["numGuesses"] =  0
-	session["scoreGauge"] = ""
-	session["scorePos"] = 0
-	session["oldScorePos"] = 0
-	session["oldMaxPoints"] = 0
-	session["oldBestList"] = ""
-	session["status"] = "not done"
-	session["level"] = ""
-	session["slide"] = ""
-	session["totalWords"] = ""
-
 @app.route("/", methods = ["GET", "POST"])
 def home():
 

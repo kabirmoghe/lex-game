@@ -215,14 +215,15 @@
 		</div>
 		<div class="keyBoard">
 			<div class="keyWidth">
-			 	<div class="keyRow">
+			 	<div class="keyRow"><!--
 					{% for letter in letters %}
 						<input type="image" value="{{letter}}" src="{{url_for('static', filename = letter+'.svg')}}" onclick="document.getElementById(activeTile()).value = $(this).val()" onfocus="this.blur();">
-					{% endfor %}
+					{% endfor %}-->
 				</div>
 				<div class="otherActions">
 					<input type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" onfocus="this.blur();">
 					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
+					<input type="image" id="shuffle" value="shuffle" src="{{url_for('static', filename = 'shuffle.svg')}}" onfocus="this.blur();">
 					<!--<input type="image" id="done" value="done" src="{{url_for('static', filename = 'giveUp.svg')}}" onfocus="this.blur();">-->
 				</div>
 			</div>
@@ -364,7 +365,43 @@
 
 			/* Define all constant variables */
 
-			localStorage.setItem('letters', {{letters | tojson}});
+			var letters = (JSON.stringify({{letters | tojson}}));	
+			localStorage.setItem('letters', letters);			
+
+			function addLetters() {
+				let curr = JSON.parse(localStorage.getItem('letters'));
+
+				$(".keyRow").text("");
+
+				for (let i = 0; i < 8; i++){
+						let letter = String(curr[i]).valueOf();
+						let file = letter+".svg";
+						let srcStr ="{{url_for('static', filename = '')}}"+file;
+						let str = '<input class="letterTile" type="image" value="'+letter+'" onclick="document.getElementById(activeTile()).value = $(this).val()" onfocus="this.blur();" src="'+srcStr+'"> ';
+						$(".keyRow").append(str)
+				}	
+
+				$(".keyRow").hide().fadeIn();			
+			}
+
+			addLetters();
+
+			$("#shuffle").click(function() {
+
+				let letters = JSON.parse(localStorage.getItem('letters'));
+
+				let shuffled = letters
+				  .map(value => ({ value, sort: Math.random() }))
+				  .sort((a, b) => a.sort - b.sort)
+				  .map(({ value }) => value)
+
+				localStorage.setItem('letters', JSON.stringify(shuffled));
+
+				$(".letterTile").fadeOut("fast");
+
+				setTimeout(function() {addLetters()}, 100);
+			});
+
 			localStorage.setItem('letterPts', {{letterPts | safe}});
 			localStorage.setItem('maxPoints', {{maxPoints | safe}});
 
@@ -372,6 +409,8 @@
 				localStorage.setItem('guesses', JSON.stringify([]));
 				localStorage.setItem('score', 0);
 				localStorage.setItem('status', 'not done');
+				/*var letters = (JSON.stringify({{letters | tojson}}));	
+				localStorage.setItem('letters', letters);	*/
 			}
 
 			localStorage.setItem('lid', {{lid | tojson}});
