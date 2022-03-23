@@ -447,7 +447,7 @@ img#scoreArrow {
 	position: absolute;
 	z-index: 20;
 	bottom: 20px;
-	filter: invert(90%);
+	filter: invert(80%);
 }
 
 img.letterExplained {
