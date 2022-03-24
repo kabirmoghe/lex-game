@@ -720,11 +720,11 @@ span.tally {
 } 
 
 span.check {
-	color: #A5F0B5;
+	color: #50A565;
 }
 
 .wordsDisplayed span.check {
-	color: #A5F0B5;
+	color: #50A565;
 }
 
 @media only screen and (max-width: 500px) {
@@ -745,21 +745,33 @@ span.check {
 
 .wordsDisplayed {
 	line-height: 42px;
-	font-size: 19px;
+	font-size: 17px;
+	margin-top: 45px;
 }
 
 @media only screen and (max-width: 500px) {
 	.wordsDisplayed {
-		line-height: 33px;
-		font-size: 15px;
+		line-height: 37px;
+		font-size: 10px;
+		margin-top: 0px;
 	}
 }
 
-span.correct {
+/*span.correct {
 	background-color: #A5A5A5;
 	border-radius: 5px;
 	padding: 5px;
 	color: #FFFFFF;
+	margin-bottom: 5px;
+	white-space: pre;
+	text-transform: capitalize;
+}*/
+
+span.correct {
+	padding: 5px;
+	border: 2px solid #B2B2B2;
+	background-color: #DEDEDE;
+	border-radius: 5px;
 	margin-bottom: 5px;
 	white-space: pre;
 	text-transform: capitalize;
