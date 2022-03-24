@@ -202,6 +202,7 @@
 				</p>		
 				<p class="error"><em><span id="errorMsg"></span>&nbsp;</em></p>
 			</div>
+			<br>
 			<div class='gauge'>
 					<span id="slide">{{slide}}</span><br>
 					<img id="scoreArrow" src="{{url_for('static', filename='score_arrow.svg')}}">
@@ -221,9 +222,9 @@
 					{% endfor %}-->
 				</div>
 				<div class="otherActions">
+					<input type="image" id="shuffle" value="shuffle" src="{{url_for('static', filename = 'shuffle.svg')}}" onfocus="this.blur();">					
 					<input type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" onfocus="this.blur();">
 					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
-					<input type="image" id="shuffle" value="shuffle" src="{{url_for('static', filename = 'shuffle.svg')}}" onfocus="this.blur();">
 					<!--<input type="image" id="done" value="done" src="{{url_for('static', filename = 'giveUp.svg')}}" onfocus="this.blur();">-->
 				</div>
 			</div>
