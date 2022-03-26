@@ -230,27 +230,27 @@
 			    if (pts == top) {
 			        response = "You're the champ!";
 			        level = "Champ! 🟣 " + pts + "/" + top;
-			        slide = "Champ!";
+			        slide = "Champ!" ;
 			    } else if (pts >= 0.8*top) {
 			        response = "Amazing!";
 			        level = "Amazing! 🔵 " + pts + "/" + top;
-			        slide = "Amazing!";
+			        slide = "Amazing!" ;
 				} else if (pts >= 0.6*top) {
 			        response = "Wow!";
 			        level = "Wow! 🟢 " + pts + "/" + top;
-			        slide = "Wow!";
+			        slide = "Wow! ";
 			    } else if (pts >= 0.4*top) {
 			        response = "Great!";
 			        level = "Great! ⚪️ " + pts + "/" + top;
-			        slide = "Great!";
+			        slide = "Great! ";
 			    } else if (pts >= 0.2*top) {
 			        response = "Good!";
 			        level = "Good! 🟡 " + pts + "/" + top;
-			        slide = "Good!";
+			        slide = "Good! ";
 			    } else if (pts > 0) {
 			        response = "Nice!";
 			        level = "Nice! 🟠 " + pts + "/" + top;
-			        slide="Nice!";
+			        slide = "Nice! ";
 				}
 
 				return [response, level, slide];
@@ -463,6 +463,9 @@
 				});				
 			}
 
+			if (guesses.length == 0){
+				$("#wordsSideOnly").append('--');		
+			}
 
 			// EDITS SIDE BOX OF WORDS
 			let i = 0;
@@ -471,14 +474,14 @@
 				if (i < 5){
 
 					if (guess in topBest) {
-						$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+						$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
 					}
 					else if ((guess in bestWords) && (numAdd > 0)) {
-						$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+						$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
 						numAdd -= 1;
 					}
 					else {
-						$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');						
+						$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');						
 					}		
 					i++;
 				}
@@ -639,14 +642,14 @@
 										if (i < 5){
 
 											if (guess in topBest) {
-												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
 											}
 											else if ((guess in bestWords) && (numAdd > 0)) {
-												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
 												numAdd -= 1;
 											}
 											else {
-												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');						
+												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');						
 											}		
 											i++;
 										}
@@ -770,14 +773,14 @@
 									guesses.forEach((guess) => {
 										if (i < 5){
 											if (guess in topBest) {
-												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
 											}
 											else if ((guess in bestWords) && (numAdd > 0)) {
-												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
 												numAdd -= 1;
 											}
 											else {
-												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');						
+												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');						
 											}		
 											i++;
 										}
@@ -1047,14 +1050,14 @@
 										guesses.forEach((guess) => {
 											if (i < 5){
 												if (guess in topBest) {
-													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
 												}
 												else if ((guess in bestWords) && (numAdd > 0)) {
-													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
 													numAdd -= 1;
 												}
 												else {
-													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');						
+													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');						
 												}		
 												i++;
 											}
@@ -1172,14 +1175,14 @@
 										guesses.forEach((guess) => {
 											if (i < 5){
 												if (guess in topBest) {
-													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
 												}
 												else if ((guess in bestWords) && (numAdd > 0)) {
-													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
 													numAdd -= 1;
 												}
 												else {
-													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');						
+													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');						
 												}		
 												i++;
 											}
