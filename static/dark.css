@@ -360,7 +360,7 @@ div#wordExample {
 
 .shareBox {
 	display: flex;
-	margin-top: 20px;
+	margin-top: 40px;
 	padding-top: 5px;
   width: 200px;
   min-height: 50px;
@@ -374,7 +374,7 @@ div#wordExample {
 @media only screen and (max-width: 500px){
 	.shareBox {
 		display: flex;
-		margin-top: 20px;
+		margin-top: 40px;
 		padding-top: 5px;
 	  width: 200px;
 	  min-height: 50px;
@@ -705,11 +705,11 @@ span.tally {
 } 
 
 span.check {
-	color: #50A565;
+	color: #5B876F;
 }
 
 .wordsDisplayed span.check {
-	color: #50A565;
+	color: #5B876F;
 }
 
 @media only screen and (max-width: 500px) {
@@ -766,9 +766,9 @@ span.correctBest {
 }
 
 span.best {
-	background-color: #C3B9E0;
+	background-color: #C3B8E3;
 	border-radius: 5px;
-	border: 2px solid #AEA0D7;
+	border: 2px solid #B2B2B2;
 	padding: 5px;
 	margin-bottom: 40px;
 	white-space: pre;
@@ -807,6 +807,7 @@ span#slide {
 	font-style: italic;
 	position: absolute;
 	bottom: 50px;
+	min-width: 90px;
 }
 
 @media only screen and (max-width: 500px) {

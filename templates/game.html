@@ -1692,7 +1692,7 @@
 		  		//document.getElementById("myNav").style.boxShadow = "0px 0px 6px 2px #CBCBCB";
 			}
 			$(".slideIn-content").delay(50).fadeToggle();
-			$("#switch").delay(50).fadeToggle();
+			$("#switch").delay(50).fadeIn();
 		}
 	</script>
 	<script type="text/javascript">
@@ -1700,7 +1700,7 @@
 		    $("#closeNav").click(function(){
 
 		    	$(".slideIn-content").toggle();
-		    	$("#switch").toggle();
+		    	$("#switch").hide();
 
 		        document.getElementById("myNav").style.width = "0%";
 				//document.getElementById("myNav").style.boxShadow = "none";
