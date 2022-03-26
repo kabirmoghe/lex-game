@@ -32,14 +32,31 @@ def home():
 
 	for item in oldBestWords:
 	    oldBestWordsDict[item[0]] = item[1]
+	
+	cutoff = bestWords[0][1]
 
+	for i in range(5):
+	    currPts = bestWords[i][1]
+	    if currPts < cutoff:
+	        cutoff = currPts
+
+	topBest = [wordPair for wordPair in bestWords if wordPair[1] > cutoff]
+
+	numAdd = 5 - len(topBest)
+
+	topBestDict = {}
+
+	for item in topBest:
+	    topBestDict[item[0]] = item[1]
+	
+	topBest = json.dumps(topBestDict)
 	bestWords = json.dumps(bestWordsDict)
 	possWords = json.dumps(eval(word_info["possWords"][0]))
 
 	oldBestWords = json.dumps(oldBestWordsDict)
 	oldBestWordsOnly = list(oldBestWordsDict.keys())
 
-	return render_template("game.html", letters = letters, letterPts = letterPts, maxPoints = maxPoints, bestWords = bestWords, lid = lid, possWords = possWords, oldMaxPoints = oldMaxPoints, oldBestWords = oldBestWords, oldBestWordsOnly = oldBestWordsOnly)
+	return render_template("game.html", letters = letters, letterPts = letterPts, maxPoints = maxPoints, bestWords = bestWords, lid = lid, possWords = possWords, oldMaxPoints = oldMaxPoints, oldBestWords = oldBestWords, oldBestWordsOnly = oldBestWordsOnly, topBest = topBest, numAdd = numAdd)
 
 
 ## DON'T DELETE - BREAKS DOWN HTML FOR NOW

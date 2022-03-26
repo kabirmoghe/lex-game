@@ -63,7 +63,7 @@
 				<br><br>
 				<!--If you guess 1 of the 5 highest-scoring words, the word will show up as purple.-->Your five best guesses determine your score and are displayed above the keyboard. If you want to see all of your guesses, click the button at the top left.<br><br>
 
-				<span class="correct">Jump, 15</span>
+				<span class="best">Jump, 15</span>
 				<span class="correct">Plume, 9</span>
 				<span class="correct">Hum, 8</span>
 
@@ -158,7 +158,7 @@
 					</div>		
 					<div class="popUp" id="yesterdayDetails">
 						<p class="head">Yesterday</p>
-						<p>Here are yesterday's best words with a total score of <span id="yesterdayMax" class=maxPoints></span>:<br></p>
+						<p>Here are yesterday's best acceptable words with a max score of <span id="yesterdayMax" class=maxPoints></span>:<br></p>
 						<div class="wordsDisplayed" id="yesterdayWords">
 						</div>
 						<p><br>How many did you find?</p>
@@ -398,6 +398,7 @@
 				localStorage.setItem('letters', letters);	*/
 			}
 
+			localStorage.setItem('numAdd', {{numAdd}});
 			localStorage.setItem('lid', {{lid | tojson}});
 
 			/* Create changing UI for user */
@@ -407,6 +408,7 @@
 			var guesses = JSON.parse(localStorage.getItem('guesses'));
 			var possWords = JSON.parse({{possWords | tojson}});
 			var bestWords = JSON.parse({{bestWords | tojson}});
+			var topBest = JSON.parse({{topBest | tojson}});
 
 			var slide = gaugeScore(score, maxPoints)[2];
 		    guesses = guesses.sort(sortingGuesses);
@@ -420,52 +422,64 @@
 			var oldBestWords = JSON.parse({{oldBestWords | tojson}});
 			var oldBestWordsOnly = {{oldBestWordsOnly | tojson}};
 			oldBestWordsOnly.forEach((word) => {
-				$("#yesterdayWords").append("<span class='correct'>"+word+', '+oldBestWords[word]+'</span> ');
+				$("#yesterdayWords").append("<span class='best'>"+word+', '+oldBestWords[word]+'</span> ');
 			});
 
 			// EDITS BOX OF WORDS ON MAIN SCREEN
 			if (guesses.length > 5){
+
+				let numAdd = parseInt(localStorage.getItem('numAdd'));
+
 				for (let i = 0; i < 5; i++){
 					var guess = guesses[i];
-					/*
-					if (guess in bestWords) {
+
+					if (guess in topBest) {
 						$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+					}
+					else if ((guess in bestWords) && (numAdd > 0)) {
+						$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+						numAdd -= 1;
 					}
 					else {
 						$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-					}
-					*/
-					$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
+					}					
 				}				
 			}
 			else {
+
+				let numAdd = parseInt(localStorage.getItem('numAdd'));
+
 				guesses.forEach((guess) => {
-					/*if (guess in bestWords) {
+					if (guess in topBest) {
 						$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+					}
+					else if ((guess in bestWords) && (numAdd > 0)) {
+						$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+						numAdd -= 1;
 					}
 					else {
 						$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-					}
-					*/
-					$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
+					}						
 				});				
 			}
 
 
 			// EDITS SIDE BOX OF WORDS
 			let i = 0;
+			let numAdd = parseInt(localStorage.getItem('numAdd'));
 			guesses.forEach((guess) => {
 				if (i < 5){
-					/*
-					if (guess in bestWords){
-						$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+
+					if (guess in topBest) {
+						$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+					}
+					else if ((guess in bestWords) && (numAdd > 0)) {
+						$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+						numAdd -= 1;
 					}
 					else {
-						$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
-					}
-					*/
-					$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
-
+						$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');						
+					}		
 					i++;
 				}
 				else {
@@ -581,29 +595,38 @@
 									$("#wordBox").text("");
 									// EDITS BOX OF WORDS ON MAIN SCREEN
 									if (guesses.length > 5){
+
+										let numAdd = parseInt(localStorage.getItem('numAdd'));
+
 										for (let i = 0; i < 5; i++){
 											var guess = guesses[i];
-											/*
-											if (guess in bestWords) {
+											if (guess in topBest) {
 												$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+											}
+											else if ((guess in bestWords) && (numAdd > 0)) {
+												$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+												numAdd -= 1;
 											}
 											else {
 												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-											}
-											*/
-											$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');	
+											}	
 										}				
 									}
 									else {
+
+										let numAdd = parseInt(localStorage.getItem('numAdd'));
+
 										guesses.forEach((guess) => {
-											/*if (guess in bestWords) {
+											if (guess in topBest) {
 												$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+											}
+											else if ((guess in bestWords) && (numAdd > 0)) {
+												$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+												numAdd -= 1;
 											}
 											else {
 												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-											}
-											*/
-											$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');	
+											}	
 										});				
 									}
 									
@@ -611,17 +634,20 @@
 
 									// EDITS SIDE BOX OF WORDS
 									let i = 0;
+									let numAdd = parseInt(localStorage.getItem('numAdd'));
 									guesses.forEach((guess) => {
-										if (i < 5){/*
-											if (guess in bestWords){
-												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+										if (i < 5){
+
+											if (guess in topBest) {
+												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+											}
+											else if ((guess in bestWords) && (numAdd > 0)) {
+												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+												numAdd -= 1;
 											}
 											else {
-												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
-											}
-											*/
-											$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
-
+												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');						
+											}		
 											i++;
 										}
 										else {
@@ -701,28 +727,38 @@
 									$("#wordBox").text("");
 									// EDITS BOX OF WORDS ON MAIN SCREEN
 									if (guesses.length > 5){
+
+										let numAdd = parseInt(localStorage.getItem('numAdd'));
+
 										for (let i = 0; i < 5; i++){
 											var guess = guesses[i];
-											/*
-											if (guess in bestWords) {
+											if (guess in topBest) {
 												$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+											}
+											else if ((guess in bestWords) && (numAdd > 0)) {
+												$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+												numAdd -= 1;
 											}
 											else {
 												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-											}*/
-											$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');				
+											}				
 										}				
 									}
 									else {
+
+										let numAdd = parseInt(localStorage.getItem('numAdd'));
+
 										guesses.forEach((guess) => {
-											/*
-											if (guess in bestWords) {
+											if (guess in topBest) {
 												$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+											}
+											else if ((guess in bestWords) && (numAdd > 0)) {
+												$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+												numAdd -= 1;
 											}
 											else {
 												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-											}*/
-											$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');	
+											}	
 										});				
 									}
 
@@ -730,17 +766,19 @@
 
 									// EDITS SIDE BOX OF WORDS
 									let i = 0;
+									let numAdd = parseInt(localStorage.getItem('numAdd'));
 									guesses.forEach((guess) => {
 										if (i < 5){
-											/*
-											if (guess in bestWords){
-												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+											if (guess in topBest) {
+												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+											}
+											else if ((guess in bestWords) && (numAdd > 0)) {
+												$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+												numAdd -= 1;
 											}
 											else {
-												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
-											}*/
-											$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
-
+												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');						
+											}		
 											i++;
 										}
 										else {
@@ -770,6 +808,27 @@
 								        	.delay(1000)
 								        	.fadeIn("slow");
 								        $("#scoreFinal").text(response + ' You scored ' + score + ' points.');
+				    				}
+
+				    				else if (parseInt(localStorage.getItem('score')) == parseInt(localStorage.getItem('maxPoints'))){
+				    					localStorage.setItem('status', 'Done');
+
+								        var response = gaugeScore(score, maxPoints)[0];
+								        var level = gaugeScore(score, maxPoints)[1];
+								        $(".shareIcon")
+								        	.css('display', 'inline-block')
+								        	.hide()
+								        	.fadeIn("fast");
+										$("#guessesLeft").text('Guesses');
+										$("#wordCheck").text("✓");
+										$(".keyBoard input").css('pointer-events', 'none');
+										$("#completeOverlay").fadeIn("slow");
+								        $("#overOverlay")
+								        	.css('display', 'flex')
+								        	.hide()
+								        	.delay(1000)
+								        	.fadeIn("slow");
+								        $("#scoreFinal").text(response + ' You scored ' + score + ' points.');				    					
 				    				}
 
 				    			}
@@ -949,28 +1008,34 @@
 										$("#wordBox").text("");
 										// EDITS BOX OF WORDS ON MAIN SCREEN
 										if (guesses.length > 5){
+											let numAdd = parseInt(localStorage.getItem('numAdd'));
 											for (let i = 0; i < 5; i++){
 												var guess = guesses[i];
-												/*
-												if (guess in bestWords) {
+												if (guess in topBest) {
 													$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+												}
+												else if ((guess in bestWords) && (numAdd > 0)) {
+													$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+													numAdd -= 1;
 												}
 												else {
 													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-												}*/
-												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');	
+												}		
 											}				
 										}
 										else {
+											let numAdd = parseInt(localStorage.getItem('numAdd'));
 											guesses.forEach((guess) => {
-												/*
-												if (guess in bestWords) {
+												if (guess in topBest) {
 													$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+												}
+												else if ((guess in bestWords) && (numAdd > 0)) {
+													$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+													numAdd -= 1;
 												}
 												else {
 													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-												}*/
-												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');			
+												}		
 											});				
 										}
 										
@@ -978,17 +1043,19 @@
 
 										// EDITS SIDE BOX OF WORDS
 										let i = 0;
+										let numAdd = parseInt(localStorage.getItem('numAdd'));
 										guesses.forEach((guess) => {
 											if (i < 5){
-												/*
-												if (guess in bestWords){
-													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+												if (guess in topBest) {
+													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+												}
+												else if ((guess in bestWords) && (numAdd > 0)) {
+													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+													numAdd -= 1;
 												}
 												else {
-													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
-												}*/
-												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
-
+													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');						
+												}		
 												i++;
 											}
 											else {
@@ -1066,28 +1133,34 @@
 										$("#wordBox").text("");
 										// EDITS BOX OF WORDS ON MAIN SCREEN
 										if (guesses.length > 5){
+											let numAdd = parseInt(localStorage.getItem('numAdd'));
 											for (let i = 0; i < 5; i++){
 												var guess = guesses[i];
-												/*
-												if (guess in bestWords) {
+												if (guess in topBest) {
 													$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+												}
+												else if ((guess in bestWords) && (numAdd > 0)) {
+													$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+													numAdd -= 1;
 												}
 												else {
 													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-												}*/
-												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');			
+												}		
 											}				
 										}
 										else {
+											let numAdd = parseInt(localStorage.getItem('numAdd'));
 											guesses.forEach((guess) => {
-												/*
-												if (guess in bestWords) {
+												if (guess in topBest) {
 													$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+												}
+												else if ((guess in bestWords) && (numAdd > 0)) {
+													$("#wordBox").append("<span class='best'>"+guess+', '+possWords[guess]+'</span> ');
+													numAdd -= 1;
 												}
 												else {
 													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-												}*/
-												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');		
+												}		
 											});				
 										}
 
@@ -1095,17 +1168,19 @@
 
 										// EDITS SIDE BOX OF WORDS
 										let i = 0;
+										let numAdd = parseInt(localStorage.getItem('numAdd'));
 										guesses.forEach((guess) => {
 											if (i < 5){
-												/*
-												if (guess in bestWords){
-													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+												if (guess in topBest) {
+													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+												}
+												else if ((guess in bestWords) && (numAdd > 0)) {
+													$("#wordsSideOnly").append("<span class='best'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');
+													numAdd -= 1;
 												}
 												else {
-													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
-												}*/
-												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
-
+													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'<span class="check">✓</span>'+'</span> ');						
+												}		
 												i++;
 											}
 											else {
@@ -1135,6 +1210,27 @@
 									        	.delay(1000)
 									        	.fadeIn("slow");
 									        $("#scoreFinal").text(response + ' You scored ' + score + ' points.');
+					    				}
+
+					    				else if (parseInt(localStorage.getItem('score')) == parseInt(localStorage.getItem('maxPoints'))){
+					    					localStorage.setItem('status', 'Done');
+
+									        var response = gaugeScore(score, maxPoints)[0];
+									        var level = gaugeScore(score, maxPoints)[1];
+									        $(".shareIcon")
+									        	.css('display', 'inline-block')
+									        	.hide()
+									        	.fadeIn("fast");
+											$("#guessesLeft").text('Guesses');
+											$("#wordCheck").text("✓");
+											$(".keyBoard input").css('pointer-events', 'none');
+											$("#completeOverlay").fadeIn("slow");
+									        $("#overOverlay")
+									        	.css('display', 'flex')
+									        	.hide()
+									        	.delay(1000)
+									        	.fadeIn("slow");
+									        $("#scoreFinal").text(response + ' You scored ' + score + ' points.');				    					
 					    				}
 
 					    			}
@@ -1409,6 +1505,7 @@
 		            $(".overlay").fadeOut("fast");
 		            $("#additionalInfo").fadeOut("fast");
 				    $(".slideIn-content").hide();
+				    $("#switch").hide();
 			        document.getElementById("myNav").style.width = "0%";
 					//document.getElementById("myNav").style.boxShadow = "none";
 		        }

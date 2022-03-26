@@ -221,23 +221,18 @@ a.revealEvenMore:hover {
 }
 
 .popUpBox {
-	display: flex;
-	bottom: 30px;
-	margin-top: 10%;
+	margin-top: 75px;
   width: 700px;
   height: 100%;
-  flex-direction: column;
   background-color: #FFFFFF;
 	box-shadow: 0px 0px 20px 10px #CBCBCB;
 	border-radius: 5px;
 }
 
 #overInfo {
-	display: flex;
+	margin-top: 95px;
   width: 600px;
-  margin-top: 10%;
   min-height: 600px;
-  flex-direction: column;
   background-color: #FFFFFF;
 	filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.05));
 	margin-bottom: 10px;
@@ -263,7 +258,7 @@ a.revealEvenMore:hover {
 	  width: 100%;
 	  margin-right: 10px;
 	  margin-left: 10px;
-	  margin-top: 40%;
+	  margin-top: 85px;
 	  min-height: 500px;
 	  background-color: #FFFFFF;
 		box-shadow: 0px 0px 10px 5px #CBCBCB;
@@ -274,7 +269,7 @@ a.revealEvenMore:hover {
 .sideBox {
 	display: flex;
 	margin-top: 0px;
-	height: 400px;
+	height: 500px;
   width: 400px;
   flex-direction: column;
   background-color: #FFFFFF;
@@ -752,7 +747,7 @@ span.check {
 @media only screen and (max-width: 500px) {
 	.wordsDisplayed {
 		line-height: 37px;
-		font-size: 10px;
+		font-size: 11px;
 		margin-top: 0px;
 	}
 }
@@ -790,10 +785,10 @@ span.correctBest {
 }
 
 span.best {
-	background-color: #8e7cc3;
+	background-color: #C3B9E0;
 	border-radius: 5px;
+	border: 2px solid #959595;
 	padding: 5px;
-	color: #FFFFFF;
 	margin-bottom: 40px;
 	white-space: pre;
 	text-transform: capitalize;
@@ -936,8 +931,6 @@ div#haveFun {
 	color: black;
 	font-weight: bolder;
 }
-
-
 
 
 /* SWITCH */
