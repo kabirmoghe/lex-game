@@ -952,6 +952,7 @@ div#haveFun {
 	bottom: 10px;
 	display: flex;
 	align-items: center;
+	display: none;
 }
 
 /* The switch - the box around the slider */

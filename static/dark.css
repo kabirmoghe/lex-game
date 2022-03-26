@@ -923,6 +923,7 @@ div#haveFun {
 }
 
 #switch {
+	display: none;
 	position: absolute;
 	left: 10px;
 	bottom: 10px;
