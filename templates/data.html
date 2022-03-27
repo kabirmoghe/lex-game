@@ -22,6 +22,11 @@
 			<form method="post">
 				<input class="genData" id="newData" type="submit" name="submit" value="Generate new letters">
 			</form>
+			<div class="wordsDisplayed">
+				{% for item in bestWords %}
+				<span class="best">{{item}}</span>
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 </body>

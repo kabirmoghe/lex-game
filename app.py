@@ -64,6 +64,9 @@ def home():
 @app.route("/login", methods = ["GET", "POST"])
 def login():
 
+
+	lid = int(readbucketdata.readbucketdata("letters.csv")["lid"][0])
+
 	if request.method == "POST":
 		if (request.form["usr"] == "kabirmoghe") and (request.form["pwd"] == "Daod10Bgr6"):
 
@@ -71,21 +74,22 @@ def login():
 
 			return redirect(url_for('home'))
 		else:
-			return render_template("invalidLogin.html", lid = session["lid"])
+			return render_template("invalidLogin.html", lid = lid)
 
-	return render_template("login.html", lid = session["lid"])
+	return render_template("login.html", lid = lid)
 
 @app.route("/feedback", methods = ["GET", "POST"])
 def feedback():
 
-	lid = readbucketdata.readbucketdata("letters.csv")["lid"][0]
+	lid = int(readbucketdata.readbucketdata("letters.csv")["lid"][0])
 
 	return render_template("feedback.html", lid = lid)
 
 @app.route("/data", methods = ["GET", "POST"])
 def data():
 
-	lid = readbucketdata.readbucketdata("letters.csv")["lid"][0]
+	lid = int(readbucketdata.readbucketdata("letters.csv")["lid"][0])
+	bestWords = eval(readbucketdata.readbucketdata("letters.csv")["bestWords"][0])
 
 	if "usr" not in session:
 		return redirect(url_for('home'))
@@ -98,7 +102,7 @@ def data():
 
 			return redirect(url_for("home"))
 
-		return render_template("data.html", lid = lid)
+		return render_template("data.html", lid = lid, bestWords = bestWords)
 
 
 if __name__ == '__main__':
