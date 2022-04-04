@@ -506,12 +506,17 @@ input {
 
 .formContents {
 	pointer-events: none; 
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
+
 
 .formContents::selection {
   background-color: rgba(0, 0, 0, 0);
 }
 
+/*
 input.tile {
 	font-family: 'Courier Prime', monospace;
 	height: 65px;
@@ -553,7 +558,47 @@ input.tile:focus {
 
 input.tile::selection {
   background-color: rgba(0, 0, 0, 0);
+}*/
+
+.tile {
+	font-family: 'Courier Prime', monospace;
+	height: 55px;
+	width: 75px;
+	font-size: 55px;
+	padding: 10px 0px;
+	text-transform: uppercase;
+	border: 4px solid #808080;
+	border-radius: 6px;
+	caret-color: transparent;
+	margin: 2px;
+	-webkit-appearance: none;
+	background-color: #333333;
+	color: #D7D7D7;
 }
+
+@media only screen and (max-width: 500px) {
+	.tile {
+		font-family: 'Courier Prime', monospace;
+		height: 35px;
+		width: 42px;
+		font-size: 35px;
+		padding: 3.5px 0px;
+		text-transform: uppercase;
+		border: 4px solid #808080;
+		border-radius: 3px;
+		caret-color: transparent;
+		margin: 2px;
+	}
+}
+
+.tile:focus {
+	outline-width: 0;
+}
+
+.tile::selection {
+  background-color: rgba(0, 0, 0, 0);
+}
+
 
 input.submit {
   border:  none;
@@ -768,7 +813,7 @@ span.correctBest {
 span.best {
 	background-color: #C3B8E3;
 	border-radius: 5px;
-	border: 2px solid #B2B2B2;
+	border: 2px solid #AD9FD3;
 	padding: 5px;
 	margin-bottom: 40px;
 	white-space: pre;

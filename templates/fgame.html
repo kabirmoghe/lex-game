@@ -171,19 +171,18 @@
 
 				<p>
 					
-					<div class="formContents">
+					<div class="formContents"><!--
 						<div class="tile" id="1" onfocus="blur();"></div>
 						<div class="tile" id="2" onfocus="blur();"></div>
 						<div class="tile" id="3" onfocus="blur();"></div>
 						<div class="tile" id="4" onfocus="blur();"></div>
-						<div class="tile" id="5" onfocus="blur();"></div>
+						<div class="tile" id="5" onfocus="blur();"></div>-->
 						
-						<!--
 						<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus"autocomplete="off" onfocus="blur();">
 						<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" autocomplete="off" onfocus="blur();">
 						<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" autocomplete="off" onfocus="blur();">
 						<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" autocomplete="off" onfocus="blur();">
-						<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" autocomplete="off" onfocus="blur();">-->
+						<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" autocomplete="off" onfocus="blur();">
 					</div>
 				</p>		
 				<p class="error"><em><span id="errorMsg"></span>&nbsp;</em></p>
@@ -302,7 +301,7 @@
 						j++;
 					}
 
-					if ($("#5").text().length == 1){
+					if ($("#5").val().length == 1){
 						$("#5").css('border', '4px solid #BDBCBC');
 					}
 					localStorage.setItem('mode', 'dark');					
@@ -324,7 +323,7 @@
 						j++;
 					}
 
-					if ($("#5").text().length == 1){
+					if ($("#5").val().length == 1){
 						$("#5").css('border', '4px solid black');
 					}
 
@@ -364,7 +363,7 @@
 						let letter = String(curr[i]).valueOf();
 						let file = letter+".svg";
 						let srcStr ="{{url_for('static', filename = '')}}"+file;
-						let str = '<input class="letterTile" type="image" value="'+letter+'" onclick="document.getElementById(activeTile()).textContent = $(this).val()" onfocus="this.blur();" src="'+srcStr+'"> ';
+						let str = '<input class="letterTile" type="image" value="'+letter+'" onclick="document.getElementById(activeTile()).value = $(this).val()" onfocus="this.blur();" src="'+srcStr+'"> ';
 						$(".keyRow").append(str)
 				}	
 
@@ -521,7 +520,7 @@
 
 				$("#next").click(function(){	    
 				    	if (active() > 3){
-				    		var guess = $('#1').text() + $('#2').text() + $('#3').text() + $('#4').text() + $('#5').text();
+				    		var guess = $('#1').val() + $('#2').val() + $('#3').val() + $('#4').val() + $('#5').val();
 				    		
 				    		var possWords = JSON.parse({{possWords | tojson}});
 				    		var bestWords = JSON.parse({{bestWords | tojson}});
@@ -535,36 +534,36 @@
 				    				if (localStorage.getItem('mode') == "light"){
 										$('#1')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#2')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#3')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#4')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#5')
 											.css('border', '4px solid #BDBCBC')
-											.text("");				    					
+											.val("");				    					
 				    				}
 				    				else {
 										$('#1')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#2')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#3')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#4')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#5')
 											.css('border', '4px solid #808080')
-											.text("");						    					
+											.val("");						    					
 				    				}
 
 
@@ -667,36 +666,36 @@
 				    				if (localStorage.getItem('mode') == "light"){
 										$('#1')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#2')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#3')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#4')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#5')
 											.css('border', '4px solid #BDBCBC')
-											.text("");				    					
+											.val("");				    					
 				    				}
 				    				else {
 										$('#1')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#2')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#3')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#4')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#5')
 											.css('border', '4px solid #808080')
-											.text("");						    					
+											.val("");						    					
 				    				}
 
 				    				guesses.push(guess);
@@ -847,36 +846,36 @@
 				    				if (localStorage.getItem('mode') == "light"){
 										$('#1')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#2')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#3')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#4')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#5')
 											.css('border', '4px solid #BDBCBC')
-											.text("");				    					
+											.val("");				    					
 				    				}
 				    				else {
 										$('#1')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#2')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#3')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#4')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#5')
 											.css('border', '4px solid #808080')
-											.text("");						    					
+											.val("");						    					
 				    				}
 
 
@@ -894,36 +893,36 @@
 			    				if (localStorage.getItem('mode') == "light"){
 									$('#1')
 										.css('border', '4px solid #BDBCBC')
-										.text("");
+										.val("");
 									$('#2')
 										.css('border', '4px solid #BDBCBC')
-										.text("");
+										.val("");
 									$('#3')
 										.css('border', '4px solid #BDBCBC')
-										.text("");
+										.val("");
 									$('#4')
 										.css('border', '4px solid #BDBCBC')
-										.text("");
+										.val("");
 									$('#5')
 										.css('border', '4px solid #BDBCBC')
-										.text("");				    					
+										.val("");				    					
 			    				}
 			    				else {
 									$('#1')
 										.css('border', '4px solid #808080')
-										.text("");
+										.val("");
 									$('#2')
 										.css('border', '4px solid #808080')
-										.text("");
+										.val("");
 									$('#3')
 										.css('border', '4px solid #808080')
-										.text("");
+										.val("");
 									$('#4')
 										.css('border', '4px solid #808080')
-										.text("");
+										.val("");
 									$('#5')
 										.css('border', '4px solid #808080')
-										.text("");						    					
+										.val("");						    					
 			    				}		    				
 				    		}
 				    	}
@@ -934,7 +933,7 @@
 				    {    
 				    	if ($("#completeOverlay").is(":hidden") && (e.keyCode == 13)){    
 					    	if (active() > 3){
-					    		var guess = $('#1').text() + $('#2').text() + $('#3').text() + $('#4').text() + $('#5').text();
+					    		var guess = $('#1').val() + $('#2').val() + $('#3').val() + $('#4').val() + $('#5').val();
 					    		
 					    		var possWords = JSON.parse({{possWords | tojson}});
 					    		var bestWords = JSON.parse({{bestWords | tojson}});
@@ -948,36 +947,36 @@
 					    				if (localStorage.getItem('mode') == "light"){
 											$('#1')
 												.css('border', '4px solid #BDBCBC')
-												.text("");
+												.val("");
 											$('#2')
 												.css('border', '4px solid #BDBCBC')
-												.text("");
+												.val("");
 											$('#3')
 												.css('border', '4px solid #BDBCBC')
-												.text("");
+												.val("");
 											$('#4')
 												.css('border', '4px solid #BDBCBC')
-												.text("");
+												.val("");
 											$('#5')
 												.css('border', '4px solid #BDBCBC')
-												.text("");				    					
+												.val("");				    					
 					    				}
 					    				else {
 											$('#1')
 												.css('border', '4px solid #808080')
-												.text("");
+												.val("");
 											$('#2')
 												.css('border', '4px solid #808080')
-												.text("");
+												.val("");
 											$('#3')
 												.css('border', '4px solid #808080')
-												.text("");
+												.val("");
 											$('#4')
 												.css('border', '4px solid #808080')
-												.text("");
+												.val("");
 											$('#5')
 												.css('border', '4px solid #808080')
-												.text("");						    					
+												.val("");						    					
 					    				}
 
 
@@ -1075,36 +1074,36 @@
 					    				if (localStorage.getItem('mode') == "light"){
 											$('#1')
 												.css('border', '4px solid #BDBCBC')
-												.text("");
+												.val("");
 											$('#2')
 												.css('border', '4px solid #BDBCBC')
-												.text("");
+												.val("");
 											$('#3')
 												.css('border', '4px solid #BDBCBC')
-												.text("");
+												.val("");
 											$('#4')
 												.css('border', '4px solid #BDBCBC')
-												.text("");
+												.val("");
 											$('#5')
 												.css('border', '4px solid #BDBCBC')
-												.text("");				    					
+												.val("");				    					
 					    				}
 					    				else {
 											$('#1')
 												.css('border', '4px solid #808080')
-												.text("");
+												.val("");
 											$('#2')
 												.css('border', '4px solid #808080')
-												.text("");
+												.val("");
 											$('#3')
 												.css('border', '4px solid #808080')
-												.text("");
+												.val("");
 											$('#4')
 												.css('border', '4px solid #808080')
-												.text("");
+												.val("");
 											$('#5')
 												.css('border', '4px solid #808080')
-												.text("");						    					
+												.val("");						    					
 					    				}
 
 					    				guesses.push(guess);
@@ -1249,36 +1248,36 @@
 					    				if (localStorage.getItem('mode') == "light"){
 											$('#1')
 												.css('border', '4px solid #BDBCBC')
-												.text("");
+												.val("");
 											$('#2')
 												.css('border', '4px solid #BDBCBC')
-												.text("");
+												.val("");
 											$('#3')
 												.css('border', '4px solid #BDBCBC')
-												.text("");
+												.val("");
 											$('#4')
 												.css('border', '4px solid #BDBCBC')
-												.text("");
+												.val("");
 											$('#5')
 												.css('border', '4px solid #BDBCBC')
-												.text("");				    					
+												.val("");				    					
 					    				}
 					    				else {
 											$('#1')
 												.css('border', '4px solid #808080')
-												.text("");
+												.val("");
 											$('#2')
 												.css('border', '4px solid #808080')
-												.text("");
+												.val("");
 											$('#3')
 												.css('border', '4px solid #808080')
-												.text("");
+												.val("");
 											$('#4')
 												.css('border', '4px solid #808080')
-												.text("");
+												.val("");
 											$('#5')
 												.css('border', '4px solid #808080')
-												.text("");						    					
+												.val("");						    					
 					    					}		
 
 
@@ -1295,36 +1294,36 @@
 				    				if (localStorage.getItem('mode') == "light"){
 										$('#1')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#2')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#3')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#4')
 											.css('border', '4px solid #BDBCBC')
-											.text("");
+											.val("");
 										$('#5')
 											.css('border', '4px solid #BDBCBC')
-											.text("");				    					
+											.val("");				    					
 				    				}
 				    				else {
 										$('#1')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#2')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#3')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#4')
 											.css('border', '4px solid #808080')
-											.text("");
+											.val("");
 										$('#5')
 											.css('border', '4px solid #808080')
-											.text("");						    					
+											.val("");						    					
 				    					}		    				
 					    		}
 					    	}
@@ -1339,7 +1338,7 @@
 
 	<script type="text/javascript">
 		window.onload = function() {
-			var current_url = window.location.href
+			var current_url = window.location.href;
 			if (current_url == "https://lexgame.herokuapp.com/") {
 			    window.location.href = "https://www.thelexgame.com";
 			}
@@ -1472,10 +1471,10 @@
 
 			        else if ((!(e.metaKey)) && (e.key >= "a" && e.key <= "z")) {
 
-			        	if (!($("#5").text().trim().length == 1)) {
+			        	if (!(document.getElementById("5").value.length == 1)) {
 
 			        		if ((active() == 5)){
-								$("#5").text(e.key);
+								document.getElementById("5").value = (e.key);
 								if (localStorage.getItem('mode') == "light"){
 				        			document.getElementById("5").style.border = "4px solid black";
 				        		}
@@ -1485,7 +1484,7 @@
 			        		}
 
 			        		else {
-				        		$("#"+active()).text(e.key);
+				        		document.getElementById(active()).value = e.key;
 								if (localStorage.getItem('mode') == "light"){
 				        			document.getElementById(active()-1).style.border = "4px solid black";
 				        		}
@@ -1522,11 +1521,12 @@
 			var active = 5;
 
 			for (let i = 1; i < 6 ; i++) {
-				if ($("#"+i).text().trim().length == 0){
+				if (document.getElementById(i).value.length == 0){
 					active = i;
 					break;
 				}
 			}
+
 			return active;
 		}
 	</script>
@@ -1536,7 +1536,7 @@
 
 			$("#additionalInfo").fadeOut("fast");
 
-		    if (!($("#5").text().trim().length == 1)) {
+		    if (!(document.getElementById("5").value.length == 1)) {
 
 				if (localStorage.getItem('mode') == "light"){
     				document.getElementById(currentActive).style.border = "4px solid black";
@@ -1555,7 +1555,7 @@
 			var moveTo = 5;
 
 			for (let i = 1; i < 6 ; i++) {
-				if ($("#"+i).text().trim().length == 0){
+				if (document.getElementById(i).value.length == 0){
 					if (i == 1){
 						moveTo = 1;
 					}
@@ -1573,7 +1573,7 @@
 	    			document.getElementById(moveTo).style.border = "4px solid #808080";
 	    		}
 
-			$("#"+moveTo).text('');
+			document.getElementById(moveTo).value = '';
 
 			$("#additionalInfo").fadeOut("fast");
 
