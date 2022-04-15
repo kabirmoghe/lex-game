@@ -81,6 +81,7 @@ span.choice {
   left: 0;
   right: 0;
   border-bottom: 1.5px solid #BDBDBD;
+  z-index: 50;
 }
 
 #shareOverlay {
@@ -420,6 +421,7 @@ div#wordExample {
   bottom: 50px;
   left: 0;
   right: 0;
+  z-index: 50;
 }
 
 @media only screen and (max-width: 500px){
@@ -588,6 +590,7 @@ input.tile::selection {
 @media only screen and (max-width: 500px) {
 	.tile {
 		font-family: 'Courier Prime', monospace;
+		font-weight: bold;
 		height: 35px;
 		width: 42px;
 		font-size: 35px;
