@@ -269,7 +269,7 @@
 				if (mode == "dark"){
 					$('link[href*="dark.css"]').prop('disabled', false);
 					$('link[href*="light.css"]').prop('disabled', true);
-					document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#333333');
+					document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#303133');
 					$("div#switch input[type='checkbox']").attr('checked','checked')			
 				}
 				else {
@@ -289,7 +289,7 @@
 				if (mode == "light"){
 					$('link[href*="dark.css"]').prop('disabled', false);
 					$('link[href*="light.css"]').prop('disabled', true);
-					document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#333333');
+					document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#303133');
 					
 					for (let i = 0; i <=5; i++){
 						$("#"+i).css('border', '4px solid #808080');						
