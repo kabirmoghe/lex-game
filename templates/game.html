@@ -10,19 +10,19 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">	
+	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
-		
+
 	<link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.ico') }}">
 </head>
 <body>
 	<div id="completeOverlay"></div>
 	<div class="overlay" id="infoOverlay">
-		<div class="popUpBox" id="playInfo">	
+		<div class="popUpBox" id="playInfo">
 			<div class="close">
 				<button id="closePlayInfo" type="button">✕</button>
-			</div>		
+			</div>
 			<div class="popUp" id="playInfoDetails">
 				<p class="head">How to Play</p>
 
@@ -69,20 +69,20 @@
 
 				<br><br>
 
-				If you aren't able to find the best words, that's okay! You'll be able to see them next day.
+				If you aren't able to find the best words, no worries! You'll be able to see them next day.
 
 				<br><br>
 
 				Have fun!
 				</p>
 			</div>
-		</div>	
+		</div>
 	</div>
 	<div class="overlay" id="overOverlay">
-		<div class="popUpBox" id="overInfo">	
+		<div class="popUpBox" id="overInfo">
 			<div class="close">
 				<button id="closeOverInfo" type="button">✕</button>
-			</div>		
+			</div>
 			<div class="popUp" id="overInfoDetails">
 				<div class="content" id="finished">
 					<div id="finishedTop" class="newLex">NEW LEX</div>
@@ -95,9 +95,9 @@
 							</div>
 						</div>
 					</div>
-				</div>	
+				</div>
 			</div>
-		</div>	
+		</div>
 	</div>
 	<span id="showSlide" onclick="openNav()"><span id="wordCheck"></span></span>
 	<div id="all">
@@ -106,7 +106,7 @@
 			<div id="title">LEX</div>
 			<div class="more" id="moreID"><button class="revealMore" id="moreInfo" type="button" onfocus="this.blur();">More</button></div>
 			<div class="more" id="additionalInfo">
-				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
+				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>
 				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
 				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
 				<div id="login"><a class="revealEvenMore" href="{{ url_for('login') }}">Log In</a></div>
@@ -119,7 +119,7 @@
 				<div class="shareIcon" id="shareID"><img id="shareIconInner" src="{{url_for('static', filename='shareIcon.svg')}}"></div>
 				<div class="more" id="moreID"><img id="moreButton" src="{{url_for('static', filename='more.svg')}}"></div>
 				<div class="more" id="additionalInfo">
-					<div class="close"><button id="closeAllInfo" type="button">✕</button></div>		
+					<div class="close"><button id="closeAllInfo" type="button">✕</button></div>
 					<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
 					<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
 					<div id="login"><a class="revealEvenMore" href="{{ url_for('feedback') }}" target="_blank">Feedback</a></div>
@@ -137,8 +137,8 @@
 				</div>
 			  	<div class="close">
 				    <button id="closeNav" type="button">✕</button>
-			    </div>		
-				  	
+			    </div>
+
 			  <!-- Button to close the overlay navigation -->
 			  <!-- Overlay content -->
 			  <div id="navContent" class="slideIn-content" style="max-width:500px;">
@@ -147,15 +147,15 @@
 						<div id="countdown1" class="countdown"></div> <br><br>
 						<p id="guessesLeft" class="head"></p>
 						<div id="wordsSideOnly">
-						</div>	
+						</div>
 					</div>
 			  </div>
 			</div>
 			<div class="overlay" id="yesterdayOverlay">
-				<div class="sideBox" id="yesterdayInfo">	
+				<div class="sideBox" id="yesterdayInfo">
 					<div class="close">
 						<button id="closeYesterday" type="button">✕</button>
-					</div>		
+					</div>
 					<div class="popUp" id="yesterdayDetails">
 						<p class="head">Yesterday</p>
 						<p>Here are yesterday's best acceptable words with a max score of <span id="yesterdayMax" class=maxPoints></span>:<br></p>
@@ -163,21 +163,21 @@
 						</div>
 						<p><br>How many did you find?</p>
 					</div>
-				</div>				  	
+				</div>
 			</div>
 			<div class="content">
 
 				<p>Win by reaching <span class="maxPoints">{{maxPoints}}</span> points</p>
 
 				<p>
-					
+
 					<div class="formContents">
 						<div class="tile" id="1" onfocus="blur();"></div>
 						<div class="tile" id="2" onfocus="blur();"></div>
 						<div class="tile" id="3" onfocus="blur();"></div>
 						<div class="tile" id="4" onfocus="blur();"></div>
 						<div class="tile" id="5" onfocus="blur();"></div>
-						
+
 						<!--
 						<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus"autocomplete="off" onfocus="blur();">
 						<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" autocomplete="off" onfocus="blur();">
@@ -185,7 +185,7 @@
 						<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" autocomplete="off" onfocus="blur();">
 						<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" autocomplete="off" onfocus="blur();">-->
 					</div>
-				</p>		
+				</p>
 				<p class="error"><em><span id="errorMsg"></span>&nbsp;</em></p>
 			</div>
 			<br>
@@ -208,7 +208,7 @@
 					{% endfor %}-->
 				</div>
 				<div class="otherActions">
-					<input type="image" id="shuffle" value="shuffle" src="{{url_for('static', filename = 'shuffle.svg')}}" onfocus="this.blur();">					
+					<input type="image" id="shuffle" value="shuffle" src="{{url_for('static', filename = 'shuffle.svg')}}" onfocus="this.blur();">
 					<input type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" onfocus="this.blur();">
 					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
 					<!--<input type="image" id="done" value="done" src="{{url_for('static', filename = 'giveUp.svg')}}" onfocus="this.blur();">-->
@@ -219,7 +219,7 @@
 
 	<!-- SCRIPTS -->
 
-	<!-- GAME CODE --> 
+	<!-- GAME CODE -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script type="text/javascript">
@@ -270,7 +270,7 @@
 					$('link[href*="dark.css"]').prop('disabled', false);
 					$('link[href*="light.css"]').prop('disabled', true);
 					document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#303133');
-					$("div#switch input[type='checkbox']").attr('checked','checked')			
+					$("div#switch input[type='checkbox']").attr('checked','checked')
 				}
 				else {
 					$('link[href*="light.css"]').prop('disabled', false);
@@ -290,9 +290,9 @@
 					$('link[href*="dark.css"]').prop('disabled', false);
 					$('link[href*="light.css"]').prop('disabled', true);
 					document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#303133');
-					
+
 					for (let i = 0; i <=5; i++){
-						$("#"+i).css('border', '4px solid #808080');						
+						$("#"+i).css('border', '4px solid #808080');
 					}
 
 
@@ -305,16 +305,16 @@
 					if ($("#5").text().length == 1){
 						$("#5").css('border', '4px solid #BDBCBC');
 					}
-					localStorage.setItem('mode', 'dark');					
+					localStorage.setItem('mode', 'dark');
 				}
 				else {
 					$('link[href*="light.css"]').prop('disabled', false);
 					$('link[href*="dark.css"]').prop('disabled', true);
 					document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#D5D5D5');
 
-					
+
 					for (let i = 0; i <=5; i++){
-						$("#"+i).css('border', '4px solid #BDBCBC');						
+						$("#"+i).css('border', '4px solid #BDBCBC');
 					}
 
 
@@ -328,7 +328,7 @@
 						$("#5").css('border', '4px solid black');
 					}
 
-					localStorage.setItem('mode', 'light');					
+					localStorage.setItem('mode', 'light');
 				}
 
 			})
@@ -352,8 +352,8 @@
 
 			/* Define all constant variables */
 
-			var letters = (JSON.stringify({{letters | tojson}}));	
-			localStorage.setItem('letters', letters);			
+			var letters = (JSON.stringify({{letters | tojson}}));
+			localStorage.setItem('letters', letters);
 
 			function addLetters() {
 				let curr = JSON.parse(localStorage.getItem('letters'));
@@ -366,9 +366,9 @@
 						let srcStr ="{{url_for('static', filename = '')}}"+file;
 						let str = '<input class="letterTile" type="image" value="'+letter+'" onclick="document.getElementById(activeTile()).textContent = $(this).val()" onfocus="this.blur();" src="'+srcStr+'"> ';
 						$(".keyRow").append(str)
-				}	
+				}
 
-				$(".keyRow").hide().fadeIn();			
+				$(".keyRow").hide().fadeIn();
 			}
 
 			addLetters();
@@ -396,7 +396,7 @@
 				localStorage.setItem('guesses', JSON.stringify([]));
 				localStorage.setItem('score', 0);
 				localStorage.setItem('status', 'not done');
-				/*var letters = (JSON.stringify({{letters | tojson}}));	
+				/*var letters = (JSON.stringify({{letters | tojson}}));
 				localStorage.setItem('letters', letters);	*/
 			}
 
@@ -415,7 +415,7 @@
 			var slide = gaugeScore(score, maxPoints)[2];
 		    guesses = guesses.sort(sortingGuesses);
 			$("#scoreArrow").css('marginLeft', scorePos+'%');
-			$("#slide").css('marginLeft', scorePos+'%');				
+			$("#slide").css('marginLeft', scorePos+'%');
 			$("#tally").text(score);
 			$("#wordCheck").text(10-JSON.parse(localStorage.getItem('guesses')).length);
 			$("#slide").text(slide);
@@ -443,9 +443,9 @@
 						numAdd -= 1;
 					}
 					else {
-						$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-					}					
-				}				
+						$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
+					}
+				}
 			}
 			else {
 
@@ -460,13 +460,13 @@
 						numAdd -= 1;
 					}
 					else {
-						$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-					}						
-				});				
+						$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
+					}
+				});
 			}
 
 			if (guesses.length == 0){
-				$("#wordsSideOnly").append('');		
+				$("#wordsSideOnly").append('');
 			}
 
 			// EDITS SIDE BOX OF WORDS
@@ -483,12 +483,12 @@
 						numAdd -= 1;
 					}
 					else {
-						$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');						
-					}		
+						$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+					}
 					i++;
 				}
 				else {
-					$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');					
+					$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
 				}
 			});
 
@@ -517,12 +517,12 @@
 				$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left)');
 				$("#wordCheck").text(10-JSON.parse(localStorage.getItem('guesses')).length);
 
-				// Game 
+				// Game
 
-				$("#next").click(function(){	    
+				$("#next").click(function(){
 				    	if (active() > 3){
 				    		var guess = $('#1').text() + $('#2').text() + $('#3').text() + $('#4').text() + $('#5').text();
-				    		
+
 				    		var possWords = JSON.parse({{possWords | tojson}});
 				    		var bestWords = JSON.parse({{bestWords | tojson}});
 
@@ -547,7 +547,7 @@
 											.text("");
 										$('#5')
 											.css('border', '4px solid #BDBCBC')
-											.text("");				    					
+											.text("");
 				    				}
 				    				else {
 										$('#1')
@@ -564,7 +564,7 @@
 											.text("");
 										$('#5')
 											.css('border', '4px solid #808080')
-											.text("");						    					
+											.text("");
 				    				}
 
 
@@ -613,9 +613,9 @@
 												numAdd -= 1;
 											}
 											else {
-												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-											}	
-										}				
+												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
+											}
+										}
 									}
 									else {
 
@@ -630,11 +630,11 @@
 												numAdd -= 1;
 											}
 											else {
-												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-											}	
-										});				
+												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
+											}
+										});
 									}
-									
+
 									$("#wordsSideOnly").text("");
 
 									// EDITS SIDE BOX OF WORDS
@@ -651,18 +651,18 @@
 												numAdd -= 1;
 											}
 											else {
-												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');						
-											}		
+												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+											}
 											i++;
 										}
 										else {
-											$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');					
+											$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
 										}
 									});
-									
+
 									$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left)');
 			    				}
-			    				
+
 				    			else if ($.inArray(guess, guesses) == -1) {
 				    				if (localStorage.getItem('mode') == "light"){
 										$('#1')
@@ -679,7 +679,7 @@
 											.text("");
 										$('#5')
 											.css('border', '4px solid #BDBCBC')
-											.text("");				    					
+											.text("");
 				    				}
 				    				else {
 										$('#1')
@@ -696,11 +696,11 @@
 											.text("");
 										$('#5')
 											.css('border', '4px solid #808080')
-											.text("");						    					
+											.text("");
 				    				}
 
 				    				guesses.push(guess);
-			    					guesses = guesses.sort(sortingGuesses);    				
+			    					guesses = guesses.sort(sortingGuesses);
 				    				localStorage.setItem('guesses', JSON.stringify(guesses));
 
 				    				var score = 0;
@@ -721,8 +721,8 @@
 									var scorePos = (74.5*score/maxPoints).toFixed(2);
 									var slide = gaugeScore(score, maxPoints)[2];
 
-									$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");		
-									$("#slide").animate({'marginLeft': scorePos+'%'}, "slow");		
+									$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");
+									$("#slide").animate({'marginLeft': scorePos+'%'}, "slow");
 									$("#tally").text(score);
 									$("#wordCheck").text(10-guesses.length);
 									$("#wordCheck").delay(1000).append(guess);
@@ -745,9 +745,9 @@
 												numAdd -= 1;
 											}
 											else {
-												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-											}				
-										}				
+												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
+											}
+										}
 									}
 									else {
 
@@ -762,9 +762,9 @@
 												numAdd -= 1;
 											}
 											else {
-												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-											}	
-										});				
+												$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
+											}
+										});
 									}
 
 									$("#wordsSideOnly").text("");
@@ -782,15 +782,15 @@
 												numAdd -= 1;
 											}
 											else {
-												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');						
-											}		
+												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+											}
 											i++;
 										}
 										else {
-											$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');					
+											$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
 										}
 									});
-									
+
 									$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left)');
 
 
@@ -833,7 +833,7 @@
 								        	.hide()
 								        	.delay(1000)
 								        	.fadeIn("slow");
-								        $("#scoreFinal").text(response + ' You scored ' + score + ' points.');				    					
+								        $("#scoreFinal").text(response + ' You scored ' + score + ' points.');
 				    				}
 
 				    			}
@@ -859,7 +859,7 @@
 											.text("");
 										$('#5')
 											.css('border', '4px solid #BDBCBC')
-											.text("");				    					
+											.text("");
 				    				}
 				    				else {
 										$('#1')
@@ -876,7 +876,7 @@
 											.text("");
 										$('#5')
 											.css('border', '4px solid #808080')
-											.text("");						    					
+											.text("");
 				    				}
 
 
@@ -906,7 +906,7 @@
 										.text("");
 									$('#5')
 										.css('border', '4px solid #BDBCBC')
-										.text("");				    					
+										.text("");
 			    				}
 			    				else {
 									$('#1')
@@ -923,19 +923,19 @@
 										.text("");
 									$('#5')
 										.css('border', '4px solid #808080')
-										.text("");						    					
-			    				}		    				
+										.text("");
+			    				}
 				    		}
 				    	}
 				    })
-				
+
 				$(document).keydown(
 				    function(e)
-				    {    
-				    	if ($("#completeOverlay").is(":hidden") && (e.keyCode == 13)){    
+				    {
+				    	if ($("#completeOverlay").is(":hidden") && (e.keyCode == 13)){
 					    	if (active() > 3){
 					    		var guess = $('#1').text() + $('#2').text() + $('#3').text() + $('#4').text() + $('#5').text();
-					    		
+
 					    		var possWords = JSON.parse({{possWords | tojson}});
 					    		var bestWords = JSON.parse({{bestWords | tojson}});
 
@@ -960,7 +960,7 @@
 												.text("");
 											$('#5')
 												.css('border', '4px solid #BDBCBC')
-												.text("");				    					
+												.text("");
 					    				}
 					    				else {
 											$('#1')
@@ -977,7 +977,7 @@
 												.text("");
 											$('#5')
 												.css('border', '4px solid #808080')
-												.text("");						    					
+												.text("");
 					    				}
 
 
@@ -1004,8 +1004,8 @@
 										var slide = gaugeScore(score, maxPoints)[2];
 
 
-										$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");		
-										$("#slide").animate({'marginLeft': scorePos+'%'}, "slow");											
+										$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");
+										$("#slide").animate({'marginLeft': scorePos+'%'}, "slow");
 										$("#tally").text(score);
 										$("#wordCheck").text(10-guesses.length);
 										$("#slide").text(slide);
@@ -1024,9 +1024,9 @@
 													numAdd -= 1;
 												}
 												else {
-													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-												}		
-											}				
+													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
+												}
+											}
 										}
 										else {
 											let numAdd = parseInt(localStorage.getItem('numAdd'));
@@ -1039,11 +1039,11 @@
 													numAdd -= 1;
 												}
 												else {
-													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-												}		
-											});				
+													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
+												}
+											});
 										}
-										
+
 										$("#wordsSideOnly").text("");
 
 										// EDITS SIDE BOX OF WORDS
@@ -1059,18 +1059,18 @@
 													numAdd -= 1;
 												}
 												else {
-													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');						
-												}		
+													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+												}
 												i++;
 											}
 											else {
-												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');					
+												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
 											}
 										});
-										
+
 										$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left)');
 				    				}
-				    				
+
 					    			else if ($.inArray(guess, guesses) == -1) {
 					    				if (localStorage.getItem('mode') == "light"){
 											$('#1')
@@ -1087,7 +1087,7 @@
 												.text("");
 											$('#5')
 												.css('border', '4px solid #BDBCBC')
-												.text("");				    					
+												.text("");
 					    				}
 					    				else {
 											$('#1')
@@ -1104,11 +1104,11 @@
 												.text("");
 											$('#5')
 												.css('border', '4px solid #808080')
-												.text("");						    					
+												.text("");
 					    				}
 
 					    				guesses.push(guess);
-				    					guesses = guesses.sort(sortingGuesses);    				
+				    					guesses = guesses.sort(sortingGuesses);
 					    				localStorage.setItem('guesses', JSON.stringify(guesses));
 
 					    				var score = 0;
@@ -1129,8 +1129,8 @@
 										var scorePos = (74.5*score/maxPoints).toFixed(2);
 										var slide = gaugeScore(score, maxPoints)[2];
 
-										$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");		
-										$("#slide").animate({'marginLeft': scorePos+'%'}, "slow");											
+										$("#scoreArrow").animate({'marginLeft': scorePos+'%'}, "slow");
+										$("#slide").animate({'marginLeft': scorePos+'%'}, "slow");
 										$("#tally").text(score);
 										$("#wordCheck").text(10-guesses.length);
 										$("#slide").text(slide);
@@ -1149,9 +1149,9 @@
 													numAdd -= 1;
 												}
 												else {
-													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-												}		
-											}				
+													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
+												}
+											}
 										}
 										else {
 											let numAdd = parseInt(localStorage.getItem('numAdd'));
@@ -1164,9 +1164,9 @@
 													numAdd -= 1;
 												}
 												else {
-													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');						
-												}		
-											});				
+													$("#wordBox").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
+												}
+											});
 										}
 
 										$("#wordsSideOnly").text("");
@@ -1184,15 +1184,15 @@
 													numAdd -= 1;
 												}
 												else {
-													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');						
-												}		
+													$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+' <span class="check">✓</span>'+'</span> ');
+												}
 												i++;
 											}
 											else {
-												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');					
+												$("#wordsSideOnly").append("<span class='correct'>"+guess+', '+possWords[guess]+'</span> ');
 											}
 										});
-										
+
 										$("#guessesLeft").text('Guesses ('+(10-JSON.parse(localStorage.getItem('guesses')).length)+' left)');
 
 
@@ -1235,7 +1235,7 @@
 									        	.hide()
 									        	.delay(1000)
 									        	.fadeIn("slow");
-									        $("#scoreFinal").text(response + ' You scored ' + score + ' points.');				    					
+									        $("#scoreFinal").text(response + ' You scored ' + score + ' points.');
 					    				}
 
 					    			}
@@ -1261,7 +1261,7 @@
 												.text("");
 											$('#5')
 												.css('border', '4px solid #BDBCBC')
-												.text("");				    					
+												.text("");
 					    				}
 					    				else {
 											$('#1')
@@ -1278,8 +1278,8 @@
 												.text("");
 											$('#5')
 												.css('border', '4px solid #808080')
-												.text("");						    					
-					    					}		
+												.text("");
+					    					}
 
 
 					    			}
@@ -1307,7 +1307,7 @@
 											.text("");
 										$('#5')
 											.css('border', '4px solid #BDBCBC')
-											.text("");				    					
+											.text("");
 				    				}
 				    				else {
 										$('#1')
@@ -1324,8 +1324,8 @@
 											.text("");
 										$('#5')
 											.css('border', '4px solid #808080')
-											.text("");						    					
-				    					}		    				
+											.text("");
+				    					}
 					    		}
 					    	}
 						}
@@ -1377,7 +1377,7 @@
 					} else {
 					  	navigator.share(shareData);
 						};
-			}	
+			}
 	</script>
 	<!-- TIME LEFT -->
 	<script type="text/javascript">
@@ -1391,17 +1391,17 @@
 			    let now = new Date();
 
 			    let time = (nextMidnight.getTime() - now.getTime())/1000;
-			    
+
 			    if(time < 0) {
 			      nextMidnight = new Date();
 			      nextMidnight.setHours(24,0,0,0);
-			      
+
 			      return getRemainingTime();
 			    }
-			    
+
 			    return time;
 			  }
-			  
+
 			  const parseTime = (time) => {
 			    const hours = Math.floor(time/3600);
 			    let rest = time-(hours*3600);
@@ -1412,33 +1412,33 @@
 
 			    return [hours, minutes, seconds, milliseconds];
 			  };
-			  
+
 			  const formatTime = (parsedTime) => {
 			      return '<span class="hours">' + parsedTime[0] + '</span><span class="hSep">:</span><span class="minutes">' + ("0" + parsedTime[1]).slice(-2) + '</span><span class="mSep">:</span><span class="seconds">' + ("0" + parsedTime[2]).slice(-2) + '</span>';
 			  };
-			  
+
 			  const els = [];
 			  let timeout;
-			  
+
 			  return (el) => {
 			    els.push(el);
-			    
+
 			    if(!timeout) {
-			    
+
 			      const refresh = () => {
 			        const parsedTime = parseTime(getRemainingTime());
 			        const formattedTimes = formatTime(parsedTime);
-			        
+
 			        for(let i = 0, iend = els.length; i < iend; i++) {
 			          els[i].innerHTML = formattedTimes;
 			        }
-			        
+
 			        setTimeout(() => {
 			          refresh();
 			        }, parsedTime[3]);
 			      };
 			      refresh();
-			      
+
 			    }
 			    else el.innerHTML = formatTime(parseTime(getRemainingTime()));
 			  };
@@ -1447,17 +1447,17 @@
 
 			Countdown(document.getElementById('countdown1'));
 			Countdown(document.getElementById('countdown2'));
-		})			
+		})
 	</script>
 
 	<script type="text/javascript">
 		$(document).keydown(
 		    function(e)
-		    {    
+		    {
 
 		    	if ($("#completeOverlay").is(":hidden")) {
 
-			        if (e.keyCode == 8)      
+			        if (e.keyCode == 8)
 			            del();
 
 			        /*else if ( ((document.getElementById("1").value.length == 1) && (document.getElementById("2").value.length == 1) && (document.getElementById("3").value.length == 1)) && (e.keyCode == 13)) {
@@ -1466,7 +1466,7 @@
 
 						THIS IS HOW FORM WAS BEING SUBMITTED WITH ENTER
 			        	$('form#letterField').submit();
-						
+
 						alert("guess attempted (enter)")
 			        }*/
 
@@ -1492,7 +1492,7 @@
 				        		else {
 				        			document.getElementById(active()-1).style.border = "4px solid #BDBCBC";
 				        		}
-			        		}	        		
+			        		}
 			        	}
 
 						$("#additionalInfo").fadeOut("fast");
@@ -1504,8 +1504,8 @@
 	</script>
 	<script type="text/javascript">
 		$(document).keydown(
-		    function(e) {    
-		        if (e.keyCode == 27) {      
+		    function(e) {
+		        if (e.keyCode == 27) {
 		        	$("#completeOverlay").fadeOut("fast");
 		            $(".overlay").fadeOut("fast");
 		            $("#additionalInfo").fadeOut("fast");
@@ -1583,12 +1583,12 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#showYesterday").click(function(){
-		        $("#completeOverlay").fadeIn("fast");		    	
+		        $("#completeOverlay").fadeIn("fast");
 		        $("#yesterdayOverlay")
 		        	.css('display', 'flex')
 		        	.hide()
 		        	.fadeIn("fast");
-		    }); 
+		    });
 		});
 	</script>
 	<script type="text/javascript">
@@ -1596,18 +1596,18 @@
 		    $("#closeYesterday").click(function(){
 		        $("#completeOverlay").fadeOut("fast");
 		        $("#yesterdayOverlay").fadeOut("fast");
-		    }); 
+		    });
 		});
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#shareIconInner").click(function(){
-		        $("#completeOverlay").fadeIn("fast");		    	
+		        $("#completeOverlay").fadeIn("fast");
 		        $("#overOverlay")
 		        	.css('display', 'flex')
 		        	.hide()
 		        	.fadeIn("fast");
-		    }); 
+		    });
 		});
 	</script>
 	<script type="text/javascript">
@@ -1618,7 +1618,7 @@
 		        	.css('display', 'flex')
 		        	.hide()
 		        	.fadeIn("fast");
-		    }); 
+		    });
 		});
 	</script>
 	<script type="text/javascript">
@@ -1626,7 +1626,7 @@
 		    $("#closePlayInfo").click(function(){
 		        $("#completeOverlay").fadeOut("fast");
 		        $("#infoOverlay").fadeOut("fast");
-		    }); 
+		    });
 		});
 	</script>
 	<script type="text/javascript">
@@ -1634,7 +1634,7 @@
 		    $("#closeOverInfo").click(function(){
 		        $("#completeOverlay").fadeOut("fast");
 		        $("#overOverlay").fadeOut("fast");
-		    }); 
+		    });
 		});
 	</script>
 	<script type="text/javascript">
@@ -1644,7 +1644,7 @@
 		        	.toggle()
 		        	.hide()
 		        	.fadeIn("fast");
-		    }); 
+		    });
 		});
 	</script>
 	<script type="text/javascript">
@@ -1654,7 +1654,7 @@
 		        	.toggle()
 		        	.show()
 		        	.fadeOut("fast");
-		    }); 
+		    });
 		});
 	</script>
 	<script type="text/javascript">
@@ -1665,7 +1665,7 @@
 		        	.css('display', 'flex')
 		        	.hide()
 		        	.fadeIn("fast");
-		    }); 
+		    });
 		});
 	</script>
 	<script type="text/javascript">
@@ -1673,7 +1673,7 @@
 		    $("#notDone").click(function(){
 		        $("#completeOverlay").fadeOut("fast");
 		        $("#doneOverlay").fadeOut("fast");
-		    }); 
+		    });
 		});
 	</script>
 	<script type="text/javascript">
@@ -1705,7 +1705,7 @@
 
 		        document.getElementById("myNav").style.width = "0%";
 				//document.getElementById("myNav").style.boxShadow = "none";
-		    }); 
+		    });
 		});
 	</script>
 </body>
