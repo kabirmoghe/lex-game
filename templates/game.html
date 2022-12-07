@@ -839,7 +839,7 @@
 				    			}
 
 				    			else {
-				    				$("#errorMsg").text("Already guessed");
+				    				$("#errorMsg").stop(true, true).text("Already guessed");
 				    				$("#errorMsg")
 				    					.fadeIn("fast")
 				    					.delay(1000)
@@ -886,7 +886,7 @@
 				    		}
 
 				    		else {
-				    			$("#errorMsg").text("Invalid word");
+				    			$("#errorMsg").stop(true, true).text("Invalid word");
 				    			$("#errorMsg")
 				    				.fadeIn("fast")
 				    				.delay(1000)
@@ -1241,7 +1241,7 @@
 					    			}
 
 					    			else {
-					    				$("#errorMsg").text("Already guessed");
+					    				$("#errorMsg").stop(true, true).text("Already guessed");
 					    				$("#errorMsg")
 					    					.fadeIn("fast")
 					    					.delay(1000)
@@ -1287,7 +1287,7 @@
 					    		}
 
 					    		else {
-					    			$("#errorMsg").text("Invalid word");
+					    			$("#errorMsg").stop(true, true).text("Invalid word");
 					    			$("#errorMsg")
 					    				.fadeIn("fast")
 					    				.delay(1000)
