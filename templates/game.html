@@ -260,6 +260,57 @@
 
 				return [response, level, slide];
 			}
+
+			function shareScore(pts, top, numBest){
+
+				let response = "";
+					let level = pts+'/'+top;
+					let slide="";
+
+					let wordBestDisplay = ""
+
+
+					for (let i = 0; i < numBest; i++) {
+	  				wordBestDisplay+="🟪";
+					}
+
+					for (let i = 0; i < 5-numBest; i++){
+						wordBestDisplay+="⬜";
+					}
+
+					if (pts == top) {
+							response = "You're the champ!";
+							level = "Champ! " + pts + "/" + top;
+							slide = "Champ!" ;
+					} else if (pts >= 0.8*top) {
+							response = "Amazing!";
+							level = "Amazing! " + pts + "/" + top;
+							slide = "Amazing!" ;
+				} else if (pts >= 0.6*top) {
+							response = "Wow!";
+							level = "Wow! " + pts + "/" + top;
+							slide = "Wow! ";
+					} else if (pts >= 0.4*top) {
+							response = "Great!";
+							level = "Great! " + pts + "/" + top;
+							slide = "Great! ";
+					} else if (pts >= 0.2*top) {
+							response = "Good!";
+							level = "Good! " + pts + "/" + top;
+							slide = "Good! ";
+					} else if (pts > 0) {
+							response = "Nice!";
+							level = "Nice! " + pts + "/" + top;
+							slide = "Nice! ";
+				}
+
+				level += " \
+\
+"
++ wordBestDisplay;
+
+				return [response, level, slide];
+			}
 	</script>
 
 	<script type="text/javascript">
@@ -1351,13 +1402,18 @@
 	<script type="text/javascript">
 		function shareData() {
 
+					var numBest = $('#wordBox').children('.best').length;
+
 				  var score = parseInt(localStorage.getItem('score'));
 				  var maxPoints = parseInt(localStorage.getItem('maxPoints'));
-				  var level = gaugeScore(score, maxPoints)[1];
+				  var level = shareScore(score, maxPoints,numBest)[1];
+					var txt = 'Lex {{lid}}: \
+\
+'+level;
 
 				  const shareData = {
 					    title: 'Lex',
-					    text: 'Lex {{lid}}: '+level
+					    text: txt
 					};
 
 				  const btn = document.querySelector('#share');
