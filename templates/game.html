@@ -263,8 +263,8 @@
 
 			function shareScore(pts, top, numBest){
 
-				let response = "";
-					let level = pts+'/'+top;
+				  let response = "";
+					let level = "\n\n" + pts+'/'+top;
 					let slide="";
 
 					let wordBestDisplay = ""
@@ -280,34 +280,31 @@
 
 					if (pts == top) {
 							response = "You're the champ!";
-							level = "Champ! " + pts + "/" + top;
+							level = "\n\nChamp! " + pts + "/" + top;
 							slide = "Champ!" ;
 					} else if (pts >= 0.8*top) {
 							response = "Amazing!";
-							level = "Amazing! " + pts + "/" + top;
+							level = "\n\nAmazing! " + pts + "/" + top;
 							slide = "Amazing!" ;
 				} else if (pts >= 0.6*top) {
 							response = "Wow!";
-							level = "Wow! " + pts + "/" + top;
+							level = "\n\nWow! " + pts + "/" + top;
 							slide = "Wow! ";
 					} else if (pts >= 0.4*top) {
 							response = "Great!";
-							level = "Great! " + pts + "/" + top;
+							level = "\n\nGreat! " + pts + "/" + top;
 							slide = "Great! ";
 					} else if (pts >= 0.2*top) {
 							response = "Good!";
-							level = "Good! " + pts + "/" + top;
+							level = "\n\nGood! " + pts + "/" + top;
 							slide = "Good! ";
 					} else if (pts > 0) {
 							response = "Nice!";
-							level = "Nice! " + pts + "/" + top;
+							level = "\n\nNice! " + pts + "/" + top;
 							slide = "Nice! ";
-				}
+				  }
 
-				level += " \
-\
-"
-+ wordBestDisplay;
+				level += "\n"+wordBestDisplay;
 
 				return [response, level, slide];
 			}
@@ -1407,9 +1404,7 @@
 				  var score = parseInt(localStorage.getItem('score'));
 				  var maxPoints = parseInt(localStorage.getItem('maxPoints'));
 				  var level = shareScore(score, maxPoints,numBest)[1];
-					var txt = 'Lex {{lid}}: \
-\
-'+level;
+					var txt = '—— Lex {{lid}} ——'+level;
 
 				  const shareData = {
 					    title: 'Lex',
@@ -1421,7 +1416,7 @@
 
 				  if (!navigator.canShare) {
 					 	navigator.clipboard
-							.writeText('Lex {{lid}}: '+level)
+							.writeText(txt)
 							.then(() => {
 								sharePara.textContent = 'Results copied to clipboard!';
 								})
@@ -1529,15 +1524,15 @@
 						alert("guess attempted (enter)")
 			        }*/
 
-			        else if ((!(e.metaKey)) && (e.key >= "a" && e.key <= "z")) {
+			        else if (localStorage.getItem('status') != 'Done' && (!(e.metaKey)) && (e.key >= "a" && e.key <= "z")) {
 
 			        	if (!($("#5").text().trim().length == 1)) {
 
 			        		if ((active() == 5)){
-								$("#5").text(e.key);
-								if (localStorage.getItem('mode') == "light"){
-				        			document.getElementById("5").style.border = "4px solid black";
-				        		}
+										$("#5").text(e.key);
+										if (localStorage.getItem('mode') == "light"){
+						        			document.getElementById("5").style.border = "4px solid black";
+						        }
 				        		else {
 				        			document.getElementById("5").style.border = "4px solid #BDBCBC";
 				        		}
@@ -1545,18 +1540,18 @@
 
 			        		else {
 				        		$("#"+active()).text(e.key);
-								if (localStorage.getItem('mode') == "light"){
-				        			document.getElementById(active()-1).style.border = "4px solid black";
-				        		}
-				        		else {
-				        			document.getElementById(active()-1).style.border = "4px solid #BDBCBC";
-				        		}
+										if (localStorage.getItem('mode') == "light"){
+						        	 document.getElementById(active()-1).style.border = "4px solid black";
+						        }
+						        else {
+						         	 document.getElementById(active()-1).style.border = "4px solid #BDBCBC";
+						        }
 			        		}
 			        	}
 
 						$("#additionalInfo").fadeOut("fast");
 
-					}
+						}
 		   		}
 		   	}
 		);
