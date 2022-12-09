@@ -24,7 +24,7 @@
 				<button id="closePlayInfo" type="button">✕</button>
 			</div>
 			<div class="popUp" id="playInfoDetails">
-				<p class="head">What is Lex?</p>
+				<p class="head">How to play...</p>
 
 				<p>Given 10 guesses and 8 letters, find the 5 highest-scoring words. Words must be at least 3 letters long and can repeat letters. Point values are assigned as following:
 				<br>
@@ -72,8 +72,6 @@
 				If you aren't able to find the best words, no worries! You'll be able to see them next day.
 
 				<br><br>
-
-				Have fun!
 				</p>
 			</div>
 		</div>
@@ -569,6 +567,14 @@
 			}
 
 			else {
+
+				$("#completeOverlay").fadeIn("fast");
+				$("#infoOverlay")
+				  .delay(1000)
+					.css('display', 'flex')
+					.hide()
+					.fadeIn("fast");
+
 				$("#guessesLeft").text(''+(10-JSON.parse(localStorage.getItem('guesses')).length)+' LEFT');
 				$("#wordCheck").text(10-JSON.parse(localStorage.getItem('guesses')).length);
 

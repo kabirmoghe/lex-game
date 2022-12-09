@@ -235,9 +235,12 @@ a.revealEvenMore:hover {
 	margin-top: 75px;
   width: 700px;
   height: 100%;
-  flex-direction: column;
-  background-color: #303133;
-	border-radius: 5px;
+	background-color: #303133;
+	border-radius: 7px;
+}
+
+#closePlayInfo {
+	margin: 5px;
 }
 
 #overInfo {
