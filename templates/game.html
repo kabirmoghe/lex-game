@@ -225,7 +225,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 	<script type="text/javascript">
 
 			/* function that returns the response to be displayed, to-send message, and slider message */
@@ -347,18 +347,18 @@
 					document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#303133');
 
 					for (let i = 0; i <=5; i++){
-						$("#"+i).css('border', '6px solid #808080');
+						$("#"+i).css('border-color', '#808080');
 					}
 
 
 					let j = 1;
 					while (j < active()){
-						$("#"+j).css('border', '6px solid #BDBCBC');
+						$("#"+j).css('border-color', '#BDBCBC');
 						j++;
 					}
 
 					if ($("#5").text().length == 1){
-						$("#5").css('border', '6px solid #BDBCBC');
+						$("#5").css('border-color', '#BDBCBC');
 					}
 					localStorage.setItem('mode', 'dark');
 				}
@@ -369,18 +369,18 @@
 
 
 					for (let i = 0; i <=5; i++){
-						$("#"+i).css('border', '6px solid #BDBCBC');
+						$("#"+i).css('border-color', '#BDBCBC');
 					}
 
 
 					let j = 1;
 					while (j < active()){
-						$("#"+j).css('border', '6px solid black');
+						$("#"+j).css('border-color', 'black');
 						j++;
 					}
 
 					if ($("#5").text().length == 1){
-						$("#5").css('border', '6px solid black');
+						$("#5").css('border-color', 'black');
 					}
 
 					localStorage.setItem('mode', 'light');
@@ -589,36 +589,36 @@
 			    				if (guesses.length == 0){
 				    				if (localStorage.getItem('mode') == "light"){
 										$('#1')
-											.css('border', '6px solid #BDBCBC')
+											.css('border-color', '#BDBCBC')
 											.text("");
 										$('#2')
-											.css('border', '6px solid #BDBCBC')
+											.css('border-color', '#BDBCBC')
 											.text("");
 										$('#3')
-											.css('border', '6px solid #BDBCBC')
+											.css('border-color', '#BDBCBC')
 											.text("");
 										$('#4')
-											.css('border', '6px solid #BDBCBC')
+											.css('border-color', '#BDBCBC')
 											.text("");
 										$('#5')
-											.css('border', '6px solid #BDBCBC')
+											.css('border-color', '#BDBCBC')
 											.text("");
 				    				}
 				    				else {
 										$('#1')
-											.css('border', '6px solid #808080')
+											.css('border-color', '#808080')
 											.text("");
 										$('#2')
-											.css('border', '6px solid #808080')
+											.css('border-color', '#808080')
 											.text("");
 										$('#3')
-											.css('border', '6px solid #808080')
+											.css('border-color', '#808080')
 											.text("");
 										$('#4')
-											.css('border', '6px solid #808080')
+											.css('border-color', '#808080')
 											.text("");
 										$('#5')
-											.css('border', '6px solid #808080')
+											.css('border-color', '#808080')
 											.text("");
 				    				}
 
@@ -721,36 +721,36 @@
 				    			else if ($.inArray(guess, guesses) == -1) {
 				    				if (localStorage.getItem('mode') == "light"){
 										$('#1')
-											.css('border', '6px solid #BDBCBC')
+											.css('border-color', '#BDBCBC')
 											.text("");
 										$('#2')
-											.css('border', '6px solid #BDBCBC')
+											.css('border-color', '#BDBCBC')
 											.text("");
 										$('#3')
-											.css('border', '6px solid #BDBCBC')
+											.css('border-color', '#BDBCBC')
 											.text("");
 										$('#4')
-											.css('border', '6px solid #BDBCBC')
+											.css('border-color', '#BDBCBC')
 											.text("");
 										$('#5')
-											.css('border', '6px solid #BDBCBC')
+											.css('border-color', '#BDBCBC')
 											.text("");
 				    				}
 				    				else {
 										$('#1')
-											.css('border', '6px solid #808080')
+											.css('border-color', '#808080')
 											.text("");
 										$('#2')
-											.css('border', '6px solid #808080')
+											.css('border-color', '#808080')
 											.text("");
 										$('#3')
-											.css('border', '6px solid #808080')
+											.css('border-color', '#808080')
 											.text("");
 										$('#4')
-											.css('border', '6px solid #808080')
+											.css('border-color', '#808080')
 											.text("");
 										$('#5')
-											.css('border', '6px solid #808080')
+											.css('border-color', '#808080')
 											.text("");
 				    				}
 
@@ -903,38 +903,38 @@
 				    				if (localStorage.getItem('mode') == "light"){
 											setTimeout( function(){
 												$('#1')
-													.css('border', '6px solid #BDBCBC')
+													.css('border-color', '#BDBCBC')
 													.text("");
 												$('#2')
-													.css('border', '6px solid #BDBCBC')
+													.css('border-color', '#BDBCBC')
 													.text("");
 												$('#3')
-													.css('border', '6px solid #BDBCBC')
+													.css('border-color', '#BDBCBC')
 													.text("");
 												$('#4')
-													.css('border', '6px solid #BDBCBC')
+													.css('border-color', '#BDBCBC')
 													.text("");
 												$('#5')
-													.css('border', '6px solid #BDBCBC')
+													.css('border-color', '#BDBCBC')
 													.text("");
 												},1300);
 				    				}
 				    				else {
 											setTimeout( function(){
 												$('#1')
-													.css('border', '6px solid #808080')
+													.css('border-color', '#808080')
 													.text("");
 												$('#2')
-													.css('border', '6px solid #808080')
+													.css('border-color', '#808080')
 													.text("");
 												$('#3')
-													.css('border', '6px solid #808080')
+													.css('border-color', '#808080')
 													.text("");
 												$('#4')
-													.css('border', '6px solid #808080')
+													.css('border-color', '#808080')
 													.text("");
 												$('#5')
-													.css('border', '6px solid #808080')
+													.css('border-color', '#808080')
 													.text("");
 											},1300);
 				    				}
@@ -955,38 +955,38 @@
 			    				if (localStorage.getItem('mode') == "light"){
 										setTimeout( function(){
 											$('#1')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 											$('#2')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 											$('#3')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 											$('#4')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 											$('#5')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 										},1300);
 			    				}
 			    				else {
 										setTimeout( function(){
 											$('#1')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 											$('#2')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 											$('#3')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 											$('#4')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 											$('#5')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 										},1300);
 			    				}
@@ -1012,36 +1012,36 @@
 				    				if (guesses.length == 0){
 					    				if (localStorage.getItem('mode') == "light"){
 											$('#1')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 											$('#2')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 											$('#3')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 											$('#4')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 											$('#5')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 					    				}
 					    				else {
 											$('#1')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 											$('#2')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 											$('#3')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 											$('#4')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 											$('#5')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 					    				}
 
@@ -1139,36 +1139,36 @@
 					    			else if ($.inArray(guess, guesses) == -1) {
 					    				if (localStorage.getItem('mode') == "light"){
 											$('#1')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 											$('#2')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 											$('#3')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 											$('#4')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 											$('#5')
-												.css('border', '6px solid #BDBCBC')
+												.css('border-color', '#BDBCBC')
 												.text("");
 					    				}
 					    				else {
 											$('#1')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 											$('#2')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 											$('#3')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 											$('#4')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 											$('#5')
-												.css('border', '6px solid #808080')
+												.css('border-color', '#808080')
 												.text("");
 					    				}
 
@@ -1315,38 +1315,38 @@
 					    				if (localStorage.getItem('mode') == "light"){
 													setTimeout( function(){
 														$('#1')
-															.css('border', '6px solid #BDBCBC')
+															.css('border-color', '#BDBCBC')
 															.text("");
 														$('#2')
-															.css('border', '6px solid #BDBCBC')
+															.css('border-color', '#BDBCBC')
 															.text("");
 														$('#3')
-															.css('border', '6px solid #BDBCBC')
+															.css('border-color', '#BDBCBC')
 															.text("");
 														$('#4')
-															.css('border', '6px solid #BDBCBC')
+															.css('border-color', '#BDBCBC')
 															.text("");
 														$('#5')
-															.css('border', '6px solid #BDBCBC')
+															.css('border-color', '#BDBCBC')
 															.text("");
 													},1300);
 					    				}
 					    				else {
 												setTimeout( function(){
 													$('#1')
-														.css('border', '6px solid #808080')
+														.css('border-color', '#808080')
 														.text("");
 													$('#2')
-														.css('border', '6px solid #808080')
+														.css('border-color', '#808080')
 														.text("");
 													$('#3')
-														.css('border', '6px solid #808080')
+														.css('border-color', '#808080')
 														.text("");
 													$('#4')
-														.css('border', '6px solid #808080')
+														.css('border-color', '#808080')
 														.text("");
 													$('#5')
-														.css('border', '6px solid #808080')
+														.css('border-color', '#808080')
 														.text("");
 												},1300);
 					    				}
@@ -1364,38 +1364,38 @@
 				    				if (localStorage.getItem('mode') == "light"){
 											setTimeout( function(){
 												$('#1')
-													.css('border', '6px solid #BDBCBC')
+													.css('border-color', '#BDBCBC')
 													.text("");
 												$('#2')
-													.css('border', '6px solid #BDBCBC')
+													.css('border-color', '#BDBCBC')
 													.text("");
 												$('#3')
-													.css('border', '6px solid #BDBCBC')
+													.css('border-color', '#BDBCBC')
 													.text("");
 												$('#4')
-													.css('border', '6px solid #BDBCBC')
+													.css('border-color', '#BDBCBC')
 													.text("");
 												$('#5')
-													.css('border', '6px solid #BDBCBC')
+													.css('border-color', '#BDBCBC')
 													.text("");
 											},1300);
 				    				}
 				    				else {
 											setTimeout( function(){
 												$('#1')
-													.css('border', '6px solid #808080')
+													.css('border-color', '#808080')
 													.text("");
 												$('#2')
-													.css('border', '6px solid #808080')
+													.css('border-color', '#808080')
 													.text("");
 												$('#3')
-													.css('border', '6px solid #808080')
+													.css('border-color', '#808080')
 													.text("");
 												$('#4')
-													.css('border', '6px solid #808080')
+													.css('border-color', '#808080')
 													.text("");
 												$('#5')
-													.css('border', '6px solid #808080')
+													.css('border-color', '#808080')
 													.text("");
 											},1300);
 				    				}
