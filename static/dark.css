@@ -20,6 +20,10 @@ p.head {
 	font-size: 27.5px;
 }
 
+p#guessesHeader {
+	margin-bottom:0px;
+}
+
 p#popUpTitle {
 	text-align: center;
 }
@@ -144,7 +148,7 @@ a.revealEvenMore {
 
 a.revealEvenMore:hover {
 	background-color: #303133;
-	border-radius: 5px; 
+	border-radius: 5px;
 }
 
 #title {
@@ -158,13 +162,13 @@ a.revealEvenMore:hover {
 
 .more {
 	display: inline-block;
-	position:absolute; 
+	position:absolute;
 	right: 25px;
 }
 
 .shareIcon {
 	display: none;
-	position:absolute; 
+	position:absolute;
 	right: 60px;
 }
 
@@ -299,7 +303,7 @@ a.revealEvenMore:hover {
 	  background-color: #303133;
 		margin-bottom: 10px;
 		border-radius: 10px;
-	}	
+	}
 }
 
 .adminSideBox {
@@ -384,7 +388,7 @@ div#wordExample {
 		box-shadow: 0px 0px 6px 3px #CBCBCB;*/
 		margin-bottom: 5px;
 		border-radius: 5px;
-	}	
+	}
 }
 
 .shareInner {
@@ -406,7 +410,7 @@ div#wordExample {
 }
 
 .keyBoard {
-  height: 120px; 
+  height: 120px;
   width:100%;
   position: fixed;
   margin: 0 auto;
@@ -419,7 +423,7 @@ div#wordExample {
 
 @media only screen and (max-width: 500px){
 	.keyBoard {
-	  height: 120px; 
+	  height: 120px;
 	  width:100%;
 	  position: fixed;
 	  margin: 0 auto;
@@ -467,7 +471,7 @@ img.letterExplained {
 }
 
 img#moreButton {
-	height: 25px; 
+	height: 25px;
 	width: auto;
 	transition: 0.2s;
 	filter: invert(90%);
@@ -478,7 +482,7 @@ img#moreButton:hover {
 }
 
 img#shareIconInner {
-	height: 25px; 
+	height: 25px;
 	width: auto;
 	transition: 0.2s;
 	filter: invert(90%);
@@ -507,7 +511,7 @@ input {
 }
 
 .formContents {
-	pointer-events: none; 
+	pointer-events: none;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -564,13 +568,14 @@ input.tile::selection {
 
 .tile {
 	font-family: 'Courier Prime', monospace;
-	height: 55px;
-	width: 75px;
-	font-size: 55px;
-	padding: 10px 0px;
+	font-weight:700;
+	height: 50px;
+	width: 60px;
+	font-size: 50px;
+	padding: 5px 0px 3px 0px;
 	text-transform: uppercase;
-	border: 4px solid #808080;
-	border-radius: 6px;
+	border: 6px solid #808080;
+	border-radius: 5px;
 	caret-color: transparent;
 	margin: 2px;
 	-webkit-appearance: none;
@@ -663,16 +668,16 @@ input#tryAgain {
 	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.99));
 }
 
-#disabledKeyboard input { 
+#disabledKeyboard input {
 	cursor: not-allowed;
 }
 
-#disabledKeyboard input:hover { 
+#disabledKeyboard input:hover {
 	cursor: not-allowed;
 	filter: none;
 }
 
-#disabledKeyboard input:active { 
+#disabledKeyboard input:active {
 	cursor: not-allowed;
 	filter: none;
 }
@@ -750,7 +755,7 @@ span.tally {
 	border: 3px solid #D7D7D7;
 	color: #D7D7D7;
 	font-weight: bold;
-} 
+}
 
 span.check {
 	color: #5B876F;
@@ -872,7 +877,7 @@ div#haveFun {
 .iframe-container {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; 
+  padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
 }
@@ -887,7 +892,7 @@ div#haveFun {
 /* SLIDE IN */
 
 .slideIn {
-  /* Height & width depends on how you want to reveal the overlay (see JS below) */   
+  /* Height & width depends on how you want to reveal the overlay (see JS below) */
   height: 100%;
   width: 0;
   position: fixed; /* Stay in place */
@@ -949,6 +954,12 @@ div#haveFun {
 .newLex {
 	font-size: 15px;
 	margin-top: 40px;
+}
+
+.smallSubhead {
+	font-size: 15px;
+	margin-bottom:40px;
+	line-height: 20px;
 }
 
 #finishedTop {
