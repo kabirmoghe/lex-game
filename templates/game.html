@@ -1310,7 +1310,7 @@
 					    				$("#errorMsg").stop(true, true).text("Already guessed");
 					    				$("#errorMsg")
 					    					.fadeIn("fast")
-					    					.delay(2000)
+					    					.delay(1000)
 					    					.fadeOut("fast");
 					    				if (localStorage.getItem('mode') == "light"){
 													setTimeout( function(){
@@ -1426,7 +1426,7 @@
 				  var score = parseInt(localStorage.getItem('score'));
 				  var maxPoints = parseInt(localStorage.getItem('maxPoints'));
 				  var level = shareScore(score, maxPoints,numBest)[1];
-					var txt = '—— LEX {{lid}} ——'+level;
+					var txt = '—— Lex {{lid}} ——'+level;
 
 				  const shareData = {
 					    title: 'Lex',
