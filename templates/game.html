@@ -314,6 +314,44 @@
 
 	<script type="text/javascript">
 
+		var timeout = null;
+
+		function clearLight() {
+			$('#1')
+				.css('border-color', '#BDBCBC')
+				.text("");
+			$('#2')
+				.css('border-color', '#BDBCBC')
+				.text("");
+			$('#3')
+				.css('border-color', '#BDBCBC')
+				.text("");
+			$('#4')
+				.css('border-color', '#BDBCBC')
+				.text("");
+			$('#5')
+				.css('border-color', '#BDBCBC')
+				.text("");
+		}
+
+		function clearDark() {
+			$('#1')
+				.css('border-color', '#808080')
+				.text("");
+			$('#2')
+				.css('border-color', '#808080')
+				.text("");
+			$('#3')
+				.css('border-color', '#808080')
+				.text("");
+			$('#4')
+				.css('border-color', '#808080')
+				.text("");
+			$('#5')
+				.css('border-color', '#808080')
+				.text("");
+			}
+
 		$(document).ready(function(){
 
 
@@ -417,7 +455,7 @@
 						let letter = String(curr[i]).valueOf();
 						let file = letter+".svg";
 						let srcStr ="{{url_for('static', filename = '')}}"+file;
-						let str = '<input class="letterTile" type="image" value="'+letter+'" onclick="document.getElementById(activeTile()).textContent = $(this).val()" onfocus="this.blur();" src="'+srcStr+'"> ';
+						let str = '<input class="letterTile" type="image" value="'+letter+'" onclick="keyActiveTile($(this).val())" onfocus="this.blur();" src="'+srcStr+'"> ';
 						$(".keyRow").append(str)
 				}
 
@@ -581,6 +619,7 @@
 				// Game
 
 				$("#next").click(function(){
+
 				    	if (active() > 3){
 				    		var guess = $('#1').text() + $('#2').text() + $('#3').text() + $('#4').text() + $('#5').text();
 
@@ -594,38 +633,10 @@
 
 			    				if (guesses.length == 0){
 				    				if (localStorage.getItem('mode') == "light"){
-										$('#1')
-											.css('border-color', '#BDBCBC')
-											.text("");
-										$('#2')
-											.css('border-color', '#BDBCBC')
-											.text("");
-										$('#3')
-											.css('border-color', '#BDBCBC')
-											.text("");
-										$('#4')
-											.css('border-color', '#BDBCBC')
-											.text("");
-										$('#5')
-											.css('border-color', '#BDBCBC')
-											.text("");
+											clearLight();
 				    				}
 				    				else {
-										$('#1')
-											.css('border-color', '#808080')
-											.text("");
-										$('#2')
-											.css('border-color', '#808080')
-											.text("");
-										$('#3')
-											.css('border-color', '#808080')
-											.text("");
-										$('#4')
-											.css('border-color', '#808080')
-											.text("");
-										$('#5')
-											.css('border-color', '#808080')
-											.text("");
+											clearDark();
 				    				}
 
 
@@ -726,38 +737,10 @@
 
 				    			else if ($.inArray(guess, guesses) == -1) {
 				    				if (localStorage.getItem('mode') == "light"){
-										$('#1')
-											.css('border-color', '#BDBCBC')
-											.text("");
-										$('#2')
-											.css('border-color', '#BDBCBC')
-											.text("");
-										$('#3')
-											.css('border-color', '#BDBCBC')
-											.text("");
-										$('#4')
-											.css('border-color', '#BDBCBC')
-											.text("");
-										$('#5')
-											.css('border-color', '#BDBCBC')
-											.text("");
+											clearLight();
 				    				}
 				    				else {
-										$('#1')
-											.css('border-color', '#808080')
-											.text("");
-										$('#2')
-											.css('border-color', '#808080')
-											.text("");
-										$('#3')
-											.css('border-color', '#808080')
-											.text("");
-										$('#4')
-											.css('border-color', '#808080')
-											.text("");
-										$('#5')
-											.css('border-color', '#808080')
-											.text("");
+											clearDark();
 				    				}
 
 				    				guesses.push(guess);
@@ -907,42 +890,10 @@
 				    					.delay(1000)
 				    					.fadeOut("fast");
 				    				if (localStorage.getItem('mode') == "light"){
-											setTimeout( function(){
-												$('#1')
-													.css('border-color', '#BDBCBC')
-													.text("");
-												$('#2')
-													.css('border-color', '#BDBCBC')
-													.text("");
-												$('#3')
-													.css('border-color', '#BDBCBC')
-													.text("");
-												$('#4')
-													.css('border-color', '#BDBCBC')
-													.text("");
-												$('#5')
-													.css('border-color', '#BDBCBC')
-													.text("");
-												},1300);
+											timeout = setTimeout( clearLight,1300);
 				    				}
 				    				else {
-											setTimeout( function(){
-												$('#1')
-													.css('border-color', '#808080')
-													.text("");
-												$('#2')
-													.css('border-color', '#808080')
-													.text("");
-												$('#3')
-													.css('border-color', '#808080')
-													.text("");
-												$('#4')
-													.css('border-color', '#808080')
-													.text("");
-												$('#5')
-													.css('border-color', '#808080')
-													.text("");
-											},1300);
+											timeout = setTimeout( clearDark,1300);
 				    				}
 
 
@@ -959,42 +910,10 @@
 				    				.delay(1000)
 				    				.fadeOut("fast");
 			    				if (localStorage.getItem('mode') == "light"){
-										setTimeout( function(){
-											$('#1')
-												.css('border-color', '#BDBCBC')
-												.text("");
-											$('#2')
-												.css('border-color', '#BDBCBC')
-												.text("");
-											$('#3')
-												.css('border-color', '#BDBCBC')
-												.text("");
-											$('#4')
-												.css('border-color', '#BDBCBC')
-												.text("");
-											$('#5')
-												.css('border-color', '#BDBCBC')
-												.text("");
-										},1300);
+										timeout = setTimeout( clearLight,1300);
 			    				}
 			    				else {
-										setTimeout( function(){
-											$('#1')
-												.css('border-color', '#808080')
-												.text("");
-											$('#2')
-												.css('border-color', '#808080')
-												.text("");
-											$('#3')
-												.css('border-color', '#808080')
-												.text("");
-											$('#4')
-												.css('border-color', '#808080')
-												.text("");
-											$('#5')
-												.css('border-color', '#808080')
-												.text("");
-										},1300);
+										timeout = setTimeout( clearDark,1300);
 			    				}
 				    		}
 				    	}
@@ -1017,38 +936,10 @@
 
 				    				if (guesses.length == 0){
 					    				if (localStorage.getItem('mode') == "light"){
-											$('#1')
-												.css('border-color', '#BDBCBC')
-												.text("");
-											$('#2')
-												.css('border-color', '#BDBCBC')
-												.text("");
-											$('#3')
-												.css('border-color', '#BDBCBC')
-												.text("");
-											$('#4')
-												.css('border-color', '#BDBCBC')
-												.text("");
-											$('#5')
-												.css('border-color', '#BDBCBC')
-												.text("");
+												clearLight();
 					    				}
 					    				else {
-											$('#1')
-												.css('border-color', '#808080')
-												.text("");
-											$('#2')
-												.css('border-color', '#808080')
-												.text("");
-											$('#3')
-												.css('border-color', '#808080')
-												.text("");
-											$('#4')
-												.css('border-color', '#808080')
-												.text("");
-											$('#5')
-												.css('border-color', '#808080')
-												.text("");
+												clearDark();
 					    				}
 
 
@@ -1144,38 +1035,10 @@
 
 					    			else if ($.inArray(guess, guesses) == -1) {
 					    				if (localStorage.getItem('mode') == "light"){
-											$('#1')
-												.css('border-color', '#BDBCBC')
-												.text("");
-											$('#2')
-												.css('border-color', '#BDBCBC')
-												.text("");
-											$('#3')
-												.css('border-color', '#BDBCBC')
-												.text("");
-											$('#4')
-												.css('border-color', '#BDBCBC')
-												.text("");
-											$('#5')
-												.css('border-color', '#BDBCBC')
-												.text("");
+												clearLight();
 					    				}
 					    				else {
-											$('#1')
-												.css('border-color', '#808080')
-												.text("");
-											$('#2')
-												.css('border-color', '#808080')
-												.text("");
-											$('#3')
-												.css('border-color', '#808080')
-												.text("");
-											$('#4')
-												.css('border-color', '#808080')
-												.text("");
-											$('#5')
-												.css('border-color', '#808080')
-												.text("");
+												clearDark();
 					    				}
 
 					    				guesses.push(guess);
@@ -1319,42 +1182,10 @@
 					    					.delay(1000)
 					    					.fadeOut("fast");
 					    				if (localStorage.getItem('mode') == "light"){
-													setTimeout( function(){
-														$('#1')
-															.css('border-color', '#BDBCBC')
-															.text("");
-														$('#2')
-															.css('border-color', '#BDBCBC')
-															.text("");
-														$('#3')
-															.css('border-color', '#BDBCBC')
-															.text("");
-														$('#4')
-															.css('border-color', '#BDBCBC')
-															.text("");
-														$('#5')
-															.css('border-color', '#BDBCBC')
-															.text("");
-													},1300);
+												timeout = setTimeout( clearLight,1300);
 					    				}
 					    				else {
-												setTimeout( function(){
-													$('#1')
-														.css('border-color', '#808080')
-														.text("");
-													$('#2')
-														.css('border-color', '#808080')
-														.text("");
-													$('#3')
-														.css('border-color', '#808080')
-														.text("");
-													$('#4')
-														.css('border-color', '#808080')
-														.text("");
-													$('#5')
-														.css('border-color', '#808080')
-														.text("");
-												},1300);
+												timeout = setTimeout( clearDark,1300);
 					    				}
 					    			}
 
@@ -1368,42 +1199,10 @@
 					    				.delay(1000)
 					    				.fadeOut("fast");
 				    				if (localStorage.getItem('mode') == "light"){
-											setTimeout( function(){
-												$('#1')
-													.css('border-color', '#BDBCBC')
-													.text("");
-												$('#2')
-													.css('border-color', '#BDBCBC')
-													.text("");
-												$('#3')
-													.css('border-color', '#BDBCBC')
-													.text("");
-												$('#4')
-													.css('border-color', '#BDBCBC')
-													.text("");
-												$('#5')
-													.css('border-color', '#BDBCBC')
-													.text("");
-											},1300);
+											timeout = setTimeout( clearLight,1300);
 				    				}
 				    				else {
-											setTimeout( function(){
-												$('#1')
-													.css('border-color', '#808080')
-													.text("");
-												$('#2')
-													.css('border-color', '#808080')
-													.text("");
-												$('#3')
-													.css('border-color', '#808080')
-													.text("");
-												$('#4')
-													.css('border-color', '#808080')
-													.text("");
-												$('#5')
-													.css('border-color', '#808080')
-													.text("");
-											},1300);
+											timeout = setTimeout( clearDark,1300);
 				    				}
 					    		}
 					    	}
@@ -1539,9 +1338,10 @@
 
 		    	if ($("#completeOverlay").is(":hidden")) {
 
-			        if (e.keyCode == 8)
-			            del();
+			        if (e.keyCode == 8) {
 
+									del();
+							}
 			        /*else if ( ((document.getElementById("1").value.length == 1) && (document.getElementById("2").value.length == 1) && (document.getElementById("3").value.length == 1)) && (e.keyCode == 13)) {
 
 						$("#additionalInfo").fadeOut("fast");
@@ -1554,8 +1354,21 @@
 
 			        else if (localStorage.getItem('status') != 'Done' && (!(e.metaKey)) && (e.key >= "a" && e.key <= "z")) {
 
+								if (timeout!=null) {
+									clearTimeout(timeout);
+									if (localStorage.getItem('mode') == "light"){
+										clearLight();
+									}
+									else {
+										clearDark();
+									}
+									timeout=null;
+									$("#errorMsg").stop(true, true).fadeOut('fast');
+								}
+
 			        	if (!($("#5").text().trim().length == 1)) {
 
+									$("#"+active()).effect('shake', {direction:'up', times: 1, distance: 5}, 200);
 			        		if ((active() == 5)){
 										$("#5").text(e.key);
 										if (localStorage.getItem('mode') == "light"){
@@ -1633,7 +1446,39 @@
 		}
 	</script>
 	<script type="text/javascript">
+		function keyActiveTile(val) {
+
+			if (timeout!=null) {
+				clearTimeout(timeout);
+				if (localStorage.getItem('mode') == "light"){
+					clearLight();
+				}
+				else {
+					clearDark();
+				}
+				timeout=null;
+				$("#errorMsg").stop(true, true).fadeOut('fast');
+			}
+
+			var at = activeTile();
+			console.log(at);
+			console.log(val);
+
+			if (!($("#5").text().trim().length == 1)) {
+				$("#"+at).text(val);
+				$("#"+at).effect('shake', {direction:'up', times: 1, distance: 5}, 200)
+			}
+		}
+	</script>
+	<script type="text/javascript">
 		function del() {
+
+			if (timeout!=null) {
+				clearTimeout(timeout);
+				timeout=null;
+				$("#errorMsg").stop(true, true).fadeOut('fast');
+			}
+
 			var moveTo = 5;
 
 			for (let i = 1; i < 6 ; i++) {
