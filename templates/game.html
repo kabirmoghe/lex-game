@@ -1553,20 +1553,20 @@
 			        		if ((active() == 5)){
 										$("#5").text(e.key);
 										if (localStorage.getItem('mode') == "light"){
-						        			document.getElementById("5").style.border = "6px solid black";
+						        			document.getElementById("5").style.borderColor = "black";
 						        }
 				        		else {
-				        			document.getElementById("5").style.border = "6px solid #BDBCBC";
+				        			document.getElementById("5").style.borderColor = "#BDBCBC";
 				        		}
 			        		}
 
 			        		else {
 				        		$("#"+active()).text(e.key);
 										if (localStorage.getItem('mode') == "light"){
-						        	 document.getElementById(active()-1).style.border = "6px solid black";
+						        	 document.getElementById(active()-1).style.borderColor = "black";
 						        }
 						        else {
-						         	 document.getElementById(active()-1).style.border = "6px solid #BDBCBC";
+						         	 document.getElementById(active()-1).style.borderColor = "#BDBCBC";
 						        }
 			        		}
 			        	}
@@ -1615,10 +1615,10 @@
 		    if (!($("#5").text().trim().length == 1)) {
 
 				if (localStorage.getItem('mode') == "light"){
-    				document.getElementById(currentActive).style.border = "6px solid black";
+    				document.getElementById(currentActive).style.borderColor = "black";
 	    		}
 	    		else {
-	    			document.getElementById(currentActive).style.border = "6px solid #BDBCBC";
+	    			document.getElementById(currentActive).style.borderColor = "#BDBCBC";
 	    		}
 
 
@@ -1643,10 +1643,10 @@
 			}
 
 				if (localStorage.getItem('mode') == "light"){
-    				document.getElementById(moveTo).style.border = "6px solid #BDBCBC";
+    				document.getElementById(moveTo).style.borderColor = "#BDBCBC";
 	    		}
 	    		else {
-	    			document.getElementById(moveTo).style.border = "6px solid #808080";
+	    			document.getElementById(moveTo).style.borderColor = "#808080";
 	    		}
 
 			$("#"+moveTo).text('');
