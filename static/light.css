@@ -783,11 +783,8 @@ span.tally {
 }
 
 span.check {
-	color: #5B876F;
-}
-
-.wordsDisplayed span.check {
-	color: #5B876F;
+	color: #e6d56d;
+  -webkit-text-stroke: 1.5px #9e901d;
 }
 
 @media only screen and (max-width: 500px) {
