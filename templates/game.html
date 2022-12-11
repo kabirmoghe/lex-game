@@ -333,6 +333,8 @@
 			$('#5')
 				.css('border-color', '#BDBCBC')
 				.text("");
+			$(".wordScore").fadeOut('fast');
+
 		}
 
 		function clearDark() {
@@ -351,6 +353,7 @@
 			$('#5')
 				.css('border-color', '#808080')
 				.text("");
+			$(".wordScore").fadeOut('fast');
 			}
 
 		$(document).ready(function(){
@@ -898,9 +901,6 @@
 				    				else {
 											timeout = setTimeout( clearDark,1300);
 				    				}
-
-
-
 				    			}
 
 				    		}
