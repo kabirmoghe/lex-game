@@ -168,9 +168,7 @@
 			<div class="content">
 
 				<p id="guessPrompt">Get <span class="maxPoints">{{maxPoints}}</span> points to become today's <span class="maxPoints">Champ!</span></p>
-
-				<p>
-
+				<div class="guessRow">
 					<div class="formContents">
 						<div class="tile" id="1" onfocus="blur();"></div>
 						<div class="tile" id="2" onfocus="blur();"></div>
@@ -185,7 +183,10 @@
 						<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" autocomplete="off" onfocus="blur();">
 						<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" autocomplete="off" onfocus="blur();">-->
 					</div>
-				</p>
+					<div class="wordScore">
+						0
+					</div>
+				</div>
 				<p class="error"><em><span id="errorMsg"></span>&nbsp;</em></p>
 			</div>
 			<br>
@@ -517,6 +518,8 @@
 			oldBestWordsOnly.forEach((word) => {
 				$("#yesterdayWords").append("<span class='best'>"+word+', '+oldBestWords[word]+'</span> ');
 			});
+
+			$(".wordScore").hide();
 
 			// EDITS BOX OF WORDS ON MAIN SCREEN
 			if (guesses.length > 5){
@@ -1341,6 +1344,7 @@
 			        if (e.keyCode == 8) {
 
 									del();
+
 							}
 			        /*else if ( ((document.getElementById("1").value.length == 1) && (document.getElementById("2").value.length == 1) && (document.getElementById("3").value.length == 1)) && (e.keyCode == 13)) {
 
@@ -1389,9 +1393,10 @@
 						        }
 			        		}
 			        	}
+								$("#additionalInfo").fadeOut("fast");
+								var guess = $('#1').text() + $('#2').text() + $('#3').text() + $('#4').text() + $('#5').text();
 
-						$("#additionalInfo").fadeOut("fast");
-
+								$(".wordScore").text(wordValue(guess));
 						}
 		   		}
 		   	}
@@ -1413,6 +1418,28 @@
 		);
 	</script>
 	<script type="text/javascript">
+		function wordValue(word) {
+			const wordBank = {"a": 1, "b": 3, "c": 3, "d": 2, "e": 1, "f": 4, "g": 2,
+			"h": 4, "i": 1, "j": 8, "k": 5, "l": 1, "m": 3, "n": 1, "o": 1, "p": 3,
+			"q": 10, "r": 1, "s": 1, "t": 1, "u": 1, "v": 4, "w": 4, "x": 8, "y": 4,
+			"z": 10};
+
+			var val = 0;
+
+			if (word.length>=3) {
+				for (var i = 0; i < word.length; i++) {
+					val+=wordBank[word.charAt(i)];
+				}
+
+				return val;
+			}
+			else {
+				return "";
+			}
+
+		}
+	</script>
+	<script type="text/javascript">
 		function active() {
 			var active = 5;
 
@@ -1422,12 +1449,30 @@
 					break;
 				}
 			}
+
+			if (active >= 4) {
+
+				if (active == 4) {
+					$(".wordScore").stop(true, true).fadeIn();
+				}
+			}
+			if (active < 4 && $(".wordScore").is(':visible')) {
+				$(".wordScore").stop(true, true).fadeOut();
+			}
+
 			return active;
 		}
 	</script>
 	<script type="text/javascript">
 		function activeTile() {
-			var currentActive = active();
+			var currentActive = 5;
+
+			for (let i = 1; i < 6 ; i++) {
+				if ($("#"+i).text().trim().length == 0){
+					currentActive = i;
+					break;
+				}
+			}
 
 			$("#additionalInfo").fadeOut("fast");
 
@@ -1440,6 +1485,16 @@
 	    			document.getElementById(currentActive).style.borderColor = "#BDBCBC";
 	    		}
 
+					if (currentActive >= 3) {
+
+						if (currentActive == 3) {
+							$(".wordScore").stop(true, true).fadeIn();
+						}
+
+					}
+					if (active < 3 && $(".wordScore").is(':visible')) {
+						$(".wordScore").stop(true, true).fadeOut();
+					}
 
 				return currentActive;
 			}
@@ -1468,6 +1523,10 @@
 				$("#"+at).text(val);
 				$("#"+at).effect('shake', {direction:'up', times: 1, distance: 2.5}, 200)
 			}
+
+			var guess = $('#1').text() + $('#2').text() + $('#3').text() + $('#4').text() + $('#5').text();
+
+			$(".wordScore").text(wordValue(guess));
 		}
 	</script>
 	<script type="text/javascript">
@@ -1503,6 +1562,12 @@
 			$("#"+moveTo).text('');
 
 			$("#additionalInfo").fadeOut("fast");
+
+			active();
+
+			var guess = $('#1').text() + $('#2').text() + $('#3').text() + $('#4').text() + $('#5').text();
+
+			$(".wordScore").text(wordValue(guess));
 
 			return moveTo;
 		}

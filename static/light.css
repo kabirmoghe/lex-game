@@ -15,10 +15,14 @@ p {
 	font-size: 20px;
 }
 
+#guessPrompt {
+	margin:0px 0px 20px 0px;
+}
 
 @media only screen and (max-width: 500px){
 	p#guessPrompt {
 		font-size: 18px;
+		margin:0px 0px 20px 0px;
 	}
 }
 
@@ -49,9 +53,9 @@ span.choice {
 }
 
 .content {
+	display: flex;
   align-items: center;
-	flex-direction: row;
-	flex-wrap: nowrap;
+	flex-direction: column;
 	justify-content: space-between;
   margin: 0 auto;
   text-align: center;
@@ -603,6 +607,59 @@ input.tile::selection {
 	-webkit-appearance: none;
 	background-color: #FFFFFF;
 }
+
+.guessRow {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width:500px;
+}
+
+@media only screen and (max-width: 500px) {
+	.guessRow {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width:370px;
+	}
+}
+
+.wordScore {
+	width: 30px;
+	height: 30px;
+	background-color: white;
+	border-radius:5px;
+	border:2px solid #D5D5D5;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+  right: 15px;
+  margin-left: 10px;
+	color:gray;
+}
+
+@media only screen and (max-width: 500px) {
+	.wordScore {
+		font-size: 12.5px;
+		width: 22.5px;
+		height: 22.5px;
+		background-color: white;
+		border-radius:5px;
+		border:2px solid #D5D5D5;
+		display:flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+	  right: 17.5px;
+	  margin-left: 10px;
+	}
+}
+
 
 @media only screen and (max-width: 500px) {
 	.tile {
