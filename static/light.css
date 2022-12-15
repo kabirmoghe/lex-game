@@ -67,6 +67,36 @@ span.choice {
 	max-width:500px;
 }
 
+.smallGuessTitle {
+	font-size:13px;
+	font-style: italic;
+}
+
+.smallGuessTitle.background:before {
+    border-top: 2px solid #dfdfdf;
+    content: "";
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 95%;
+    z-index: -1;
+}
+
+#wordsSideOnlyTop {
+	border-radius: 10px;
+	padding: 7px;
+	background: repeating-linear-gradient( 45deg, #c3c9ec, #c3c9ec 10px, #b0b6dc 10px, #b0b6dc 20px);
+}
+
+#wordsSideOnlyOther {
+	border-radius: 10px;
+	padding: 7px;
+	background: repeating-linear-gradient( 45deg, #ececec, #ececec 10px, #e1e1e1 10px, #e1e1e1 20px);
+}
+
 .ncontent {
   align-items: center;
 	flex-direction: row;
@@ -187,6 +217,16 @@ a.revealEvenMore:hover {
 	display: none;
 	position:absolute;
 	right: 60px;
+}
+
+.switchVersion {
+	background-color:white;
+	border-radius:10px;
+	padding:5px;
+	left:40px;
+	position:absolute;
+	font-size:13px;
+	margin-bottom:8px;
 }
 
 #additionalInfo {
