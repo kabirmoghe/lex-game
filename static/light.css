@@ -220,6 +220,7 @@ a.revealEvenMore:hover {
 }
 
 .switchVersion {
+	display: none;
 	background-color:white;
 	border-radius:10px;
 	padding:5px;

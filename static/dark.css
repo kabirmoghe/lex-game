@@ -207,6 +207,7 @@ a.revealEvenMore:hover {
 }
 
 .switchVersion {
+	display: none;
 	background-color:#121212;
 	color:#D7D7D7;
 	border-radius:10px;
