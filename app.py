@@ -2,7 +2,7 @@ from flask import Flask, redirect, url_for, render_template, request, session
 import game
 import readbucketdata
 import createData
-import config
+import appconfig
 import json
 
 app = Flask(__name__)
