@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import random
 
+# Class to store all game info
 class WordInfo:
     def __init__(self, letters, letterPts, possWords, bestWords, maxPoints):
         self.letters = letters
@@ -10,10 +11,11 @@ class WordInfo:
         self.bestWords = bestWords
         self.maxPoints = maxPoints
 
+# Creates a "game"
 def create_word_info():
 
+    # Based on the Scrabble dicitonary
     dictionary = pd.read_csv("https://raw.githubusercontent.com/kabirmoghe/lexwords/main/words.csv", index_col=0)
-    # dictionary = dictionary[dictionary["words"].isna() == False]
 
     # Orders words and creates column of ordered words in dictionary
     ordered_words = []
@@ -23,7 +25,6 @@ def create_word_info():
     letter_bank = {"a": 1, "b": 3, "c": 3, "d": 2, "e": 1, "f": 4, "g": 2, "h": 4, "i": 1, "j": 8, "k": 5, "l": 1, "m": 3, "n": 1, "o": 1, "p": 3, "q": 10, "r": 1, "s": 1, "t": 1, "u": 1, "v": 4, "w": 4, "x": 8, "y": 4, "z": 10}
 
     # Choses letters based on frequencies
-
     freqs = [("e", 11.1607), ("m", 3.0129),
             ("a", 8.4966), ("h", 3.0034),
             ("r", 7.5809), ("g", 2.4705),
@@ -50,6 +51,7 @@ def create_word_info():
         for i in range(freq):
             letterList.append(letter)
 
+    # Actually picks letters
     picked_letters = []
 
     for i in range(8):
@@ -60,9 +62,6 @@ def create_word_info():
             letter = random.choice(letterList)
 
         picked_letters.append(letter)
-
-
-    #picked_letters = random.sample(list(letter_bank), 8)
 
     # Ensures that there are vowels in the picked letters. If not, replaces random letter(s) with a vowel, calculates letter points
     vowels = ["a", "e", "i", "o", "u"]
@@ -109,7 +108,6 @@ def create_word_info():
     all_words = words_of_length(3) + words_of_length(4) + words_of_length(5)
 
     # Returns all words that are possible with given letters
-
     final_words = all_words.copy()
 
     for word in all_words:
@@ -124,7 +122,6 @@ def create_word_info():
     else:
 
         # Calculates point tally of a word
-
         def point_tally(word):
             tally = 0
 

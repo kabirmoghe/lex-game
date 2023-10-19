@@ -2,13 +2,13 @@ from flask import Flask, redirect, url_for, render_template, request, session
 import game
 import readbucketdata
 import createData
+import config
 import json
-
-
 
 app = Flask(__name__)
 app.secret_key = 'hello'
 
+# Home route: 
 @app.route("/", methods = ["GET", "POST"])
 def home():
 
@@ -22,7 +22,6 @@ def home():
 	letters, letterPts, maxPoints, bestWords, lid = eval(word_info["letters"][0]), eval(word_info["letterPts"][0]), int(word_info["maxPoints"][0]), eval(word_info["bestWords"][0]), int(word_info["lid"][0])
 
 	# Turns bestWords into dictionary so it can be turned into JSON
-
 	bestWordsDict = {}
 
 	for item in bestWords:
@@ -58,7 +57,7 @@ def home():
 
 	return render_template("game.html", letters = letters, letterPts = letterPts, maxPoints = maxPoints, bestWords = bestWords, lid = lid, possWords = possWords, oldMaxPoints = oldMaxPoints, oldBestWords = oldBestWords, oldBestWordsOnly = oldBestWordsOnly, topBest = topBest, numAdd = numAdd)
 
-
+# Beta version of the app for testing new features
 @app.route("/test", methods = ["GET", "POST"])
 def test():
 
@@ -108,17 +107,18 @@ def test():
 
 	return render_template("test.html", letters = letters, letterPts = letterPts, maxPoints = maxPoints, bestWords = bestWords, lid = lid, possWords = possWords, oldMaxPoints = oldMaxPoints, oldBestWords = oldBestWords, oldBestWordsOnly = oldBestWordsOnly, topBest = topBest, numAdd = numAdd)
 
-## DON'T DELETE - BREAKS DOWN HTML FOR NOW
-
+# Login page for admin to see the current game info
 @app.route("/login", methods = ["GET", "POST"])
 def login():
 
 	lid = int(readbucketdata.readbucketdata("letters.csv")["lid"][0])
 
 	if request.method == "POST":
-		if (request.form["usr"] == "kabirmoghe") and (request.form["pwd"] == "Daod10Bgr6"):
+		if (request.form["usr"] == config.admin_name) and (request.form["pwd"] == config.admin_pwd):
 
-			session["usr"] = "kabirmoghe"
+			session["usr"] = config.admin_name
+
+			print("Logged in as " + config.admin_name)
 
 			return redirect(url_for('home'))
 		else:
