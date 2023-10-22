@@ -126,6 +126,7 @@ def login():
 
 	return render_template("login.html", lid = lid)
 
+# For users to provide feedback about the game
 @app.route("/feedback", methods = ["GET", "POST"])
 def feedback():
 
@@ -133,6 +134,7 @@ def feedback():
 
 	return render_template("feedback.html", lid = lid)
 
+# Admin page for getting quick access to game data
 @app.route("/data", methods = ["GET", "POST"])
 def data():
 
@@ -151,7 +153,6 @@ def data():
 			return redirect(url_for("home"))
 
 		return render_template("data.html", lid = lid, bestWords = bestWords)
-
 
 if __name__ == '__main__':
     app.run(debug = True)
