@@ -59,7 +59,9 @@
 				<img class="letterExplained" src="{{url_for('static', filename = 'y.svg')}}">
 				<img class="letterExplained" src="{{url_for('static', filename = 'z.svg')}}">
 
+
 				<br><br>
+				<!--If you guess 1 of the 5 highest-scoring words, the word will show up as purple.-->Only your five best guesses determine your score and are displayed above the keyboard. To see all of your guesses, click the button at the top left. Top words are purple, and others are gray.<br><br>
 
 				<span class="best">Jump, 15</span>
 				<span class="correct">Plume, 9</span>
@@ -98,6 +100,18 @@
 	</div>
 	<span id="showSlide" onclick="openNav()"><span id="wordCheck"></span></span>
 	<div id="all">
+		<!-- NON FEEDBACK (LOGIN)
+		<div class="top">
+			<div id="title">LEX</div>
+			<div class="more" id="moreID"><button class="revealMore" id="moreInfo" type="button" onfocus="this.blur();">More</button></div>
+			<div class="more" id="additionalInfo">
+				<div class="close"><button id="closeAllInfo" type="button">✕</button></div>
+				<div id="info"><button id="showInfo" class="revealEvenMore" type="button" onfocus="this.blur();">How to Play</button></div>
+				<div id="yesterday"><button id="showYesterday" class="revealEvenMore" type="button" onfocus="this.blur();">Yesterday</button></div>
+				<div id="login"><a class="revealEvenMore" href="{{ url_for('login') }}">Log In</a></div>
+			</div>
+		</div>
+	    -->
 	    <div id="topContainer">
 		    <div class="top">
 				<div id="title">LEX</div>
@@ -162,6 +176,13 @@
 						<div class="tile" id="3" onfocus="blur();"></div>
 						<div class="tile" id="4" onfocus="blur();"></div>
 						<div class="tile" id="5" onfocus="blur();"></div>
+
+						<!--
+						<input class="tile" onClick="this.select();" type="text" name="1" id="1" required maxlength="1" autofocus="autofocus"autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="2" id="2" required maxlength="1" autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="3" id="3" required maxlength="1" autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="4" id="4" maxlength="1" autocomplete="off" onfocus="blur();">
+						<input class="tile" onClick="this.select();" type="text" name="5" id="5" maxlength="1" autocomplete="off" onfocus="blur();">-->
 					</div>
 					<div class="wordScore">
 						0
@@ -183,18 +204,23 @@
 		</div>
 		<div class="keyBoard">
 			<div class="keyWidth">
-			 	<div class="keyRow">
+			 	<div class="keyRow"><!--
+					{% for letter in letters %}
+						<input type="image" value="{{letter}}" src="{{url_for('static', filename = letter+'.svg')}}" onclick="document.getElementById(activeTile()).value = $(this).val()" onfocus="this.blur();">
+					{% endfor %}-->
 				</div>
 				<div class="otherActions">
 					<input type="image" id="shuffle" value="shuffle" src="{{url_for('static', filename = 'shuffle.svg')}}" onfocus="this.blur();">
 					<input type="image" id="next" src="{{url_for('static', filename = 'guess.svg')}}" onfocus="this.blur();">
 					<input type="image" id="del" value="⌫" src="{{url_for('static', filename = 'del.svg')}}" onclick="del();" onfocus="this.blur();">
+					<!--<input type="image" id="done" value="done" src="{{url_for('static', filename = 'giveUp.svg')}}" onfocus="this.blur();">-->
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<!-- SCRIPTS -->
+
 	<!-- GAME CODE -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -466,6 +492,8 @@
 				localStorage.setItem('guesses', JSON.stringify([]));
 				localStorage.setItem('score', 0);
 				localStorage.setItem('status', 'not done');
+				/*var letters = (JSON.stringify({{letters | tojson}}));
+				localStorage.setItem('letters', letters);	*/
 			}
 
 			localStorage.setItem('numAdd', {{numAdd}});
@@ -595,7 +623,7 @@
 				$("#guessesLeft").text(''+(10-JSON.parse(localStorage.getItem('guesses')).length)+' LEFT');
 				$("#wordCheck").text(10-JSON.parse(localStorage.getItem('guesses')).length);
 
-				// Actual game code
+				// Game
 
 				$("#next").click(function(){
 
@@ -1189,7 +1217,8 @@
 	</script>
 
 	<!-- UI STUFF -->
-	<!-- Redirecting -->
+
+
 	<script type="text/javascript">
 		window.onload = function() {
 			var current_url = window.location.href
@@ -1198,7 +1227,6 @@
 			}
 		}
 	</script>
-	<!-- For sharing end-result -->
 	<script type="text/javascript">
 		function shareData() {
 
@@ -1236,7 +1264,7 @@
 						};
 			}
 	</script>
-	<!-- Time Left Display -->
+	<!-- TIME LEFT -->
 	<script type="text/javascript">
 		$(document).ready(function() {
 			const Countdown = (() => {
@@ -1319,6 +1347,15 @@
 									del();
 
 							}
+			        /*else if ( ((document.getElementById("1").value.length == 1) && (document.getElementById("2").value.length == 1) && (document.getElementById("3").value.length == 1)) && (e.keyCode == 13)) {
+
+						$("#additionalInfo").fadeOut("fast");
+
+						THIS IS HOW FORM WAS BEING SUBMITTED WITH ENTER
+			        	$('form#letterField').submit();
+
+						alert("guess attempted (enter)")
+			        }*/
 
 			        else if (localStorage.getItem('status') != 'Done' && (!(e.metaKey)) && (e.key >= "a" && e.key <= "z")) {
 
@@ -1366,7 +1403,6 @@
 		   	}
 		);
 	</script>
-	<!-- User tries to escape -->
 	<script type="text/javascript">
 		$(document).keydown(
 		    function(e) {
@@ -1377,11 +1413,11 @@
 				    $(".slideIn-content").hide();
 				    $("#switch").hide();
 			        document.getElementById("myNav").style.width = "0%";
+					//document.getElementById("myNav").style.boxShadow = "none";
 		        }
 		    }
 		);
 	</script>
-	<!-- Gets word value -->
 	<script type="text/javascript">
 		function wordValue(word) {
 			const wordBank = {"a": 1, "b": 3, "c": 3, "d": 2, "e": 1, "f": 4, "g": 2,
@@ -1404,7 +1440,6 @@
 
 		}
 	</script>
-	<!-- Gets active tile for which letter to update after user input -->
 	<script type="text/javascript">
 		function active() {
 			var active = 5;
@@ -1495,7 +1530,6 @@
 			$(".wordScore").text(wordValue(guess));
 		}
 	</script>
-	<!-- Deleting letter -->
 	<script type="text/javascript">
 		function del() {
 
@@ -1539,7 +1573,6 @@
 			return moveTo;
 		}
 	</script>
-	<!-- Other functions for processing user clicks on other displays -->
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $("#showYesterday").click(function(){
@@ -1646,9 +1679,11 @@
 		function openNav() {
 			if (Math.min(window.screen.width, window.screen.height) < 768) {
 		  		document.getElementById("myNav").style.width = "98%";
+		  		//document.getElementById("myNav").style.boxShadow = "0px 0px 6px 2px #CBCBCB";
 			}
 			else {
 				document.getElementById("myNav").style.width = "25%";
+		  		//document.getElementById("myNav").style.boxShadow = "0px 0px 6px 2px #CBCBCB";
 			}
 			$(".slideIn-content").delay(50).fadeToggle();
 			$("#switch").delay(50).fadeIn();
@@ -1662,6 +1697,7 @@
 		    	$("#switch").hide();
 
 		        document.getElementById("myNav").style.width = "0%";
+				//document.getElementById("myNav").style.boxShadow = "none";
 		    });
 		});
 	</script>
