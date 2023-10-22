@@ -114,11 +114,11 @@ def login():
 	lid = int(readbucketdata.readbucketdata("letters.csv")["lid"][0])
 
 	if request.method == "POST":
-		if (request.form["usr"] == config.admin_name) and (request.form["pwd"] == config.admin_pwd):
+		if (request.form["usr"] == appconfig.admin_name) and (request.form["pwd"] == appconfig.admin_pwd):
 
-			session["usr"] = config.admin_name
+			session["usr"] = appconfig.admin_name
 
-			print("Logged in as " + config.admin_name)
+			print("Logged in as " + appconfig.admin_name)
 
 			return redirect(url_for('home'))
 		else:
