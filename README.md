@@ -1,4 +1,4 @@
-# Lex [2022 - ]
+# Lex
 An experimental word game called [Lex](https://www.thelexgame.com/) that tests users' vocabulary in a high-stakes daily format.
 
 This repository contains the key components of Lex, a new word game. Learn more about the game on my [blog](https://kabirmoghe.medium.com/a-new-word-game-d9552c191e2b).
